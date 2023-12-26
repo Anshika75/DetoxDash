@@ -4,6 +4,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+a{
+    text-decoration: none;
+}
 body {
     background-color: #f1f1f1;
     text-align: center;
@@ -63,12 +66,18 @@ body {
     padding: 10px 40px;
     border: none;
     border-radius: 5px;
-    color: #f1f1f1;
     background-color: #F8BBD0;
     color: #D82F5A;
     cursor: pointer;
     font-weight: 700;
     transition: all 0.3s ease-in-out;
+}
+.btn-container button a{
+    color: #D82F5A;
+    transition: all 0.3s ease-in-out;
+}
+.btn-container button:hover a{
+    color: #f1f1f1;
 }
 .btn-container button:hover{
     background-color: #D82F5A;
@@ -78,7 +87,19 @@ body {
     background-color: #B2EBF2;
     color: #02B1AA;
 }
+.btn-container button:last-child a{
+    color: #02B1AA;
+}
 .btn-container button:last-child:hover{
     background-color: #02B1AA;
     color: #f1f1f1;
+}
+.btn-container button:last-child:hover a{
+    color: #f1f1f1;
+}
+@media screen and (max-width: 768px) {
+    .center-div{
+        transform: scale(0.8);
+    }
+    
 }
