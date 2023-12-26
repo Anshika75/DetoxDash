@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #f1f1f1;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.splash-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image:url("https://www.dropbox.com/scl/fi/hgio2ytn2tys22lrzewnu/iMac-4.png?rlkey=ar2pz6k9o97g0i7ywv7q4ej0p&dl=1");
+    background-size: cover;
+}
+.center-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    width: 100%;
+    position: relative;
+}
+.btn-container::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    transform: translateY(-50%);
+    background-color: #f1f1f1;
+    z-index: 1;
+}
+.btn-container::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    transform: translate(-50%,-50%);
+    background-color: #EA8532;
+    z-index: 1;
+    box-shadow: inset 7px 5px 0 3px #7C5E90;
+}
+.btn-container button{
+    z-index: 20;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 5px;
+    color: #f1f1f1;
+    background-color: #F8BBD0;
+    color: #D82F5A;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s ease-in-out;
+}
+.btn-container button:hover{
+    background-color: #D82F5A;
+    color: #f1f1f1;
+}
+.btn-container button:last-child{
+    background-color: #B2EBF2;
+    color: #02B1AA;
+}
+.btn-container button:last-child:hover{
+    background-color: #02B1AA;
+    color: #f1f1f1;
+}
