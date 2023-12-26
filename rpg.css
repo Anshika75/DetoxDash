@@ -12,7 +12,7 @@
     display: grid;
     place-items: center;
 }
-.dialouge{
+.dialouge-container{
     width: 90%;
     height: 90vh;
     background-size: 100% 100%;
@@ -26,7 +26,7 @@
     background-size: 100% 100%;
     box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
 }
-.dialouge::before{
+.dialouge-container::before{
     content: "";
     position: absolute;
     top: 50%;
@@ -51,13 +51,15 @@
 .dialouge-container .dialouge{
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 300%;
     background-color: red;
+    z-index: 20;
+    flex-wrap: nowrap;
 }
 .dialouge-container .dialouge p{
     width: 100%;
 }
-.dialouge .prev{
+.dialouge-container .prev{
     position: absolute;
     z-index: 20;
     left: 0%;
@@ -71,7 +73,7 @@
     display: grid;
     place-items: center;
 }
-.dialouge .next{
+.dialouge-container .next{
     position: absolute;
     z-index: 20;
     right: 0%;
