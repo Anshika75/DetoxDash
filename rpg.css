@@ -52,6 +52,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    background-color: red;
 }
 .dialouge-container .dialouge p{
     width: 100%;
