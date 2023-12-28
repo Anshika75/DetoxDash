@@ -8,7 +8,7 @@
 .entry {
     width: 100%;
     height: 100vh;
-    background: url("https://png.pngtree.com/thumb_back/fh260/background/20230526/pngtree-room-with-piles-of-rocks-and-fire-inside-image_2642763.jpg") no-repeat center center;
+    background: url("https://i.pinimg.com/originals/72/90/0b/72900b2f71d5bca68566495410325267.jpg") no-repeat center center;
     background-size: cover;
     display: grid;
     place-items: center;
@@ -22,7 +22,7 @@
     justify-content: center;
     align-items: center;
     padding: 0 20px;
-    background-color: rgba(22, 32, 44, 0.55);
+    background-color: rgba(37, 0, 14, 0.55);
     position: relative;
     clip-path: polygon(0 10%, 5% 0, 95% 0%, 100% 10%, 100% 90%, 95% 100%, 5% 100%, 0% 90%);
     background-size: 100% 100%;
@@ -38,7 +38,7 @@
     transform: translate(-50%, -50%);
     width: 95%;
     height: 90%;
-    background-color: rgba(130, 155, 175, 0.55);
+    background-color: rgba(216, 133, 98, 0.55);
     clip-path: polygon(0 10%, 5% 0, 95% 0%, 100% 10%, 100% 90%, 95% 100%, 5% 100%, 0% 90%);
     background-size: 100% 100%;
 }
@@ -64,7 +64,7 @@
     font-size: 2rem;
 }
 .dialouge-container .dialouge .slide b{
-    color: #15202A;
+    color: #25000E;
     font-size: 2.25rem;
 }
 .dialouge-container .dialouge .slide .opt{
@@ -75,12 +75,12 @@
     margin: 20px 0;
     font-size: 2.5rem;
     font-weight: 700;
-    color: #15202A;
+    color: #25000E;
 }
 .dialouge-container .dialouge .slide .opt .number{
-    background-color: #15202A;
+    background-color: #25000E;
     font-size: 2.25rem;
-    color: rgba(130, 155, 175, 0.75);
+    color: rgba(216, 133, 98, 0.75);
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -97,9 +97,9 @@
     transform: translate(0%, -50%);
     width: 50px;
     height: 50px;
-    background-color: rgba(22, 32, 44, 0.75);
+    background-color: rgba(37, 0, 14, 0.75);
     cursor: pointer;
-    color: rgba(130, 155, 175, 0.75);
+    color: rgba(216, 133, 98, 0.75);
     display: grid;
     place-items: center;
     font-size: 2.5rem;
@@ -118,9 +118,9 @@
     transform: translate(0%, -50%);
     width: 50px;
     height: 50px;
-    background-color: rgba(22, 32, 44, 0.75);
+    background-color: rgba(37, 0, 14, 0.75);
     cursor: pointer;
-    color: rgba(130, 155, 175, 0.75);
+    color: rgba(216, 133, 98, 0.75);
     display: grid;
     place-items: center;
     font-size: 2.5rem;
