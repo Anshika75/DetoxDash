@@ -79,10 +79,9 @@
         }
 
         function typeWriterEffect() {
-            const currentParagraph = dialougeContainer.children[currentIndex].querySelector('p');
+            const currentParagraph = dialougeContainer.children[currentIndex];
             const text = currentParagraph.innerText;
             currentParagraph.innerHTML = '';
-
             let i = 0;
             function type() {
                 if (i < text.length) {
