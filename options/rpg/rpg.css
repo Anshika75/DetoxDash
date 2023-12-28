@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Armata&family=Single+Day&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -80,8 +80,14 @@
     color: white;
     display: grid;
     place-items: center;
+    font-size: 2.5rem;
 }
-
+.dialouge-container .prev i{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
 .dialouge-container .next {
     position: absolute;
     z-index: 20;
@@ -95,21 +101,56 @@
     color: white;
     display: grid;
     place-items: center;
+    font-size: 2.5rem;
+}
+.dialouge-container .next i{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+.enter-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 100%;
+    font-weight: bold;
+    color: white;
+    margin-top: 20px;
+}
+.enter-link a{
+    font-family: 'Armata', sans-serif;
+    padding: 10px 20px;
+    background-color: rgba(69, 78, 100, 0.95);
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: all 0.3s ease-in-out; 
+}
+.enter-link a:hover{
+    background-color: rgba(69, 78, 100, 0.75);
+    transform: scale(0.9);
 }
 @media screen and (max-width: 768px) {
     .dialouge-container .dialouge p {
         font-size: 1.35rem;
-        padding: 0 7%;
+        padding: 0 13%;
     }
     .dialouge-container .dialouge p b{
         font-size: 1.5rem;
     }
     .dialouge-container .prev {
-        width: 30px;
-        height: 40px;
+        width: 20px;
+        height: 30px;
+        font-size: 1rem;
     }
     .dialouge-container .next {
-        width: 30px;
-        height: 40px;
+        width: 20px;
+        height: 30px;
+        font-size: 1rem;
     }
 }
