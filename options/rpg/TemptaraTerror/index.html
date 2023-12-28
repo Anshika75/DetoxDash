@@ -60,46 +60,76 @@
                     counteract the effects of Temptara. This option may involve navigating a virtual world within the
                     RPG to break the illusion and free those affected.
                 </div>
+                <div class="slide">
+                  <div class="opt-link"><a href="./TemptaraTerror/">Enter</a></div>
+                </div>
             </div>
             <div class="prev"><i class="fa-solid fa-caret-left"></i></div>
             <div class="next"><i class="fa-solid fa-caret-right"></i></div>
         </div>
     </div>
     <script>
-        const dialougeContainer = document.querySelector('.dialouge');
-        const prevButton = document.querySelector('.prev');
-        const nextButton = document.querySelector('.next');
-
+        const dialougeContainer = document.querySelector(".dialouge");
+        const prevButton = document.querySelector(".prev");
+        const nextButton = document.querySelector(".next");
+  
         let currentIndex = 0;
         let maxIndex = dialougeContainer.children.length - 1;
-
-        prevButton.addEventListener('click', () => {
-            currentIndex = Math.max(currentIndex - 1, 0);
-            updateSlide();
+        let isWriting = false;
+        prevButton.addEventListener("click", () => {
+          if (isWriting) return;
+          currentIndex = Math.max(currentIndex - 1, 0);
+          updateSlide();
         });
-
-        nextButton.addEventListener('click', () => {
-            currentIndex = Math.min(currentIndex + 1, 2); // Adjust the number based on the number of slides
-            updateSlide();
+  
+        nextButton.addEventListener("click", () => {
+          if (isWriting) return;
+          currentIndex = Math.min(currentIndex + 1, 2); // Adjust the number based on the number of slides
+          updateSlide();
+          typeWriterEffect();
         });
-
+  
         function updateSlide() {
-            if (currentIndex === 0) {
-                prevButton.style.display = 'none';
-            } else {
-                prevButton.style.display = 'block';
-            }
-            if (currentIndex === maxIndex) {
-                nextButton.style.display = 'none';
-            } else {
-                nextButton.style.display = 'block';
-            }
-
-            const newPosition = -currentIndex * 100 + '%';
-            dialougeContainer.style.transform = 'translateX(' + newPosition + ')';
+          if (currentIndex === 0) {
+            prevButton.style.display = "none";
+          } else {
+            prevButton.style.display = "block";
+          }
+          if (currentIndex === maxIndex) {
+            nextButton.style.display = "none";
+          } else {
+            nextButton.style.display = "block";
+          }
+  
+          const newPosition = -currentIndex * 100 + "%";
+          dialougeContainer.style.transform = "translateX(" + newPosition + ")";
         }
+  
+        function typeWriterEffect() {
+          const currentParagraph = dialougeContainer.children[currentIndex];
+          const text = currentParagraph.innerHTML;
+          if (currentParagraph.alreadyTyped) return;
+          currentParagraph.alreadyTyped = true;
+          currentParagraph.innerHTML = "";
+  
+          let i = 0;
+          function type() {
+            if (i < text.length) {
+              isWriting = true;
+              currentParagraph.innerHTML = text.substring(0, i + 1);
+              i++;
+              setTimeout(type, 0);
+            } else {
+              console.log("done");
+              isWriting = false;
+            }
+          }
+          type();
+        }
+  
         updateSlide();
-    </script>
+        typeWriterEffect();
+      </script>
 </body>
 
 </html>

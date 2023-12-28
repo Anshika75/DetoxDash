@@ -153,6 +153,40 @@
     background-color: rgba(69, 78, 100, 0.75);
     transform: scale(0.9);
 }
+.dialouge-container .dialouge .slide:last-child{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    padding: 0 10%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    text-justify: center;
+    place-items: center;
+}
+.dialouge-container .dialouge .slide .opt-link{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 100%;
+    font-weight: bold;
+    color: white;
+    margin-top: 20px;
+}
+.dialouge-container .dialouge .slide .opt-link a{
+    font-family: 'Armata', sans-serif;
+    padding: 10px 20px;
+    background-color: rgba(69, 78, 100, 0.95);
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: all 0.3s ease-in-out; 
+}
 @media screen and (max-width: 768px) {
     .dialouge-container .dialouge .slide {
         font-size: 1.35rem;
