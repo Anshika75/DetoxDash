@@ -83,7 +83,7 @@
 
         function typeWriterEffect() {
             const currentParagraph = dialougeContainer.children[currentIndex];
-            const text = currentParagraph.innerText;
+            const text = currentParagraph.innerHTML;
             if(currentParagraph.alreadyTyped) return;
             currentParagraph.alreadyTyped = true;
             currentParagraph.innerHTML = '';
@@ -92,12 +92,13 @@
             function type() {
                 if (i < text.length) {
                     isWriting = true;
-                    currentParagraph.innerHTML += text.charAt(i);
+                    currentParagraph.innerHTML = text.substring(0, i + 1);
                     i++;
                     setTimeout(type, 0);
                 }else{
                     console.log('done');
                     isWriting = false;
+                    currentParagraph.innerHTML = text;
                 }
             }
             type();
