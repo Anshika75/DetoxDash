@@ -50,13 +50,15 @@
 
         let currentIndex = 0;
         let maxIndex = dialougeContainer.children.length - 1;
-
+        let isWriting = false;
         prevButton.addEventListener('click', () => {
+            if(isWriting) return;
             currentIndex = Math.max(currentIndex - 1, 0);
             updateSlide();
         });
 
         nextButton.addEventListener('click', () => {
+            if(isWriting) return;
             currentIndex = Math.min(currentIndex + 1, 2); // Adjust the number based on the number of slides
             updateSlide();
             typeWriterEffect();
@@ -76,25 +78,34 @@
 
             const newPosition = -currentIndex * 100 + '%';
             dialougeContainer.style.transform = 'translateX(' + newPosition + ')';
+
         }
 
         function typeWriterEffect() {
             const currentParagraph = dialougeContainer.children[currentIndex];
             const text = currentParagraph.innerText;
+            if(currentParagraph.alreadyTyped) return;
+            currentParagraph.alreadyTyped = true;
             currentParagraph.innerHTML = '';
             let i = 0;
+            
             function type() {
                 if (i < text.length) {
+                    isWriting = true;
                     currentParagraph.innerHTML += text.charAt(i);
                     i++;
-                    setTimeout(type, 50);
+                    setTimeout(type, 0);
+                }else{
+                    console.log('done');
+                    isWriting = false;
                 }
             }
-
             type();
         }
 
         updateSlide();
+        typeWriterEffect();
+
     </script>
 </body>
 
