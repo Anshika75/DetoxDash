@@ -30,13 +30,12 @@
                 </p>
                 <p>
                     Your <b>mission</b> is clear: Navigate the challenges of peer pressure, addiction, and the dark choices
-                    fueled
-                    by <b>Temptara</b>. As <b>Valor</b>, you hold the key to unraveling the mysteries of the Shadow Syndicate and
+                    fueled by <b>Temptara</b>. As <b>Valor</b>, you hold the key to unraveling the mysteries of the Shadow Syndicate and
                     preventing the city's descent into chaos. Embark on a journey where every decision shapes your
                     destiny and the fate of <b>VirtuaVille</b>. Will you confront the shadows head-on, seek support from the
                     community, investigate undercover, or utilize cutting-edge technology to combat the spread of
                     <b>Temptara</b>? <br>
-                    <b class="enter-link"><a href="./rpg1/">Enter</a></b>    
+                    <b class="enter-link"><a href="./TemptaraTerror/">Enter</a></b>    
                 </p>
             </div>
             <div class="prev"><i class="fa-solid fa-caret-left"></i></div>
@@ -61,7 +60,7 @@
             if(isWriting) return;
             currentIndex = Math.min(currentIndex + 1, 2); // Adjust the number based on the number of slides
             updateSlide();
-            typeWriterEffect();
+            // typeWriterEffect();
         });
 
         function updateSlide() {
@@ -81,30 +80,43 @@
 
         }
 
-        function typeWriterEffect() {
-            const currentParagraph = dialougeContainer.children[currentIndex];
-            const text = currentParagraph.innerText;
-            if(currentParagraph.alreadyTyped) return;
-            currentParagraph.alreadyTyped = true;
-            currentParagraph.innerHTML = '';
-            let i = 0;
-            
-            function type() {
-                if (i < text.length) {
-                    isWriting = true;
-                    currentParagraph.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, 0);
-                }else{
-                    console.log('done');
-                    isWriting = false;
-                }
-            }
-            type();
-        }
+//         function typeWriterEffect() {
+//     const currentParagraph = dialougeContainer.children[currentIndex];
+//     const text = currentParagraph.innerText;
+//     if (currentParagraph.alreadyTyped) return;
+//     currentParagraph.alreadyTyped = true;
+//     currentParagraph.innerHTML = ''; // Clear existing content
+
+//     let i = 0;
+//     const tempElement = document.createElement('div');
+
+//     function type() {
+//         if (i < text.length) {
+//             isWriting = true;
+
+//             if (text[i] === '<') {
+//                 const tagEndIndex = text.indexOf('>', i);
+//                 if (tagEndIndex !== -1) {
+//                     tempElement.innerHTML = text.substring(i, tagEndIndex + 1);
+//                     currentParagraph.appendChild(tempElement.firstChild);
+//                     i = tagEndIndex + 1;
+//                 }
+//             } else {
+//                 currentParagraph.appendChild(document.createTextNode(text.charAt(i)));
+//                 i++;
+//             }
+
+//             setTimeout(type, 0);
+//         } else {
+//             console.log('done');
+//             isWriting = false;
+//         }
+//     }
+//     type();
+// }
 
         updateSlide();
-        typeWriterEffect();
+        // typeWriterEffect();
 
     </script>
 </body>
