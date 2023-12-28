@@ -149,16 +149,4 @@
         height: 30px;
         font-size: 1rem;
     }
-    .dialouge-container .dialouge .slide:last-child{
-        grid-template-columns: 1fr;
-        grid-gap: 20px;
-        padding: 10%;
-    }
-    .dialouge-container .dialouge .slide:last-child .opt-link a{
-        font-family: 'Armata', sans-serif;
-        padding: 20px 12px;
-        place-items: center start;
-        width: 270px;
-        font-size: 1rem;
-    }
 }

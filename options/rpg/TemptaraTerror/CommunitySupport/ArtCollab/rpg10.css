@@ -8,7 +8,7 @@
 .entry {
     width: 100%;
     height: 100vh;
-    background: url("https://img.freepik.com/premium-photo/library-2d-mobile-game-background-rpg-environment-classic-library-background-generated-by-ai_935179-66.jpg?size=626&ext=jpg&ga=GA1.1.1546980028.1703462400&semt=ais") no-repeat center center;
+    background: url("https://cdnb.artstation.com/p/assets/images/images/034/732/749/large/kim-aldau-gamegroup.jpg?1613066749") no-repeat center center;
     background-size: cover;
     display: grid;
     place-items: center;
@@ -22,7 +22,7 @@
     justify-content: center;
     align-items: center;
     padding: 0 20px;
-    background-color: rgba(13, 10, 29, 0.55);
+    background-color: rgba(48, 31, 31, 0.75);
     position: relative;
     clip-path: polygon(0 10%, 5% 0, 95% 0%, 100% 10%, 100% 90%, 95% 100%, 5% 100%, 0% 90%);
     background-size: 100% 100%;
@@ -38,7 +38,7 @@
     transform: translate(-50%, -50%);
     width: 95%;
     height: 90%;
-    background-color: rgba(167, 146, 184, 0.55);
+    background-color: rgba(99, 93, 95, 0.55);
     clip-path: polygon(0 10%, 5% 0, 95% 0%, 100% 10%, 100% 90%, 95% 100%, 5% 100%, 0% 90%);
     background-size: 100% 100%;
 }
@@ -64,7 +64,7 @@
     font-size: 2rem;
 }
 .dialouge-container .dialouge .slide b{
-    color: #0D0A1D;
+    color: rgba(48, 31, 31, 0.95);
     font-size: 2.25rem;
 }
 .dialouge-container .dialouge .slide .opt{
@@ -75,12 +75,12 @@
     margin: 20px 0;
     font-size: 2.5rem;
     font-weight: 700;
-    color: #0D0A1D;
+    color: #301F1F;
 }
 .dialouge-container .dialouge .slide .opt .number{
-    background-color: #0D0A1D;
+    background-color: rgba(48, 31, 31, 0.95);
     font-size: 2.25rem;
-    color: rgba(167, 146, 184, 0.75);
+    color: rgba(139, 105, 95, 0.75);
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -97,9 +97,9 @@
     transform: translate(0%, -50%);
     width: 50px;
     height: 50px;
-    background-color: rgba(13, 10, 29, 0.75);
+    background-color: rgba(48, 31, 31, 0.95);
     cursor: pointer;
-    color: rgba(167, 146, 184, 0.75);
+    color: rgba(139, 105, 95, 0.75);
     display: grid;
     place-items: center;
     font-size: 2.5rem;
@@ -118,9 +118,9 @@
     transform: translate(0%, -50%);
     width: 50px;
     height: 50px;
-    background-color: rgba(13, 10, 29, 0.75);
+    background-color: rgba(48, 31, 31, 0.95);
     cursor: pointer;
-    color: rgba(167, 146, 184, 0.75);
+    color: rgba(139, 105, 95, 0.75);
     display: grid;
     place-items: center;
     font-size: 2.5rem;
