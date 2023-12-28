@@ -1,38 +1,85 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Login</title>
-    <link rel="stylesheet" href="./login.css">
-</head>
+    <link rel="stylesheet" href="./login.css" />
+  </head>
 
-<body>
+  <body>
     <div class="login-splash-container">
-        <div class="form-container">
-            <h1><span style="color: #D3315A;">S</span>
-                <span style="color: #00ADA9;">I</span>
-                <span style="color: #7D5F91;">G</span>
-                <span style="color: #EA872C;">N</span>
-                <span style="color: #7D5F91;">-</span>
-                <span style="color: #D3315A;">U</span>
-                <span style="color: #00ADA9;">P</span></h1>
-            <form>
-                <label for="name">Username</label>
-                <input type="text" id="name" name="name" required>
+      <div class="form-container">
+        <h1>
+          <span style="color: #d3315a">S</span>
+          <span style="color: #00ada9">I</span>
+          <span style="color: #7d5f91">G</span>
+          <span style="color: #ea872c">N</span>
+          <span style="color: #7d5f91">-</span>
+          <span style="color: #d3315a">U</span>
+          <span style="color: #00ada9">P</span>
+        </h1>
+        <form id="signupForm">
+            <select name="type" id="type">
+                <option value="user">User</option>
+                <option value="influencer">Influencer</option>
+            </select>
+          <label for="name">Username</label>
+          <input type="text" id="name" name="name" required />
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
 
-                <label for="index">Addiction index (1-10):</label>
-                <input type="text" id="index" name="index" required>
+          <label for="index">Addiction index (1-10):</label>
+          <input type="text" id="index" name="index" required />
 
-                <button><a href="./options.html">Sign Up</a></button>
-            </form>
-        </div>
+          <button>Sign Up</button>
+        </form>
+      </div>
     </div>
-</body>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="./auth.js"></script>
+    <script>
+      const signupForm = document.getElementById("signupForm");
+      signupForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = signupForm["name"].value;
+        const email = signupForm["email"].value;
+        const password = signupForm["password"].value;
+        const index = signupForm["index"].value;
+        const type = signupForm["type"].value;
+        auth
+          .createUserWithEmailAndPassword(email, password)
+          .then((cred) => {
 
+            console.log(cred.user);
+            // set display name and index
+            cred.user.updateProfile({
+              displayName: name,
+            });
+            cred.user.updateProfile({
+              index: index,
+            });
+            db.collection("users")
+              .doc(cred.user.uid)
+              .set({
+                name: name,
+                email: email,
+                password: password,
+                index: index,
+                type: type,
+              })
+              .then(() => {
+                window.location.href = "./options.html";
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+    </script>
+  </body>
 </html>

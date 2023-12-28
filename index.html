@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Splash Screen</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
 
-<body>
+  <body>
     <div class="splash-container">
-        <div class="center-div">
-            <img src="https://www.dropbox.com/scl/fi/nv7ndeqnibbm3xe9sxpvw/detoxlogo.png?rlkey=39pvygvo4lutkizhdrzd1l26k&dl=1" alt="">
-            <div class="btn-container">
-                <button><a href="./login.html">Login</a></button>
-                <button><a href="./signup.html">Sign Up</a></button>
-            </div>
+      <div class="center-div">
+        <img
+          src="https://www.dropbox.com/scl/fi/nv7ndeqnibbm3xe9sxpvw/detoxlogo.png?rlkey=39pvygvo4lutkizhdrzd1l26k&dl=1"
+          alt=""
+        />
+        <div class="btn-container">
+          <button><a href="./login.html">Login</a></button>
+          <button><a href="./signup.html">Sign Up</a></button>
         </div>
+      </div>
     </div>
-</body>
 
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+
+    <script src="./auth.js"></script>
+    <script>
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          console.log("User logged in: ", user.displayName);
+          location.href = "./options.html";
+        } else {
+          console.log("User logged out");
+          
+        }
+      });
+    </script>
+  </body>
 </html>
