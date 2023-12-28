@@ -14,7 +14,7 @@
                 <span style="color: #7D5F91;">G</span>
                 <span style="color: #EA872C;">I</span>
                 <span style="color: #D3315A;">N</span></h1>
-            <form>
+            <form id="loginForm">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
 
@@ -23,8 +23,48 @@
 
                 <button><a href="./options.html">Login</a></button>
             </form>
+            <button id="googleLogin">
+                Login with Google
+            </button>
+            <button><a href="./signup.html">Sign Up</a></button>
         </div>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+
+    <script src="./auth.js"></script>
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = loginForm["email"].value;
+            const password = loginForm["password"].value;
+            auth.signInWithEmailAndPassword(email, password).then((cred) => {
+                console.log(cred.user);
+                window.location.href = "./options.html";
+            });
+        });
+        const googleLogin = document.getElementById("googleLogin");
+        googleLogin.addEventListener("click", (e) => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider).then((cred) => {
+                console.log(cred.user);
+                db.collection("users").doc(cred.user.uid).set({
+                    name: cred.user.displayName,
+                    email: cred.user.email,
+                    index: -1,
+                    password: "",
+                    type: "none"
+                }).then(() => {
+                    console.log("Document successfully written!");
+                    window.location.href = "./options.html";
+                }).catch((error) => {
+                    console.error("Error writing document: ", error);
+                })
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -1,89 +1,121 @@
-@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url("https://fonts.googleapis.com/css2?family=Single+Day&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.entry{
-    width: 100%;
-    height: 100vh;
-    background: url("https://cdn.akamai.steamstatic.com/steam/apps/1952427/ss_71ca92eadc858048913f19fabf5809d5570f8524.600x338.jpg?t=1666046628") no-repeat center center;
-    background-size: cover;
-    display: grid;
-    place-items: center;
+.entry {
+  width: 100%;
+  height: 100vh;
+  background: url("https://cdn.akamai.steamstatic.com/steam/apps/1952427/ss_71ca92eadc858048913f19fabf5809d5570f8524.600x338.jpg?t=1666046628")
+    no-repeat center center;
+  background-size: cover;
+  display: grid;
+  place-items: center;
 }
-.dialouge-container{
-    width: 90%;
-    height: 90vh;
-    background-size: 100% 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
-    background-color: rgba(69, 78, 100, 0.55);
-    position: relative;
-    clip-path: polygon(0 10%,5% 0,95% 0%,100% 10%,100% 90%,95% 100%,5% 100%,0% 90%);
-    background-size: 100% 100%;
-    box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
+.dialouge-container {
+  width: 90%;
+  height: 90vh;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  background-color: rgba(69, 78, 100, 0.55);
+  position: relative;
+  clip-path: polygon(
+    0 10%,
+    5% 0,
+    95% 0%,
+    100% 10%,
+    100% 90%,
+    95% 100%,
+    5% 100%,
+    0% 90%
+  );
+  background-size: 100% 100%;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
 }
-.dialouge-container::before{
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 95%;
-    height: 90%;
-    background-color: rgba(179, 203, 255,0.55);
-    clip-path: polygon(0 10%,5% 0,95% 0%,100% 10%,100% 90%,95% 100%,5% 100%,0% 90%);
-    background-size: 100% 100%;
+.dialouge-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  height: 90%;
+  background-color: rgba(179, 203, 255, 0.55);
+  clip-path: polygon(
+    0 10%,
+    5% 0,
+    95% 0%,
+    100% 10%,
+    100% 90%,
+    95% 100%,
+    5% 100%,
+    0% 90%
+  );
+  background-size: 100% 100%;
 }
-.dialouge-container{
-    font-family: 'Single Day', cursive;
-    z-index: 20;
-    width: 90%;
-    height: 80%;
-    text-align: justify;
-    text-justify: inter-word;
-    font-size: 2rem;
-    overflow-y: scroll;
+.dialouge-container {
+  font-family: "Single Day", cursive;
+  z-index: 20;
+  width: 90%;
+  height: 80%;
+  text-align: justify;
+  text-justify: inter-word;
+  font-size: 2rem;
+  overflow-y: scroll;
 }
-.dialouge-container .dialouge{
-    display: flex;
-    flex-direction: row;
-    width: 300%;
-    background-color: red;
-    z-index: 20;
-    flex-wrap: nowrap;
+.dialouge-container .dialouge {
+  display: flex;
+  flex-direction: row;
+  z-index: 20;
+  flex-wrap: nowrap;
+  transition: all 0.5s ease-in-out;
 }
-.dialouge-container .dialouge p{
-    width: 100%;
+.dialouge-container .dialouge p {
+  min-width: 100%;
+  padding: 10px;
+  background: #d8a;
 }
-.dialouge-container .prev{
-    position: absolute;
-    z-index: 20;
-    left: 0%;
-    top: 50%;
-    transform: translate(0%,-50%);
-    width: 50px;
-    height: 50px;
-    background-color: rgba(69, 78, 100, 0.95);
-    cursor: pointer;
-    color: white;
-    display: grid;
-    place-items: center;
+.dialouge-container .dialouge p:nth-child(2n) {
+  width: 100%;
+  background: #fff;
 }
-.dialouge-container .next{
-    position: absolute;
-    z-index: 20;
-    right: 0%;
-    top: 50%;
-    transform: translate(0%,-50%);
-    width: 50px;
-    height: 50px;
-    background-color: rgba(69, 78, 100, 0.95);
-    cursor: pointer;
-    color: white;
-    display: grid;
-    place-items: center;
+.dialouge-container .prev {
+  position: absolute;
+  z-index: 20;
+  left: 0%;
+  top: 50%;
+  transform: translate(0%, -50%);
+  width: 50px;
+  height: 50px;
+  background-color: rgba(69, 78, 100, 0.95);
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  vertical-align: middle;
+  transition: all 0.2s ease-in-out;
+}
+.dialouge-container .next {
+  position: absolute;
+  z-index: 20;
+  right: 0%;
+  top: 50%;
+  transform: translate(0%, -50%);
+  width: 50px;
+  height: 50px;
+  background-color: rgba(69, 78, 100, 0.95);
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  vertical-align: middle;
+  transition: all 0.2s ease-in-out;
+}
+.dialouge-container .prev:hover,
+.dialouge-container .next:hover {
+  background-color: rgba(69, 78, 100, 0.75);
 }
