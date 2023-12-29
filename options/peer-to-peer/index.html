@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./influencer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      #videoPreview {
+        width: 100%;
+        height: 100%;
+      }
+      video{
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Influencer Hub</h1>
+      <div class="posts">
+        
+      </div>
+      <div class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Post</h2>
+          <form id="savePost">
+            <label for="caption">caption</label>
+            <input type="text" name="caption" id="caption" />
+
+            <!-- Upload Video -->
+            <label for="video">
+              <i class="fa-solid fa-video"></i>
+              <video src="" id="videoPreview" controls></video>
+            </label>
+            <input
+              type="file"
+              name="video"
+              id="video"
+              onchange="document.getElementById('videoPreview').src = window.URL.createObjectURL(this.files[0])"
+            />
+
+            <button type="submit">Post</button>
+          </form>
+        </div>
+      </div>
+      <button class="addPostBtn">+</button>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <!-- firebase storage -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
+
+    <script src="../../auth.js"></script>
+    <script>
+      const modal = document.querySelector(".modal");
+      const modalContent = document.querySelector(".modal-content");
+      const close = document.querySelector(".close");
+      const postButton = document.querySelector(".addPostBtn");
+      var currentUserByDb;
+
+      postButton.addEventListener("click", () => {
+        modal.style.display = "flex";
+      });
+
+      close.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+
+      window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+      var s;
+      const savePost = document.getElementById("savePost");
+      savePost.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const video = savePost["video"].value;
+        const caption = savePost["caption"].value;
+        // upload video to firebase storage
+        const videoFile = document.getElementById("video").files[0];
+        const storageRef = firebase.storage().ref();
+        const videoRef = storageRef.child(`videos/${Date.now()}-${videoFile.name}`);
+        console.log("Uploading a blob or file!");
+        videoRef.put(videoFile).then((snapshot) => {
+          console.log("Uploaded a blob or file!");
+          snapshot.ref.getDownloadURL().then((url) => {
+            console.log("File available at", url);
+            db.collection("posts")
+              .add({
+                video: url,
+                caption: savePost["caption"].value,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                postBy: auth.currentUser.uid,
+                postByName: auth.currentUser.displayName,
+                postByPhotoURL: auth.currentUser.photoURL,
+                likes: [],
+                comments: [],
+              })
+              .then(() => {
+                console.log("Document successfully written!");
+                modal.style.display = "none";
+              })
+              .catch((error) => {
+                console.error("Error writing document: ", error);
+              });
+
+          });
+        });
+      });
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          console.log("User   logged in: ", user.displayName);
+          db.collection("users")
+            .doc(user.uid)
+            .get()
+            .then((doc) => {
+              currentUserByDb = doc.data();
+              console.log(currentUserByDb);
+            });
+        } else {
+          console.log("User logged out");
+          window.location = "../../index.html";
+        }
+      });
+
+
+      var posts = document.querySelector(".posts");
+      db.collection("posts").
+      onSnapshot((snapshot) => {
+        posts.innerHTML = "";
+        snapshot.forEach((doc) => {
+          posts.innerHTML += `
+          <div class="post">
+            <div class="post-header">
+              <div class="post-header-left">
+                <img src="${doc.data().postByPhotoURL}" alt="" />
+                <div class="post-header-left-text">
+                  <h3>${doc.data().postByName}</h3>
+                  <p>${doc.data().timestamp.toDate().toDateString()}</p>
+                </div>
+              </div>
+              <div class="post-header-right">
+                <i class="fa-solid fa-ellipsis"></i>
+              </div>
+            </div>
+            <div class="post-video">
+              <video src="${doc.data().video}" controls></video>
+            </div>
+            <div class="post-footer">
+              <div class="post-footer-left">
+                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-comment"></i>
+                <i class="fa-solid fa-share"></i>
+              </div>
+              <div class="post-footer-right">
+                <i class="fa-solid fa-bookmark"></i>
+              </div>
+            </div>
+            <div class="post-caption">
+              <h3>${doc.data().caption}</h3>
+            </div>
+            <div class="post-comments">
+              ${
+                doc.data().comments.length > 0
+                  ? doc
+                      .data()
+                      .comments.map(
+                        (comment) => `
+                <div class="post-comment">
+                  <img src="${comment.commentByPhotoURL}" alt="" />
+                  <div class="post-comment-text">
+                    <h3>${comment.commentByName}</h3>
+                    <p>${comment.comment}</p>
+                  </div>
+                </div>
+                `
+                      )
+                      .join("")
+                  : ""
+              }
+            </div>
+            <div class="post-add-comment">
+              <form id="saveComment" onsubmit='saveComment(event, "${doc.id}")'>
+                <label for="comment">Comment</label>
+                <input type="text" name="comment" id="comment" />
+                <button type="submit">Comment</button>
+              </form>
+            </div>
+            <div class="post-add-like">
+              <button onclick='likePost(event, "${doc.id}")'>
+                <i class="fa-solid fa-heart"></i>
+                <p>${doc.data().likes.length}</p>
+              </button>
+            </div>
+            ${
+              doc.data().postBy === auth.currentUser.uid
+                ? `<button class="post-delete" onclick='deletePost(event, "${doc.id}")'>
+              <i class="fa-solid fa-trash"></i>
+            </button>`
+                : ""
+            }
+          </div>
+          `;
+        });
+      });
+      function saveComment(e, postId) {
+        e.preventDefault();
+        const comment = document.getElementById("comment").value;
+        db.collection("posts")
+          .doc(postId)
+          .update({
+            comments: firebase.firestore.FieldValue.arrayUnion({
+              comment: comment,
+              commentBy: auth.currentUser.uid,
+              commentByName: auth.currentUser.displayName,
+              commentByPhotoURL: auth.currentUser.photoURL,
+            }),
+          })
+          .then(() => {
+            console.log("Document successfully updated!");
+            document.getElementById("comment").value = "";
+          })
+          .catch((error) => {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+          });
+      }
+
+    </script>
+  </body>
+</html>

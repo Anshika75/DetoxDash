@@ -1,57 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./community.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="./community.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-
-<body>
-  <div class="container">
-    <h1>Community Hub </h1>
-    <div class="forum">
-    </div>
-    <div class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Post</h2>
-        <form id="savePost">
-          <label for="title">Title</label>
-          <input type="text" name="title" id="title" />
-          <label for="content">Content</label>
-          <textarea name="description" id="content" cols="30" rows="10"></textarea>
-          <button type="submit">Post</button>
-        </form>
+  <body>
+    <div class="container">
+      <h1>Community Hub</h1>
+      <div class="forum"></div>
+      <div class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Post</h2>
+          <form id="savePost">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" />
+            <label for="content">Content</label>
+            <textarea
+              name="description"
+              id="content"
+              cols="30"
+              rows="10"
+            ></textarea>
+            <button type="submit">Post</button>
+          </form>
+        </div>
       </div>
+      <button class="addPostBtn">+</button>
     </div>
-    <button class="addPostBtn">+</button>
-  </div>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
-  <script src="../../auth.js"></script>
-  <script>
-    const modal = document.querySelector(".modal");
-    const modalContent = document.querySelector(".modal-content");
-    const close = document.querySelector(".close");
-    const postButton = document.querySelector(".addPostBtn");
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="../../auth.js"></script>
+    <script>
+      const modal = document.querySelector(".modal");
+      const modalContent = document.querySelector(".modal-content");
+      const close = document.querySelector(".close");
+      const postButton = document.querySelector(".addPostBtn");
+      var currentUserByDb;
 
-    postButton.addEventListener("click", () => {
-      modal.style.display = "flex";
-    });
+      postButton.addEventListener("click", () => {
+        modal.style.display = "flex";
+      });
 
-    close.addEventListener("click", () => {
-      modal.style.display = "none";
-    });
-
-    window.addEventListener("click", (e) => {
-      if (e.target === modal) {
+      close.addEventListener("click", () => {
         modal.style.display = "none";
-      }
-    });
+      });
+
+      window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.style.display = "none";
+        }
+      });
 
       const savePost = document.getElementById("savePost");
       savePost.addEventListener("submit", (e) => {
@@ -66,7 +76,7 @@
             postBy: auth.currentUser.uid,
             comments: [],
             postByPhotoURL: auth.currentUser.photoURL,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            createdAt: firebase.firestore.FieldValue.serverTimestamp() || null,
             likes: [],
           })
           .then(() => {
@@ -76,112 +86,111 @@
 
       db.collection("forums").onSnapshot((querySnapshot) => {
         document.querySelector(".forum").innerHTML = "";
-        querySnapshot.forEach((
-            doc,
-            index
-        ) => {
+        querySnapshot.forEach((doc, index) => {
           console.log(doc.data());
+          var isLiked = doc.data().likes.includes(auth.currentUser.uid);
           document.querySelector(".forum").innerHTML += `
                 <div class="post">
                     <h3 class="title">${doc.data().title}</h3>
                     <p class="desc">${doc.data().content}</p>
                     <div class="bottom">
-                    <button class="likeBtn" onclick='db.collection("forums").doc("${doc.id}").update({likes: firebase.firestore.FieldValue.increment(1)})'>
-                      <i class="fa-solid fa-thumbs-up"></i>
-                      <p>20</p>
+                    <button class="likeBtn" 
+                    // remove like if already liked else add like
+                    onclick='${
+                      doc.data().likes.includes(auth.currentUser.uid)
+                        ? `db.collection("forums").doc("${doc.id}").update({
+                          likes: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")
+                        })`
+                        : `db.collection("forums").doc("${doc.id}").update({
+                          likes: firebase.firestore.FieldValue.arrayUnion("${auth.currentUser.uid}")
+                        })`
+                    }'
+                      {
+                        doc.data().likes.includes(auth.currentUser.uid) ? "disabled" : ""
+                      }
+                      style="color: ${
+                        doc.data().likes.includes(auth.currentUser.uid)
+                          ? "blue"
+                          : "black"
+                      }"
+                    >
+                    <i class="fa-solid fa-thumbs-up"></i>
+                      <p>
+                        ${doc.data().likes.length}
+                        </p>
                     </button>
-                    <button class="dislikeBtn" onclick='db.collection("forums").doc("${doc.id}").update({likes: firebase.firestore.FieldValue.increment(-1)})'>
-                      <i class="fa-solid fa-thumbs-down"></i><p>10</p>
-                    </button>
-                    <button class="deleteBtn" onclick='db.collection("forums").doc("${doc.id}").delete()'>
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
+                    ${
+                      doc.data().postBy === auth.currentUser.uid ||
+                      currentUserByDb?.role === "admin" ||
+                      currentUserByDb?.role === "moderator"
+                        ? `<button class="deleteBtn" onclick='db.collection("forums").doc("${doc.id}").delete()'>
+                        <i class="fa-solid fa-trash"></i>
+                      </button>`
+                        : ""
+                    }
                         <div class="postBy">
                           <div class="postByPhoto">                                              
                             <h2>Post by ${doc.data().postByName}</h2>
                             <img src="${doc.data().postByPhotoURL}" alt=""> 
                           </div> 
                           <div class="postAt">
-                            <p>${doc.data().createdAt.toDate().toDateString() + " " + doc.data().createdAt.toDate().toLocaleTimeString()}</p>
+                            <p>${
+                              doc.data().createdAt?.toDate().toDateString() +
+                              " " +
+                              doc
+                                .data()
+                                .createdAt?.toDate()
+                                .toLocaleTimeString()
+                            }</p>
                           </div>
                         </div>
                     </div>
                     <div class="comments">
                         ${doc
-            .data()
-            .comments.map((comment) => {
-              return `
+                          .data()
+                          .comments.map((comment) => {
+                            return `
                             <div class="comment">
                                 <p class="cmnt">${comment.comment}</p>
                                 <div class="commentBy">
                                   <div class="commentByPhoto">
                                     <h2>Comment by ${comment.commentByName}</h2>
-                                    <img src="${comment.commentByPhotoURL}" alt="">
+                                    <img src="${
+                                      comment.commentByPhotoURL
+                                    }" alt="">
                                   </div>
                                   <div class="commentAt">
-                                    <p>${doc.data().createdAt.toDate().toDateString() + " " + doc.data().createdAt.toDate().toLocaleTimeString()}</p>
+                                    <p>${
+                                      doc
+                                        .data()
+                                        .createdAt.toDate()
+                                        .toDateString() +
+                                      " " +
+                                      doc
+                                        .data()
+                                        .createdAt.toDate()
+                                        .toLocaleTimeString()
+                                    }</p>
                                   </div>
                                 </div>
                             </div>
                             `;
-            })
-            .join("")}
+                          })
+                          .join("")}
                     </div>
-                    <form id="saveComment" onsubmit=' saveComment(event, "${doc.id}")'>
+                    <form id="saveComment" onsubmit=' saveComment(event, "${
+                      doc.id
+                    }")'>
                         <label for="comment">Comment</label>
                         <input type="text" name="comment" id="comment">
                         <button type="submit">Comment</button>
                     </form>
-                    <div class="postBy">
-                        <p>Posted by: ${doc.data().postByName}</p>
-                        <p> ${doc.data().comments.length} comments</p>
-                        <p> ${
-                            doc.data().likes.length
-                        } likes</p>
-                    </div>
-                    <div class="postAt">
-                        <p>Posted at: ${
-                            doc.data().createdAt.toDate().toDateString() +
-                            " " +
-                            doc.data().createdAt.toDate().toLocaleTimeString()
-                        }</p>
-                    </div>
-                    <button class="likeBtn"
-                        onclick='
-                          db.collection("forums").doc("${doc.id}").update({
-                            likes: firebase.firestore.FieldValue.arrayUnion("${auth.currentUser.uid}")
-                          })'
-                        ${doc.data().likes.includes(auth.currentUser.uid) ? "disabled" : ""}
-                          >Like</button>
-                    <button class="dislikeBtn"
-                        onclick='db.collection("forums").doc("${doc.id}").update({
-                            likes: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")
-                          })'
-                        ${!doc.data().likes.includes(auth.currentUser.uid) ? "disabled" : ""}
-                    >Dislike</button>
-                    <button class="deleteBtn" onclick='db.collection("forums").doc("${doc.id}").delete()'>Delete</button>
                 </div>
                 `;
-      });
-    });
-
-    function saveComment(e, id) {
-      e.preventDefault();
-      const comment = document.getElementById("saveComment")["comment"].value;
-      db.collection("forums")
-        .doc(id)
-        .update({
-          comments: firebase.firestore.FieldValue.arrayUnion({
-            comment: comment,
-            commentByName:
-              auth.currentUser.displayName || auth.currentUser.email,
-            commentBy: auth.currentUser.uid,
-            commentByPhotoURL: auth.currentUser.photoURL,
-          }),
         });
-    }
+      });
 
-      function saveComment(e, id){
+      function saveComment(e, id) {
         e.preventDefault();
         const comment = document.getElementById("saveComment")["comment"].value;
         db.collection("forums")
@@ -196,15 +205,37 @@
             }),
           });
       }
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        console.log("User logged in: ", user.displayName);
-      } else {
-        console.log("User logged out");
-        window.location = "../../index.html";
-      }
-    });
-  </script>
-</body>
 
+      function saveComment(e, id) {
+        e.preventDefault();
+        const comment = document.getElementById("saveComment")["comment"].value;
+        db.collection("forums")
+          .doc(id)
+          .update({
+            comments: firebase.firestore.FieldValue.arrayUnion({
+              comment: comment,
+              commentByName:
+                auth.currentUser.displayName || auth.currentUser.email,
+              commentBy: auth.currentUser.uid,
+              commentByPhotoURL: auth.currentUser.photoURL,
+            }),
+          });
+      }
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          console.log("User   logged in: ", user.displayName);
+          db.collection("users")
+            .doc(user.uid)
+            .get()
+            .then((doc) => {
+              currentUserByDb = doc.data();
+              console.log(currentUserByDb);
+            });
+        } else {
+          console.log("User logged out");
+          window.location = "../../index.html";
+        }
+      });
+    </script>
+  </body>
 </html>
