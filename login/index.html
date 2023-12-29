@@ -21,7 +21,7 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
 
-                <button><a href="./options">Login</a></button>
+                <button><a href="./options.html">Login</a></button>
             </form>
             <button id="googleLogin">
                 Login with Google
@@ -58,7 +58,7 @@
                     type: "none"
                 }).then(() => {
                     console.log("Document successfully written!");
-                    window.location.href = "./options.html";
+                    window.location.href = "../options";
                 }).catch((error) => {
                     console.error("Error writing document: ", error);
                 })
