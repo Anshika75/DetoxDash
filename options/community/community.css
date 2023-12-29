@@ -132,7 +132,7 @@ body {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 4px solid #7d5f9181;
+    border: 3.5px solid #7d5f9181;
 }
 
 .postBy .postAt {
@@ -195,7 +195,7 @@ body {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 4px solid #7d5f9181;
+    border: 3.5px solid #7d5f9181;
 }
 
 .commentBy .commentAt {
