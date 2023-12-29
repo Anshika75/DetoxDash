@@ -231,7 +231,7 @@
             comments: [],
             postByPhotoURL: auth.currentUser.photoURL,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            likes: 0,
+            likes: [],
           })
           .then(() => {
             modal.style.display = "none";
@@ -276,7 +276,9 @@
                     <div class="postBy">
                         <p>Posted by: ${doc.data().postByName}</p>
                         <p> ${doc.data().comments.length} comments</p>
-                        <p> ${doc.data().likes} likes</p>
+                        <p> ${
+                            doc.data().likes.length
+                        } likes</p>
                     </div>
                     <div class="postAt">
                         <p>Posted at: ${
@@ -286,13 +288,17 @@
                         }</p>
                     </div>
                     <button class="likeBtn"
-                        onclick='db.collection("forums").doc("${doc.id}").update({
-                                likes: firebase.firestore.FieldValue.increment(1)
-                            })'>Like</button>
+                        onclick='
+                          db.collection("forums").doc("${doc.id}").update({
+                            likes: firebase.firestore.FieldValue.arrayUnion("${auth.currentUser.uid}")
+                          })'
+                        ${doc.data().likes.includes(auth.currentUser.uid) ? "disabled" : ""}
+                          >Like</button>
                     <button class="dislikeBtn"
                         onclick='db.collection("forums").doc("${doc.id}").update({
-                                likes: firebase.firestore.FieldValue.increment(-1)
-                            })'
+                            likes: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")
+                          })'
+                        ${!doc.data().likes.includes(auth.currentUser.uid) ? "disabled" : ""}
                     >Dislike</button>
                     <button class="deleteBtn" onclick='db.collection("forums").doc("${doc.id}").delete()'>Delete</button>
                 </div>
@@ -300,7 +306,7 @@
         });
       });
 
-      function saveComment(e, id) {
+      function saveComment(e, id){
         e.preventDefault();
         const comment = document.getElementById("saveComment")["comment"].value;
         db.collection("forums")
