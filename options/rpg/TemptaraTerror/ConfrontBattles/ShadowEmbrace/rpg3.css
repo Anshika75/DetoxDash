@@ -8,7 +8,7 @@
 .entry {
     width: 100%;
     height: 100vh;
-    background: url("https://i.pinimg.com/originals/9e/fb/a2/9efba2f87e32f7e7c4189fdab028a9bb.jpg") no-repeat center center;
+    background: url("https://c4.wallpaperflare.com/wallpaper/800/233/92/art-battle-death-fantasy-wallpaper-preview.jpg") no-repeat center center;
     background-size: cover;
     display: grid;
     place-items: center;
@@ -22,7 +22,7 @@
     justify-content: center;
     align-items: center;
     padding: 0 20px;
-    background-color: rgba(42, 50, 49, 0.55);
+    background-color: rgba(106, 33, 22, 0.75);
     position: relative;
     clip-path: polygon(0 10%, 5% 0, 95% 0%, 100% 10%, 100% 90%, 95% 100%, 5% 100%, 0% 90%);
     background-size: 100% 100%;
@@ -38,7 +38,7 @@
     transform: translate(-50%, -50%);
     width: 95%;
     height: 90%;
-    background-color: rgba(224, 235, 212, 0.35);
+    background-color: rgba(182, 160, 117, 0.75);
     clip-path: polygon(0 10%, 5% 0, 95% 0%, 100% 10%, 100% 90%, 95% 100%, 5% 100%, 0% 90%);
     background-size: 100% 100%;
 }
@@ -64,7 +64,7 @@
     font-size: 2rem;
 }
 .dialouge-container .dialouge .slide b{
-    color: rgb(42, 50, 49);
+    color: rgba(106, 33, 22, 0.75);
     font-size: 2.25rem;
 }
 .dialouge-container .dialouge .slide .opt{
@@ -75,12 +75,12 @@
     margin: 20px 0;
     font-size: 2.5rem;
     font-weight: 700;
-    color: rgb(42, 50, 49);
+    color: rgba(106, 33, 22, 0.95);
 }
 .dialouge-container .dialouge .slide .opt .number{
-    background-color: rgb(42, 50, 49);
+    background-color: rgba(106, 33, 22, 0.75);
     font-size: 2.25rem;
-    color: white;
+    color: rgba(182, 160, 117, 0.75);
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -97,9 +97,9 @@
     transform: translate(0%, -50%);
     width: 50px;
     height: 50px;
-    background-color: rgba(42, 50, 49, 0.95);
+    background-color: rgba(106, 33, 22, 0.75);
     cursor: pointer;
-    color: white;
+    color: rgba(182, 160, 117, 0.75);
     display: grid;
     place-items: center;
     font-size: 2.5rem;
@@ -118,9 +118,9 @@
     transform: translate(0%, -50%);
     width: 50px;
     height: 50px;
-    background-color: rgba(42, 50, 49, 0.95);
+    background-color: rgba(106, 33, 22, 0.75);
     cursor: pointer;
-    color: white;
+    color: rgba(182, 160, 117, 0.75);
     display: grid;
     place-items: center;
     font-size: 2.5rem;
@@ -130,47 +130,6 @@
     width: 100%;
     display: grid;
     place-items: center;
-}
-.dialouge-container .dialouge .slide:last-child{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    grid-gap: 20px;
-    padding: 10%;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-align: center;
-    text-justify: center;
-    place-items: center;
-}
-.dialouge-container .dialouge .slide:last-child .opt-link{
-    display: grid;
-    place-items: center;
-    text-decoration: none;
-    border-radius: 5px;
-    width: 100%;
-    height: 100%;
-    font-weight: bold;
-    color: white;
-    margin-top: 20px;
-}
-.dialouge-container .dialouge .slide:last-child .opt-link a{
-    font-family: 'Armata', sans-serif;
-    padding: 40px 20px;
-    background-color: rgba(42, 50, 49, 0.95);
-    cursor: pointer;
-    color: white;
-    text-decoration: none;
-    display: grid;
-    place-items: center;
-    width: 100%;
-    height: 100%;
-    font-size: 1.5rem;
-    transition: all 0.3s ease-in-out; 
-}
-.dialouge-container .dialouge .slide .opt-link a:hover{
-    background-color: rgba(42, 50, 49, 0.75);
-    transform: scale(0.9);
 }
 @media screen and (max-width: 768px) {
     .dialouge-container .dialouge .slide {
@@ -188,18 +147,6 @@
     .dialouge-container .next {
         width: 20px;
         height: 30px;
-        font-size: 1rem;
-    }
-    .dialouge-container .dialouge .slide:last-child{
-        grid-template-columns: 1fr;
-        grid-gap: 20px;
-        padding: 10%;
-    }
-    .dialouge-container .dialouge .slide:last-child .opt-link a{
-        font-family: 'Armata', sans-serif;
-        padding: 20px 12px;
-        place-items: center start;
-        width: 270px;
         font-size: 1rem;
     }
 }
