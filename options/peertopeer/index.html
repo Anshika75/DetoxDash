@@ -40,7 +40,7 @@
 
             <!-- Upload Video -->
             <label for="video">
-              <i class="fa-solid fa-video"></i>
+              Choose Video File
             </label>
             <input
               type="file"
@@ -159,7 +159,11 @@
           posts.innerHTML += `
                   <div class="post">
                     <div class="post-video">
-                      <video src="${doc.data().video}" controls></video>
+                      <video src="${doc.data().video}"
+                      // preloader
+                      onloadedmetadata="this.muted=true; this.play()"
+
+                      controls></video>
                     </div>
                     <div class="post-caption">
                       <h3>${doc.data().caption}</h3>
@@ -203,7 +207,9 @@
                                     }" alt="">
                                   </div>
                                   <div class="commentAt">
-                                    <p>${doc.data().timestamp.toDate().toDateString()}</p>
+                                    <p>${
+                                      comment.commentAt?.toDate().toDateString()
+                                    }</p>
                                   </div>
                                 </div>
                             </div>
@@ -230,6 +236,7 @@
               commentBy: auth.currentUser.uid,
               commentByName: auth.currentUser.displayName,
               commentByPhotoURL: auth.currentUser.photoURL,
+              commentAt: new Date(),
             }),
           })
           .then(() => {
