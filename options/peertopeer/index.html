@@ -143,77 +143,66 @@
         posts.innerHTML = "";
         snapshot.forEach((doc) => {
           posts.innerHTML += `
-          <div class="post">
-            <div class="post-header">
-              <div class="post-header-left">
-                <img src="${doc.data().postByPhotoURL}" alt="" />
-                <div class="post-header-left-text">
-                  <h3>${doc.data().postByName}</h3>
-                  <p>${doc.data().timestamp.toDate().toDateString()}</p>
-                </div>
-              </div>
-              <div class="post-header-right">
-                <i class="fa-solid fa-ellipsis"></i>
-              </div>
-            </div>
-            <div class="post-video">
-              <video src="${doc.data().video}" controls></video>
-            </div>
-            <div class="post-footer">
-              <div class="post-footer-left">
-                <i class="fa-solid fa-heart"></i>
-                <i class="fa-solid fa-comment"></i>
-                <i class="fa-solid fa-share"></i>
-              </div>
-              <div class="post-footer-right">
-                <i class="fa-solid fa-bookmark"></i>
-              </div>
-            </div>
-            <div class="post-caption">
-              <h3>${doc.data().caption}</h3>
-            </div>
-            <div class="post-comments">
-              ${
-                doc.data().comments.length > 0
-                  ? doc
-                      .data()
-                      .comments.map(
-                        (comment) => `
-                <div class="post-comment">
-                  <img src="${comment.commentByPhotoURL}" alt="" />
-                  <div class="post-comment-text">
-                    <h3>${comment.commentByName}</h3>
-                    <p>${comment.comment}</p>
-                  </div>
-                </div>
-                `
-                      )
-                      .join("")
-                  : ""
-              }
-            </div>
-            <div class="post-add-comment">
-              <form id="saveComment" onsubmit='saveComment(event, "${doc.id}")'>
-                <label for="comment">Comment</label>
-                <input type="text" name="comment" id="comment" />
-                <button type="submit">Comment</button>
-              </form>
-            </div>
-            <div class="post-add-like">
-              <button onclick='likePost(event, "${doc.id}")'>
-                <i class="fa-solid fa-heart"></i>
-                <p>${doc.data().likes.length}</p>
-              </button>
-            </div>
-            ${
-              doc.data().postBy === auth.currentUser.uid
-                ? `<button class="post-delete" onclick='deletePost(event, "${doc.id}")'>
-              <i class="fa-solid fa-trash"></i>
-            </button>`
-                : ""
-            }
-          </div>
-          `;
+                  <div class="post">
+                    <div class="post-video">
+                      <video src="${doc.data().video}" controls></video>
+                    </div>
+                    <div class="post-caption">
+                      <h3>${doc.data().caption}</h3>
+                    </div>
+                    <div class="bottom">
+                      <button class="likeBtn" onclick='${doc.data().likes.includes(auth.currentUser.uid) ? `db.collection("forums").doc("${doc.id}").update({
+                            likes: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")})` : `db.collection("forums").doc("${doc.id}").update({
+                            likes: firebase.firestore.FieldValue.arrayUnion("${auth.currentUser.uid}") })`}' {doc.data().likes.includes(auth.currentUser.uid) ?           
+                            "disabled" : ""} style="color: ${doc.data().likes.includes(auth.currentUser.uid) ? "blue" : "black"}">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <p>${doc.data().likes.length}</p>
+                      </button>
+                      ${
+                        doc.data().postBy === auth.currentUser.uid ||
+                        currentUserByDb?.role === "admin" ||
+                        currentUserByDb?.role === "moderator"
+                          ? `<button class="deleteBtn" onclick='db.collection("forums").doc("${doc.id}").delete()'>
+                          <i class="fa-solid fa-trash"></i>
+                        </button>`
+                          : ""
+                      }
+                      <div class="postBy">
+                        <div class="postByPhoto">                                              
+                          <h2>Post by ${doc.data().postByName}</h2>
+                          <img src="${doc.data().postByPhotoURL}" alt=""> 
+                        </div> 
+                        <div class="postAt">
+                          <p>${doc.data().timestamp.toDate().toDateString()}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="comments">
+                        ${doc.data().comments.map((comment) => {return `
+                            <div class="comment">
+                                <p class="cmnt">${comment.comment}</p>
+                                <div class="commentBy">
+                                  <div class="commentByPhoto">
+                                    <h2>Comment by ${comment.commentByName}</h2>
+                                    <img src="${
+                                      comment.commentByPhotoURL
+                                    }" alt="">
+                                  </div>
+                                  <div class="commentAt">
+                                    <p>${doc.data().timestamp.toDate().toDateString()}</p>
+                                  </div>
+                                </div>
+                            </div>
+                            `;
+                          })
+                          .join("")}
+                    </div>
+                    <form id="saveComment" onsubmit=' saveComment(event, "${doc.id}")'>
+                        <label for="comment">Comment</label>
+                        <input type="text" name="comment" id="comment">
+                        <button type="submit">Comment</button>
+                    </form>
+                  </div>`;
         });
       });
       function saveComment(e, postId) {
