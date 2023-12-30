@@ -41,16 +41,14 @@
             <!-- Upload Video -->
             <label for="video">
               <i class="fa-solid fa-video"></i>
-              <video src="" id="videoPreview" controls></video>
             </label>
             <input
               type="file"
               name="video"
               id="video"
-              onchange="document.getElementById('videoPreview').src = window.URL.createObjectURL(this.files[0])"
             />
 
-            <button type="submit">Post</button>
+            <button type="submit" id="postBtn">Post</button>
           </form>
         </div>
       </div>
@@ -87,6 +85,12 @@
       const savePost = document.getElementById("savePost");
       savePost.addEventListener("submit", (e) => {
         e.preventDefault();
+        postBtn.disabled = true;
+        postBtn.innerHTML = "Posting...";
+        postBtn.style.opacity = "0.5";
+        postBtn.style.cursor = "not-allowed";
+        postBtn.style.pointerEvents = "none";
+
         const video = savePost["video"].value;
         const caption = savePost["caption"].value;
         // upload video to firebase storage
@@ -112,9 +116,19 @@
               .then(() => {
                 console.log("Document successfully written!");
                 modal.style.display = "none";
+                postBtn.disabled = false;
+                postBtn.style.opacity = "1";
+                postBtn.style.cursor = "pointer";
+                postBtn.style.pointerEvents = "all";
+                savePost.reset();
+
               })
               .catch((error) => {
                 console.error("Error writing document: ", error);
+                postBtn.disabled = false;
+                postBtn.style.opacity = "1";
+                postBtn.style.cursor = "pointer";
+                postBtn.style.pointerEvents = "all";
               });
 
           });
@@ -162,7 +176,7 @@
                         doc.data().postBy === auth.currentUser.uid ||
                         currentUserByDb?.role === "admin" ||
                         currentUserByDb?.role === "moderator"
-                          ? `<button class="deleteBtn" onclick='db.collection("forums").doc("${doc.id}").delete()'>
+                          ? `<button class="deleteBtn" onclick='db.collection("posts").doc("${doc.id}").delete()'>
                           <i class="fa-solid fa-trash"></i>
                         </button>`
                           : ""
