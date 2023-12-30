@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title">
+    <label for="body">Body</label>
+    <input type="text" name="body" id="body">
+    <button type="submit">Send</button>
+
+    </form>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+
+    <script src="./auth.js"></script>
+    <script>
+        const form = document.querySelector("form");
+        form.addEventListener("submit", function(e){
+            e.preventDefault();
+            const title = document.querySelector("#title").value;
+            const body = document.querySelector("#body").value;
+            // add notification to db notifications array of all users
+            db.collection("users").get().then(function(querySnapshot){
+                querySnapshot.forEach(function(doc){
+                    const notifications = doc.data().notifications || [];
+                    notifications.push({
+                        title,
+                        body
+                    })
+                    db.collection("users").doc(doc.id).update({
+                        notifications
+                    }).then(function(){
+                        console.log("Notification sent");
+                    })
+                })
+            })
+        })
+    </script>
+
+</body>
+</html>
