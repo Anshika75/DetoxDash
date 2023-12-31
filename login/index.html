@@ -21,12 +21,12 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
 
-                <button><a href="./options.html">Login</a></button>
+                <button><a href="./options">Login</a></button>
             </form>
             <button id="googleLogin">
                 Login with Google
             </button>
-            <button><a href="./signup.html">Sign Up</a></button>
+            <button><a href="./signup">Sign Up</a></button>
         </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
@@ -42,7 +42,7 @@
             const password = loginForm["password"].value;
             auth.signInWithEmailAndPassword(email, password).then((cred) => {
                 console.log(cred.user);
-                window.location.href = "./options.html";
+                window.location.href = "./options";
             });
         });
         const googleLogin = document.getElementById("googleLogin");
@@ -58,7 +58,7 @@
                     type: "none"
                 }).then(() => {
                     console.log("Document successfully written!");
-                    window.location.href = "../options";
+                    window.location.href = "./options";
                 }).catch((error) => {
                     console.error("Error writing document: ", error);
                 })
