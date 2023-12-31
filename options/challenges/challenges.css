@@ -566,7 +566,7 @@ img {
         width: 25px
 
     }
-    .modal-content{
+    .modal-content, .model-content {
         width: 90%;
     }
     .post .postimg{
