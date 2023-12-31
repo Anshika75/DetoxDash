@@ -120,8 +120,7 @@
                         </p>
                     </button>
                     <button class="commentBtn" onclick='
-                      this.parentElement.parentElement.querySelector(".comments").style.display = "flex";
-                      console.log(this.parentElement.parentElement.querySelector(".comments"));
+                      this.parentElement.parentElement.querySelector(".comments").classList.toggle("show");
                     '>
                       <i class="fa-solid fa-comment"></i>
                       <p>

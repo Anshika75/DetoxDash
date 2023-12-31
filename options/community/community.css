@@ -151,7 +151,9 @@ body {
     width: 100%;
     display: none;
 }
-
+.comments.show{
+    display: flex;
+}
 .comment {
     width: 100%;
     border: 1px solid #6d809337;
