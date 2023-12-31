@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="allNotifications"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+
+    <script src="./auth.js"></script>
+    <script>
+      const allNotifications = document.querySelector("#allNotifications");
+
+      // check if user in logged in or not
+
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          db.collection("users")
+            .doc(auth.currentUser.uid)
+            .onSnapshot(function (doc) {
+              const notifications = doc.data().notifications || [];
+              allNotifications.innerHTML = "";
+              notifications.forEach(function (notification) {
+                allNotifications.innerHTML += `
+                    <div>
+                        <h3>${notification.title}</h3>
+                        <p>${notification.body}</p>
+                    </div>
+                `;
+              });
+            });
+        } else {
+          console.log("User logged out");
+        }
+      });
+    </script>
+  </body>
+</html>
