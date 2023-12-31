@@ -176,6 +176,12 @@
                         <i class="fa-solid fa-thumbs-up"></i>
                         <p>${doc.data().likes.length}</p>
                       </button>
+                      <button class="commentBtn" onclick='document.getElementById("comments").style.display="flex";'>
+                        <i class="fa-solid fa-comment"></i>
+                        <p>
+                          ${doc.data().comments.length}
+                        </p>
+                      </button>
                       ${
                         doc.data().postBy === auth.currentUser.uid ||
                         currentUserByDb?.role === "admin" ||
@@ -195,7 +201,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="comments">
+                    <div class="comments" id="comments">
                         ${doc.data().comments.map((comment) => {return `
                             <div class="comment">
                                 <p class="cmnt">${comment.comment}</p>

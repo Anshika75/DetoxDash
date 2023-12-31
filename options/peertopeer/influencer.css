@@ -351,6 +351,37 @@ body {
     box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
     background: linear-gradient(-97deg, rgba(255, 230, 206, 0.5) 49.55%, rgba(227, 242, 251, 0.5) 100.33%);
 }
+.modal-content form input[type="file"]::file-selector-button {
+    padding: 10px;
+    font-size: 1.25rem;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-weight: 300;
+    background-color: #542076b1;
+    color: rgba(252, 237, 223, 0.75);
+    width: 150px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+.modal-content form input[type="file"]::-ms-browse:hover {
+    background-color: #3b0360;
+    color: rgba(252, 237, 223, 1);
+    transform: scale(0.9);
+  }
+  
+.modal-content form input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #3b0360;
+    color: rgba(252, 237, 223, 1);
+    transform: scale(0.9);
+  }
+  
+.modal-content form input[type="file"]::file-selector-button:hover {
+    background-color: #3b0360;
+    color: rgba(252, 237, 223, 1);
+    transform: scale(0.9);
+  }
 
 .modal-content form button {
     padding: 10px;
