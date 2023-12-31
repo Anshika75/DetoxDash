@@ -157,12 +157,15 @@ body {
 }
 
 .comments {
-    /* display: flex; */
+    display: none;
     flex-direction: column;
     gap: 20px;
     width: 100%;
 }
 
+.comments.show {
+    display: flex;
+}
 .comment {
     width: 100%;
     border: 1px solid #6d809337;
@@ -171,7 +174,6 @@ body {
     cursor: pointer;
     padding: 10px;
     border-radius: 12px;
-    margin-top: 20px;
 }
 .comment .cmnt{
     font-size: 1rem;

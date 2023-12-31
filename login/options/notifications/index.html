@@ -1,44 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./notifications.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <div class="container">
+    <h1>Notifications</h1>
     <div id="allNotifications"></div>
+    <button class="addPostBtn">+</button>
+    <div class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Create</h2>
+        <form>
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title">
+          <label for="body">Body</label>
+          <input type="text" name="body" id="body">
+          <label for="datetime">
+            Date and time
+          </label>
+          <input type="datetime-local" name="datetime" id="datetime">
+          <button type="submit">Create</button>
 
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+        </form>
+      </div>
+    </div>
+  </div>
 
-    <script src="./auth.js"></script>
-    <script>
-      const allNotifications = document.querySelector("#allNotifications");
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
 
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          db.collection("users")
-            .doc(auth.currentUser.uid)
-            .onSnapshot(function (doc) {
-              const notifications = doc.data().notifications || [];
-              allNotifications.innerHTML = "";
-              notifications.forEach(function (notification) {
-                if(notification.toShowTime<new Date().getTime()){
-                    return;
-                }
-                allNotifications.innerHTML += `
-                    <div>
-                        <h3>${notification.title}</h3>
-                        <p>${notification.body}</p>
+  <script src="../../../auth.js"></script>
+  <script>
+    const modal = document.querySelector(".modal");
+    const modalContent = document.querySelector(".modal-content");
+    const close = document.querySelector(".close");
+    const postButton = document.querySelector(".addPostBtn");
+    var currentUserByDb;
+
+    postButton.addEventListener("click", () => {
+      modal.style.display = "flex";
+    });
+
+    close.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const title = document.querySelector("#title").value;
+      const body = document.querySelector("#body").value;
+      // add notification to db notifications array of all users
+      db.collection("users").get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          if (doc.id == auth.currentUser.uid || doc.data().role != "admin") {
+            return;
+          }
+          const notifications = doc.data().notifications || [];
+          notifications.push({
+            title,
+            body,
+            toShowTime: new Date(document.querySelector("#datetime").value).getTime()
+          })
+          db.collection("users").doc(doc.id).update({
+            notifications
+          }).then(function () {
+            console.log("Notification sent");
+          })
+        })
+      })
+    })
+    const allNotifications = document.querySelector("#allNotifications");
+
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        db.collection("users")
+          .doc(auth.currentUser.uid)
+          .onSnapshot(function (doc) {
+            const notifications = doc.data().notifications || [];
+            allNotifications.innerHTML = "";
+            notifications.forEach(function (notification) {
+              if (notification.toShowTime < new Date().getTime()) {
+                return;
+              }
+              allNotifications.innerHTML += `
+                    <div class="notif">
+                      <div class="body">
+                        <div class="title">${notification.title}</div>
+                        <div class="message">${notification.message}</div>
+                      </div>
+                      <div class="other">
+                        <div class="action">
+                          <i class="fas fa-check"></i>
+                        </div>
+                        <div class="time">12-2-24</div>
+                      </div>
+                      
                     </div>
                 `;
-              });
             });
-        } else {
-          console.log("User logged out");
-        }
-      });
-    </script>
-  </body>
+          });
+      } else {
+        console.log("User logged out");
+      }
+    });
+  </script>
+</body>
+
 </html>

@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+body {
+    background-color: #f1f1f1;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    background-image:url("https://www.dropbox.com/scl/fi/hgio2ytn2tys22lrzewnu/iMac-4.png?rlkey=ar2pz6k9o97g0i7ywv7q4ej0p&dl=1");
+    background-size: cover;
+    padding: 40px 120px;
+}
+.container h1{
+    font-size: 5rem;
+    margin: 20px 0;
+    font-weight: 600;
+    margin-top: 10px;
+    font-family: "Black Ops One", cursive;
+    background: -webkit-linear-gradient(0deg, #D3315A, #00ADA9, #7D5F91, #EA872C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.container table{
+    width: 100%;
+    border: 1px solid #6d809337;
+    box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
+    background: linear-gradient(-97deg, rgba(229, 212, 196, 0.50) 49.55%, rgba(179, 203, 217, 0.50) 100.33%);
+    cursor: pointer;
+    padding: 10px;
+    padding-top: 20px;
+    border-radius: 12px;
+}
+.container table th{
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #3b0360b0;
+    padding: 0 10px;
+    text-align: left;
+}
+.container table td{
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #403b43;
+    margin-bottom: 5px;
+    padding: 10px;
+    text-align: left;
+}
+.container table tr{
+    border-bottom: 1px solid #6d809337;
+}
+.container table tr:last-child{
+    border-bottom: none;
+}
+.container table tr button{
+    padding: 10px;
+    background-color: #3b0360b1;
+    color: rgba(252, 237, 223, 0.75);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: grid;
+    place-items: center;
+    width: 100%;
+}
+.container table tr button:hover{
+    background-color: #3b0360;
+    color: rgba(252, 237, 223, 1);
+    transform: scale(0.9);
+}
+
+.container table tr select{
+    padding: 10px;
+    background-color: #3b0360b1;
+    color: rgba(252, 237, 223, 0.75);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: grid;
+    place-items: center;
+    width: 100%;
+}
+.container table tr select:hover{
+    background-color: #3b0360;
+    color: rgba(252, 237, 223, 1);
+    transform: scale(0.9);
+}
+.container table tr select:focus{
+    background-color: #3b0360;
+    color: rgba(252, 237, 223, 1);
+    transform: scale(0.9);
+}
+.container table tr select option{
+    padding: 10px;
+    background-color: #7D5F91;
+    color: rgba(252, 237, 223, 0.75);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: grid;
+    place-items: center;
+    width: 100%;
+}
+
+.container table tr select option:hover{
+    background-color: #3b0360;
+    color: rgba(252, 237, 223, 1);
+    transform: scale(0.9);
+}
+.container table tr select option:focus{
+    background-color: #3b0360;
+    color: rgba(252, 237, 223, 1);
+    transform: scale(0.9);
+}
+.container table tr select option:checked{
+    background-color: #3b0360;
+    color: rgba(252, 237, 223, 1);
+    transform: scale(0.9);
+}
+.container table tr select option:active{
+    background-color: #3b0360;
+    color: rgba(252, 237, 223, 1);
+    transform: scale(0.9);
+}
+
+@media  only screen and (max-width: 600px) {
+    .container {
+        padding: 40px 20px;
+    }
+    .container h1{
+        font-size: 3rem;
+    }
+    .container table{
+        padding: 10px;
+        padding-top: 20px;
+        border-radius: 12px;
+        transform: scale(0.55);
+    }
+    .container table th{
+        font-size: 1rem;
+        font-weight: 800;
+        color: #3b0360b0;
+        padding: 0 10px;
+        text-align: left;
+    }
+    .container table td{
+        font-size: 1rem;
+        font-weight: 400;
+        color: #403b43;
+        margin-bottom: 5px;
+        padding: 10px;
+        text-align: left;
+    }
+    .container table tr button{
+        padding: 10px;
+        background-color: #3b0360b1;
+        color: rgba(252, 237, 223, 0.75);
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: grid;
+        place-items: center;
+        width: 100%;
+    }
+    .container table tr button:hover{
+        background-color: #3b0360;
+        color: rgba(252, 237, 223, 1);
+        transform: scale(0.9);
+    }
+    .container table tr select{
+        padding: 10px;
+        background-color: #3b0360b1;
+        color: rgba(252, 237, 223, 0.75);
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: grid;
+        place-items: center;
+        width: 100%;
+    }
+    
+}

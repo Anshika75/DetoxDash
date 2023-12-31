@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./duty.css">
   </head>
   <body>
+    <div class="container">
+      <h1>Assign Roles</h1>
     <table>
       <tr>
         <th>Name</th>
-        <th>Profile Pic</th>
         <th>Email</th>
         <th>Role</th>
         <th>Change Role</th>
@@ -17,10 +19,11 @@
       </tr>
       <tr></tr>
     </table>
+    </div>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
-    <script src="./auth.js"></script>
+    <script src="../../../auth.js"></script>
     <script>
       const table = document.querySelector("table");
       db.collection("users")
@@ -33,7 +36,6 @@
             table.innerHTML += `
                     <tr>
                         <td>${doc.data().name}</td>
-                        <td><img src="${doc.data().profilePic}" alt=""></td>
                         <td>${doc.data().email}</td>
                         <td>${doc.data().type}</td>
                         <td>

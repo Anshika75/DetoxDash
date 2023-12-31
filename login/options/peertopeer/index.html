@@ -60,7 +60,7 @@
     <!-- firebase storage -->
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
 
-    <script src="../../auth.js"></script>
+    <script src="../../../auth.js"></script>
     <script>
       const modal = document.querySelector(".modal");
       const modalContent = document.querySelector(".modal-content");
@@ -161,16 +161,14 @@
                     <div class="post-video">
                       <video src="${doc.data().video}"
                       // preloader
-                      onloadedmetadata="this.muted=true; this.play()"
-
-                      controls></video>
+                      onloadedmetadata="this.muted=true; this.play()" controls></video>
                     </div>
                     <div class="caption">
                       <h3>${doc.data().caption}</h3>
                     </div>
                     <div class="bottom">
-                      <button class="likeBtn" onclick='${doc.data().likes.includes(auth.currentUser.uid) ? `db.collection("forums").doc("${doc.id}").update({
-                            likes: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")})` : `db.collection("forums").doc("${doc.id}").update({
+                      <button class="likeBtn" onclick='${doc.data().likes.includes(auth.currentUser.uid) ? `db.collection("posts").doc("${doc.id}").update({
+                            likes: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")})` : `db.collection("posts").doc("${doc.id}").update({
                             likes: firebase.firestore.FieldValue.arrayUnion("${auth.currentUser.uid}") })`}' {doc.data().likes.includes(auth.currentUser.uid) ?           
                             "disabled" : ""} style="color: ${doc.data().likes.includes(auth.currentUser.uid) ? "#3b0360" : "#807985"}">
                         <i class="fa-solid fa-thumbs-up"></i>
