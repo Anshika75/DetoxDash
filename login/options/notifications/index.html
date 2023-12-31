@@ -20,7 +20,7 @@
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Create</h2>
-        <form>
+        <form >
           <label for="title">Title</label>
           <input type="text" name="title" id="title">
           <label for="body">Body</label>
@@ -29,6 +29,12 @@
             Date and time
           </label>
           <input type="datetime-local" name="datetime" id="datetime">
+
+          <label for="deadline">
+            Deadline
+          </label>
+          <input type="datetime-local" name="deadline" id="deadline">
+
           <button type="submit">Create</button>
 
         </form>
@@ -69,14 +75,15 @@
       // add notification to db notifications array of all users
       db.collection("users").get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
-          if (doc.id == auth.currentUser.uid || doc.data().role != "admin") {
-            return;
-          }
+          // if (doc.id == auth.currentUser.uid || doc.data().role != "admin") {
+          //   return;
+          // }
           const notifications = doc.data().notifications || [];
           notifications.push({
             title,
             body,
-            toShowTime: new Date(document.querySelector("#datetime").value).getTime()
+            toShowTime: new Date(document.querySelector("#datetime").value).getTime(),
+            deadline: new Date(document.querySelector("#deadline").value).getTime()
           })
           db.collection("users").doc(doc.id).update({
             notifications
@@ -90,9 +97,12 @@
 
     auth.onAuthStateChanged((user) => {
       if (user) {
+        console.log("User logged in", user);
         db.collection("users")
           .doc(auth.currentUser.uid)
           .onSnapshot(function (doc) {
+            currentUserByDb = doc.data();
+            console.log(currentUserByDb);
             const notifications = doc.data().notifications || [];
             allNotifications.innerHTML = "";
             notifications.forEach(function (notification) {
@@ -103,13 +113,28 @@
                     <div class="notif">
                       <div class="body">
                         <div class="title">${notification.title}</div>
-                        <div class="message">${notification.message}</div>
+                        <div class="message">${notification.body }</div>
                       </div>
                       <div class="other">
                         <div class="action">
-                          <i class="fas fa-check"></i>
+                          <i class="fas fa-check" onclick='${
+                            // mark the read as true
+                            `db.collection("users").doc(auth.currentUser.uid).update({
+                              notifications: firebase.firestore.FieldValue.arrayRemove({
+                                title: "${notification.title}",
+                                body: "${notification.body}",
+                                toShowTime: ${notification.toShowTime},
+                                deadline: ${notification.deadline}
+                              })
+                            }).then(function () {
+                              console.log("Notification removed");
+                            })`
+                            
+                          }'></i>
                         </div>
-                        <div class="time">12-2-24</div>
+                        <div class="time">${
+                         notification.deadline ? new Date(notification.deadline).toLocaleString() : "" 
+                        }</div>
                       </div>
                       
                     </div>
