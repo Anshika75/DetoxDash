@@ -127,6 +127,9 @@ body {
     color: rgba(252, 237, 223, 0.95);
     min-width: 100px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: all 0.3s ease-in-out;
 
 }

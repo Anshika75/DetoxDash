@@ -187,13 +187,6 @@
                       <p>${doc.data().description}</p>
                     </div>
                     <div class="bottom">
-                      <button class="likeBtn" onclick='${doc.data().likes.includes(auth.currentUser.uid) ? `db.collection("forums").doc("${doc.id}").update({
-                            likes: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")})` : `db.collection("forums").doc("${doc.id}").update({
-                            likes: firebase.firestore.FieldValue.arrayUnion("${auth.currentUser.uid}") })`}' {doc.data().likes.includes(auth.currentUser.uid) ?           
-                            "disabled" : ""} style="color: ${doc.data().likes.includes(auth.currentUser.uid) ? "#3b0360" : "#807985"}">
-                        <i class="fa-solid fa-thumbs-up"></i>
-                        <p>${doc.data().likes.length}</p>
-                      </button>
                       <button class="joinBtn" onclick='${doc.data().joined.includes(auth.currentUser.uid) ? `db.collection("challenges").doc("${doc.id}").update({
                             joined: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")})` : `db.collection("challenges").doc("${doc.id}").update({
                             joined: firebase.firestore.FieldValue.arrayUnion("${auth.currentUser.uid}") })`}' {doc.data().joined.includes(auth.currentUser.uid) ?         
@@ -252,7 +245,7 @@
       function openUploadModal(postId) {
         const modelProof = document.getElementById("modelProof");
         modelProof.style.display = "flex";
-        const close = document.querySelector(".close");
+        const close = modelProof.querySelector(".close");
         close.addEventListener("click", () => {
           modelProof.style.display = "none";
         });
