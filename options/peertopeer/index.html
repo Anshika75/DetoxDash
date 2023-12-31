@@ -176,7 +176,9 @@
                         <i class="fa-solid fa-thumbs-up"></i>
                         <p>${doc.data().likes.length}</p>
                       </button>
-                      <button class="commentBtn" onclick='document.getElementById("comments").style.display="flex";'>
+                      <button class="commentBtn" onclick='
+                        this.parentElement.parentElement.querySelector(".comments").classList.toggle("show");
+                      '>
                         <i class="fa-solid fa-comment"></i>
                         <p>
                           ${doc.data().comments.length}

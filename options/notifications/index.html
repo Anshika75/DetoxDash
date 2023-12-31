@@ -16,8 +16,6 @@
     <script>
       const allNotifications = document.querySelector("#allNotifications");
 
-      // check if user in logged in or not
-
       auth.onAuthStateChanged((user) => {
         if (user) {
           db.collection("users")
