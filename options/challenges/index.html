@@ -252,7 +252,7 @@
       function openUploadModal(postId) {
         const modelProof = document.getElementById("modelProof");
         modelProof.style.display = "flex";
-        const close = document.querySelector(".close");
+        const close = modelProof.querySelector(".close");
         close.addEventListener("click", () => {
           modelProof.style.display = "none";
         });
