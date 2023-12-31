@@ -60,6 +60,19 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
+.post .postimg{
+    width: 800px;
+    height: 500px;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+
+}
+.post .postImg img{
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
 .post .title {
     font-size: 2rem;
     font-weight: 600;
