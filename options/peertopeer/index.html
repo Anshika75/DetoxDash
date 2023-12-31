@@ -172,7 +172,7 @@
                       <button class="likeBtn" onclick='${doc.data().likes.includes(auth.currentUser.uid) ? `db.collection("forums").doc("${doc.id}").update({
                             likes: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")})` : `db.collection("forums").doc("${doc.id}").update({
                             likes: firebase.firestore.FieldValue.arrayUnion("${auth.currentUser.uid}") })`}' {doc.data().likes.includes(auth.currentUser.uid) ?           
-                            "disabled" : ""} style="color: ${doc.data().likes.includes(auth.currentUser.uid) ? "blue" : "black"}">
+                            "disabled" : ""} style="color: ${doc.data().likes.includes(auth.currentUser.uid) ? "#3b0360" : "#807985"}">
                         <i class="fa-solid fa-thumbs-up"></i>
                         <p>${doc.data().likes.length}</p>
                       </button>
