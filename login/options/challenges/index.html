@@ -131,7 +131,7 @@
               .add({
                 title: title,
                 description: description,
-                deadline: new Date(deadline).toDateString(),
+                deadline: new Date(deadline),
                 image: downloadURL,
                 postByName: auth.currentUser.displayName,
                 postBy: auth.currentUser.uid,
@@ -187,7 +187,11 @@
                       <p>${doc.data().description}</p>
                     </div>
                     <div class="deadline">
-                      <p>Deadline: ${doc.data().deadline}</p>
+                      <p>Deadline: ${
+                        doc.data().deadline.toDate().toDateString() +
+                        " " +
+                        doc.data().deadline.toDate().toLocaleTimeString()
+                      }</p>
                     </div>
                     <div class="bottom">
                       <button class="joinBtn" onclick='${doc.data().joined.includes(auth.currentUser.uid) ? `db.collection("challenges").doc("${doc.id}").update({
