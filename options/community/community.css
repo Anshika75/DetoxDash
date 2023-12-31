@@ -144,13 +144,16 @@ body {
     width: 100%;
 }
 
-.comments {
-    display: flex;
+.comments{
+    /* display: flex; */
     flex-direction: column;
     gap: 20px;
     width: 100%;
+    display: none;
 }
-
+.comments.show{
+    display: flex;
+}
 .comment {
     width: 100%;
     border: 1px solid #6d809337;
@@ -159,7 +162,7 @@ body {
     cursor: pointer;
     padding: 10px;
     border-radius: 12px;
-    display: none;
+    display: flex;
     flex-direction: column;
 }
 .comment .cmnt{
