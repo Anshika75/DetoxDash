@@ -34,7 +34,7 @@
               rows="2"
             ></textarea>
             <label for="deadline">Deadline</label>
-            <input type="date" name="deadline" id="deadline" />
+            <input type="datetime-local" name="deadline" id="deadline" />
             <!-- Upload Video -->
             <label for="image">
               Choose Image File
@@ -71,7 +71,7 @@
     <!-- firebase storage -->
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
 
-    <script src="../../auth.js"></script>
+    <script src="../../../auth.js"></script>
     <script>
       const modal = document.querySelector(".modal");
       const modalContent = document.querySelector(".modal-content");
@@ -186,6 +186,9 @@
                     <div class="desc">
                       <p>${doc.data().description}</p>
                     </div>
+                    <div class="deadline">
+                      <p>Deadline: ${doc.data().deadline}</p>
+                    </div>
                     <div class="bottom">
                       <button class="joinBtn" onclick='${doc.data().joined.includes(auth.currentUser.uid) ? `db.collection("challenges").doc("${doc.id}").update({
                             joined: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")})` : `db.collection("challenges").doc("${doc.id}").update({
@@ -200,9 +203,9 @@
                         </button>` : "" }
                       ${
                         doc.data().postBy === auth.currentUser.uid ||
-                        currentUserByDb?.role === "admin" ||
-                        currentUserByDb?.role === "moderator"
-                          ? `<button class="deleteBtn" onclick='db.collection("posts").doc("${doc.id}").delete()'>
+                        currentUserByDb?.type === "admin" ||
+                        currentUserByDb?.type === "moderator"
+                          ? `<button class="deleteBtn" onclick='db.collection("challenges").doc("${doc.id}").delete()'>
                           <i class="fa-solid fa-trash"></i>
                         </button>`
                           : ""
@@ -222,7 +225,7 @@
       function saveComment(e, postId) {
         e.preventDefault();
         const comment = document.getElementById("comment").value;
-        db.collection("posts")
+        db.collection("challenges")
           .doc(postId)
           .update({
             comments: firebase.firestore.FieldValue.arrayUnion({
