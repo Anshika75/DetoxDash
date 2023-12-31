@@ -66,6 +66,7 @@ body {
     width: 1200px;
     height: 600px;
     max-width: 100%;
+    margin-bottom: 20px;
 }
 .post .post-video video{
     width: 1200px;
@@ -401,4 +402,101 @@ body {
     background-color: #3b0360;
     color: rgba(252, 237, 223, 1);
     transform: scale(0.9);
+}
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 40px 20px;
+    }
+    .container h1{
+        font-size: 3rem;
+    }
+    .post .bottom button{
+        font-size: 1.25rem;
+    }
+    .post .bottom button p{
+        font-size: 1rem;
+    }
+    .postBy .postByPhoto img {
+        width: 25px;
+        height: 25px;
+    }
+    .postBy .postByPhoto h2 {
+        font-size: 0.75rem;
+    }
+    .postBy .postAt {
+        font-size: 0.75rem;
+    }
+    .commentBy .commentByPhoto img {
+        width: 25px;
+        height: 25px;
+    }
+    .commentBy .commentByPhoto h2 {
+        font-size: 0.75rem;
+    }
+    .commentBy .commentAt {
+        font-size: 0.75rem;
+    }
+    .comment .cmnt{
+        font-size: 0.75rem;
+    }
+    .comment {
+        padding: 5px;
+    }
+    .commentBy {
+        font-size: 1rem;
+    }
+    .post .title {
+        font-size: 1.5rem;
+    }
+    .post .desc {
+        font-size: 0.75rem;
+    }
+    .postBy .postByPhoto h2 {
+        font-size: 0.75rem;
+    }
+    .postBy .postByPhoto img {
+        width: 25px;
+        height: 25px;
+    }
+    .postBy .postAt {
+        font-size: 0.75rem;
+    }
+    .postBy .postByPhoto {
+        margin-top: 10px;
+    }
+    .postBy .postByPhoto h2 {
+        font-size: 0.75rem;
+    }
+    .postBy .postByPhoto img {
+        width: 25px;
+        height: 25px;
+    }
+    .postBy .postAt {
+        font-size: 0.75rem;
+    }
+    .postBy .postByPhoto {
+        margin-top: 10px;
+    }
+    .postBy .postByPhoto h2 {
+        font-size: 0.75rem;
+    }
+    .postBy .postByPhoto img {
+        width: 25px
+
+    }
+    .modal-content{
+        width: 90%;
+    }
+    .post .post-video{
+        width: 275px;
+        height: 300px;
+        max-width: 100%;
+        margin-bottom: 15px;
+    }
+    .post .post-video video{
+        width: 275px;
+        height: 300px;
+        border-radius: 12px;
+        object-fit: cover;
+    }
 }
