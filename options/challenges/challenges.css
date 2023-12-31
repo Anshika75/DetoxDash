@@ -331,7 +331,7 @@ img {
     align-items: center;
 }
 
-.modal-content {
+.modal-content, .model-content {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -363,7 +363,7 @@ img {
     cursor: pointer;
 }
 
-.modal-content h2 {
+.modal-content h2, .model-content h2 {
     margin-bottom: 20px;
     font-size: 2rem;
     font-weight: 600;
@@ -371,14 +371,14 @@ img {
     font-family: "Black Ops One", cursive;
 }
 
-.modal-content form {
+.modal-content form,  .model-content form {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
 }
 
-.modal-content form label {
+.modal-content form label,  .model-content form label {
     font-size: 20px;
     font-weight: 600;
     color: #7D5F91;
@@ -386,7 +386,7 @@ img {
 }
 
 .modal-content form input,
-.modal-content form textarea {
+.modal-content form textarea,  .model-content form input, .model-content form textarea {
     font-size: 20px;
     padding: 10px;
     width: 100%;
@@ -402,7 +402,7 @@ img {
     background: linear-gradient(-97deg, rgba(255, 230, 206, 0.5) 49.55%, rgba(227, 242, 251, 0.5) 100.33%);
 }
 
-.modal-content form button {
+.modal-content form button, .model-content form button {
     padding: 10px;
     font-size: 1.25rem;
     border: none;
@@ -417,23 +417,23 @@ img {
     transition: all 0.3s ease-in-out;
 }
 
-.modal-content form button:hover {
+.modal-content form button:hover, .model-content form button:hover {
     background-color: #3b0360;
     color: rgba(252, 237, 223, 1);
     transform: scale(0.9);
 }
 
-.modal-content form button:active {
+.modal-content form button:active, .model-content form button:active {
     background-color: #3b0360;
     color: rgba(252, 237, 223, 1);
     transform: scale(0.9);
 }
 
-.modal-content form button:focus {
+.modal-content form button:focus, .model-content form button:focus {
     outline: none;
 }
 
-.modal-content form input[type="file"]::file-selector-button {
+.modal-content form input[type="file"]::file-selector-button, .model-content form input[type="file"]::file-selector-button {
     padding: 10px;
     font-size: 1.25rem;
     border: none;
@@ -447,19 +447,19 @@ img {
     transition: all 0.3s ease-in-out;
   }
   
-.modal-content form input[type="file"]::-ms-browse:hover {
+.modal-content form input[type="file"]::-ms-browse:hover, .model-content form input[type="file"]::-ms-browse:hover {
     background-color: #3b0360;
     color: rgba(252, 237, 223, 1);
     transform: scale(0.9);
   }
   
-.modal-content form input[type="file"]::-webkit-file-upload-button:hover {
+.modal-content form input[type="file"]::-webkit-file-upload-button:hover, .model-content form input[type="file"]::-webkit-file-upload-button:hover {
     background-color: #3b0360;
     color: rgba(252, 237, 223, 1);
     transform: scale(0.9);
   }
   
-.modal-content form input[type="file"]::file-selector-button:hover {
+.modal-content form input[type="file"]::file-selector-button:hover, .model-content form input[type="file"]::file-selector-button:hover {
     background-color: #3b0360;
     color: rgba(252, 237, 223, 1);
     transform: scale(0.9);
@@ -569,16 +569,19 @@ img {
     .modal-content{
         width: 90%;
     }
-    .post .postImg{
+    .post .postimg{
         width: 275px;
         height: 300px;
         max-width: 100%;
         margin-bottom: 15px;
     }
-    .post .postImg img{
+    .post .postimg img{
         width: 100%;
         height: 100%;
         border-radius: 12px;
         object-fit: cover;
     }   
+    .post .bottom{
+        flex-wrap: wrap;
+    }
 }
