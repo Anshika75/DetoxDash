@@ -131,7 +131,7 @@
               .add({
                 title: title,
                 description: description,
-                deadline: deadline,
+                deadline: new Date(deadline).toDateString(),
                 image: downloadURL,
                 postByName: auth.currentUser.displayName,
                 postBy: auth.currentUser.uid,
