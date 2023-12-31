@@ -11,6 +11,10 @@
     <input type="text" name="title" id="title">
     <label for="body">Body</label>
     <input type="text" name="body" id="body">
+    <label for="datetime">
+        Date and time
+    </label>
+    <input type="datetime-local" name="datetime" id="datetime">
     <button type="submit">Send</button>
 
     </form>
@@ -29,10 +33,14 @@
             // add notification to db notifications array of all users
             db.collection("users").get().then(function(querySnapshot){
                 querySnapshot.forEach(function(doc){
+                    if(doc.id==auth.currentUser.uid || doc.data().role!="admin"){
+                        return;
+                    }
                     const notifications = doc.data().notifications || [];
                     notifications.push({
                         title,
-                        body
+                        body,
+                        toShowTime: new Date(document.querySelector("#datetime").value).getTime()
                     })
                     db.collection("users").doc(doc.id).update({
                         notifications

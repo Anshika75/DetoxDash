@@ -26,6 +26,9 @@
               const notifications = doc.data().notifications || [];
               allNotifications.innerHTML = "";
               notifications.forEach(function (notification) {
+                if(notification.toShowTime<new Date().getTime()){
+                    return;
+                }
                 allNotifications.innerHTML += `
                     <div>
                         <h3>${notification.title}</h3>
