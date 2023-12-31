@@ -74,17 +74,19 @@ body {
     border-radius: 12px;
 }
 .post .title {
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: 600;
     color: #3b0360;
     margin-bottom: 10px;
     text-transform: capitalize;
     font-weight: 700;
+    margin-top: 15px;
 }
 
 .post .desc {
     font-size: 1rem;
     font-weight: 300;
+    margin-bottom: 30px;
 }
 .post .bottom{
     display: flex;
