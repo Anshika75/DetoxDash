@@ -205,6 +205,17 @@
                         <i class="fa-solid fa-thumbs-up"></i>
                         <p>${doc.data().likes.length}</p>
                       </button>
+                      <button class="joinBtn" onclick='${doc.data().joined.includes(auth.currentUser.uid) ? `db.collection("challenges").doc("${doc.id}").update({
+                            joined: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")})` : `db.collection("challenges").doc("${doc.id}").update({
+                            joined: firebase.firestore.FieldValue.arrayUnion("${auth.currentUser.uid}") })`}' {doc.data().joined.includes(auth.currentUser.uid) ?         
+                            "disabled" : ""} style="color: ${doc.data().joined.includes(auth.currentUser.uid) ? "blue" : "black"}">
+                        ${doc.data().joined.includes(auth.currentUser.uid) ? "Joined" : "Join"}
+                        <p>${doc.data().joined.length}</p>
+                      </button>
+                        ${doc.data().joined.includes(auth.currentUser.uid) ? 
+                       `<button onclick='openUploadModal("${doc.id}")'>
+                          Upload your proof <i class="fa-solid fa-upload"></i>
+                        </button>` : "" }
                       ${
                         doc.data().postBy === auth.currentUser.uid ||
                         currentUserByDb?.role === "admin" ||
@@ -223,26 +234,7 @@
                           <p>${doc.data().createdAt.toDate().toDateString()}</p>
                         </div>
                       </div>
-                    </div>
-                    <div class="join">
-                      <button class="joinBtn" onclick='${doc.data().joined.includes(auth.currentUser.uid) ? `db.collection("challenges").doc("${doc.id}").update({
-                            joined: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")})` : `db.collection("challenges").doc("${doc.id}").update({
-                            joined: firebase.firestore.FieldValue.arrayUnion("${auth.currentUser.uid}") })`}' {doc.data().joined.includes(auth.currentUser.uid) ?           
-                            "disabled" : ""} style="color: ${doc.data().joined.includes(auth.currentUser.uid) ? "blue" : "black"}">
-                        ${
-                          doc.data().joined.includes(auth.currentUser.uid) ? "Joined" : "Join"
-                      
-                      }
-                      ${
-                        doc.data().joined.includes(auth.currentUser.uid) ? `<button
-                          onclick='openUploadModal("${doc.id}")'
-                        >
-                          Upload your proof <i class="fa-solid fa-upload"></i>
-                        </button>` : ""
-                      }
-                        <p>${doc.data().joined.length}</p>
-                      </button>
-                  </div>`;
+                    </div>`;
         });
       });
       function saveComment(e, postId) {
