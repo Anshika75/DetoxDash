@@ -37,7 +37,9 @@
                         <td>${doc.data().email}</td>
                         <td>${doc.data().type}</td>
                         <td>
-                            <select onchange="changeRole('${doc.id}')">
+                            <select onchange="changeRole('${doc.id}', this.value)" 
+                            id="${doc.id}"
+                            >
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
 
@@ -50,11 +52,11 @@
                 `;
           });
         });
-      function changeRole(id) {
+      function changeRole(id,role) {
         db.collection("users")
           .doc(id)
           .update({
-            type: newRole,
+            type: role,
           })
           .then(function () {
             alert("Role changed");
