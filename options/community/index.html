@@ -100,7 +100,7 @@
                       doc.data().likes.includes(auth.currentUser.uid)
                         ? `db.collection("forums").doc("${doc.id}").update({
                           likes: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")
-                        })`
+                        });`
                         : `db.collection("forums").doc("${doc.id}").update({
                           likes: firebase.firestore.FieldValue.arrayUnion("${auth.currentUser.uid}")
                         })`
@@ -110,8 +110,8 @@
                       }
                       style="color: ${
                         doc.data().likes.includes(auth.currentUser.uid)
-                          ? "#807985"
-                          : "#3b0360"
+                          ? "#3b0360"
+                          : "#807985"
                       }"
                     >
                     <i class="fa-solid fa-thumbs-up"></i>
@@ -119,7 +119,10 @@
                         ${doc.data().likes.length}
                         </p>
                     </button>
-                    <button class="commentBtn" onclick='document.getElementById("comments").style.display="flex";'>
+                    <button class="commentBtn" onclick='
+                      this.parentElement.parentElement.querySelector(".comments").style.display = "flex";
+                      console.log(this.parentElement.parentElement.querySelector(".comments"));
+                    '>
                       <i class="fa-solid fa-comment"></i>
                       <p>
                         ${doc.data().comments.length}
