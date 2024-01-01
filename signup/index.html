@@ -18,10 +18,6 @@
           <span style="color: #00ada9">P</span>
         </h1>
         <form id="signupForm">
-            <select name="type" id="type">
-                <option value="user">User</option>
-                <option value="influencer">Influencer</option>
-            </select>
           <label for="name">Username</label>
           <input type="text" id="name" name="name" required />
 
@@ -30,9 +26,6 @@
 
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" required />
-
-          <label for="index">Addiction index (1-10):</label>
-          <input type="text" id="index" name="index" required />
 
           <button>Sign Up</button>
         </form>
@@ -49,19 +42,13 @@
         const name = signupForm["name"].value;
         const email = signupForm["email"].value;
         const password = signupForm["password"].value;
-        const index = signupForm["index"].value;
-        const type = signupForm["type"].value;
         auth
           .createUserWithEmailAndPassword(email, password)
           .then((cred) => {
 
             console.log(cred.user);
-            // set display name and index
             cred.user.updateProfile({
               displayName: name,
-            });
-            cred.user.updateProfile({
-              index: index,
             });
             db.collection("users")
               .doc(cred.user.uid)
@@ -69,8 +56,6 @@
                 name: name,
                 email: email,
                 password: password,
-                index: index,
-                type: type,
               })
               .then(() => {
                 window.location.href = "./options";
