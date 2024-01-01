@@ -44,7 +44,8 @@
                             >
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
-
+                                <option value="influencer">Influencer</option>
+                                <option value="moderator">Moderator</option>
                             </select>
                             </td>
                         <td><button onclick="deleteUser('${
@@ -72,6 +73,12 @@
             alert("User deleted");
           });
       }
+
+      auth.onAuthStateChanged((user) => {
+        if (!user) {
+          window.location.href = "../login/";
+        }
+      });
     </script>
   </body>
 </html>
