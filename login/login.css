@@ -61,9 +61,9 @@ body {
     font-size: 1rem;
     font-weight: 500;
 }
-.login-splash-container .form-container form button{
+button{
     z-index: 20;
-    padding: 10px 40px;
+    padding: 10px;
     border: none;
     border-radius: 5px;
     background-color: #F8BBD0;
@@ -72,19 +72,56 @@ body {
     font-weight: 700;
     width: 100%;
     transition: all 0.3s ease-in-out;
-    margin-top: 10px;
+    margin: 5px 0px;
 }
-.login-splash-container .form-container form button a{
+button a{
     color: #D82F5A;
     transition: all 0.3s ease-in-out;
     text-decoration: none;
 }
-.login-splash-container .form-container form button:hover a{
+button:hover a{
     color: #f1f1f1;
 }
-.login-splash-container .form-container form button:hover{
+button:hover{
     background-color: #D82F5A;
     color: #f1f1f1;
+}
+a{
+    color: #D82F5A;
+    transition: all 0.3s ease-in-out;
+}
+.or{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-family: "Black Ops One", cursive;
+    color: #23192a7a;
+    text-transform: lowercase;
+    position: relative;
+    opacity: 0.65;
+}
+.or::before{
+    content: "";
+    position: absolute;
+    width: 35%;
+    height: 2px;
+    background-color: #23192a49;
+    top: 50%;
+    left: 7%;
+}
+.or::after{
+    content: "";
+    position: absolute;
+    width: 35%;
+    height: 2px;
+    background-color: #23192a49;
+    top: 50%;
+    right: 7%;
+}
+p{
+    color: #23192a7a;
+    font-weight: 500;
 }
 @media screen and (max-width: 768px){
     .login-splash-container .form-container {
