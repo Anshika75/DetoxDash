@@ -18,6 +18,9 @@
           <span style="color: #00ada9">P</span>
         </h1>
         <form id="signupForm">
+          <label for="profilePic">Profile Picture</label>
+          <input type="file" id="profilePic" name="profilePic" />
+
           <label for="name">Username</label>
           <input type="text" id="name" name="name" required />
 
@@ -34,7 +37,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
-    <script src="./auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
+    <script src="../auth.js"></script>
     <script>
       const signupForm = document.getElementById("signupForm");
       signupForm.addEventListener("submit", (e) => {
@@ -45,11 +49,27 @@
         auth
           .createUserWithEmailAndPassword(email, password)
           .then((cred) => {
+            // upload profile pic
+            const file = document.querySelector("#profilePic").files[0];
 
-            console.log(cred.user);
-            cred.user.updateProfile({
-              displayName: name,
-            });
+            if (file) {
+              const storageRef = firebase.storage().ref();
+              const fileRef = storageRef.child(cred.user.uid);
+
+              fileRef.put(file).then((s) => {
+                // get download url
+                fileRef.getDownloadURL().then((url) => {
+                  cred.user
+                    .updateProfile({
+                      photoURL: url,
+                    })
+                    .then(() => {
+                      window.location.href = "../login/";
+                    });
+                });
+              });
+            }
+
             db.collection("users")
               .doc(cred.user.uid)
               .set({
@@ -58,7 +78,24 @@
                 password: password,
               })
               .then(() => {
-                window.location.href = "./options";
+                cred.user
+                  .updateProfile({
+                    displayName: name,
+                  })
+                  .then(() => {
+                    if (!file) {
+                      cred.user
+                        .updateProfile({
+                          photoURL:
+                            "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg",
+                        })
+                        .then(() => {
+                          window.location.href = "../login/";
+                        });
+                    }
+
+                    console.log("Document successfully written!");
+                  });
               });
           })
           .catch((error) => {
