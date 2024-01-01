@@ -22,6 +22,7 @@ body {
     background-image:url("https://www.dropbox.com/scl/fi/hgio2ytn2tys22lrzewnu/iMac-4.png?rlkey=ar2pz6k9o97g0i7ywv7q4ej0p&dl=1");
     background-size: cover;
     padding: 40px 120px;
+    position: relative;
 }
 .options-container h1{
     font-size: 5rem;
@@ -75,6 +76,27 @@ body {
     font-weight: 600;
     text-align: justify;
     text-justify: inter-word;
+}
+
+.addPostBtn {
+    font-size: 1.2rem;
+    padding: 10px;
+    background-color: #3b0360b1;
+    color: rgba(252, 237, 223, 0.75);
+    border: none;
+    cursor: pointer;
+    float: right;
+    height: 60px;
+    width: 100px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    transition: all 0.3s ease-in-out;
+}
+.addPostBtn:hover{
+    background-color: #3b0360;
+    color: rgba(252, 237, 223, 1);
+    transform: scale(0.9);
 }
 @media screen and (max-width: 768px){
     .options-container{
