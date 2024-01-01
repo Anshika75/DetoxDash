@@ -182,15 +182,9 @@
                           ${doc.data().comments.length}
                         </p>
                       </button>
-                      ${
-                        doc.data().postBy === auth.currentUser.uid ||
-                        currentUserByDb?.role === "admin" ||
-                        currentUserByDb?.role === "moderator"
-                          ? `<button class="deleteBtn" onclick='db.collection("posts").doc("${doc.id}").delete()'>
+                      <button class="deleteBtn" onclick='db.collection("posts").doc("${doc.id}").delete()'>
                           <i class="fa-solid fa-trash"></i>
-                        </button>`
-                          : ""
-                      }
+                        </button>
                       <div class="postBy">
                         <div class="postByPhoto">                                              
                           <h2>Post by ${doc.data().postByName}</h2>
