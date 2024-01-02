@@ -1,4 +1,3 @@
-
 const firebaseConfig = {
   apiKey: "AIzaSyBrk0jw3zgBe4-Xk-ztQNkIURIIMDIt2xo",
   authDomain: "detox-dash.firebaseapp.com",
@@ -13,3 +12,57 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
+
+var loader = document.createElement("div");
+loader.className = "loader";
+loader.id = "loader";
+var rotator = document.createElement("div");
+rotator.className = "rotator";
+
+loader.style = `
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.9);
+z-index: 1000;
+display: flex;
+justify-content: center;
+align-items: center;
+`;
+rotator.style = `
+width: 40px;
+height: 40px;
+position: relative;
+border: 3px solid #fff;
+border-top: 3px solid #000;
+border-radius: 50%;
+animation: spin 2s linear infinite;
+`;
+
+var style = document.createElement("style");
+style.innerHTML = `
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+
+`;
+document.head.appendChild(style);
+
+loader.appendChild(rotator);
+document.body.appendChild(loader);
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+  } else {
+    console.log("user logged out");
+  }
+  setTimeout(() => {
+    loader.style.display = "none";
+  }, 1500);
+});
