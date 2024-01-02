@@ -57,13 +57,14 @@ document.head.appendChild(style);
 loader.appendChild(rotator);
 document.body.appendChild(loader);
 
-auth.onAuthStateChanged((user) => {
-  if (user) {
-  } else {
-    console.log("user logged out");
-  }
-  setTimeout(() => {
-    loader.style.display = "none";
-  }, 1500);
+window.addEventListener("DOMContentLoaded", (event) => {
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+    } else {
+      console.log("user logged out");
+    }
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 2000);
+  });
 });
-
