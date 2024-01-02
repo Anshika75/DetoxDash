@@ -75,11 +75,12 @@ body {
     object-fit: cover;
 }
 
-.post .caption {
+.post .caption h3{
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 10px;
     color: #807985;
+    text-align: left;
 }
 
 .post .desc {
