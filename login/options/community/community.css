@@ -26,6 +26,7 @@ body {
     background-size: cover;
     padding: 40px 120px;
     position: relative;
+    background-attachment: fixed;
 }
 
 .container h1 {

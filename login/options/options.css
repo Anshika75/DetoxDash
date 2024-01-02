@@ -67,6 +67,7 @@ body {
     background: -webkit-linear-gradient(0deg, #D3315A, #00ADA9, #7D5F91, #EA872C);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-attachment: fixed;
 }
 .options-container .grid-container .grid-item p{
     font-size: 1rem;
