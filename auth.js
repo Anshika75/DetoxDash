@@ -25,8 +25,8 @@ top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background-color: rgba(0, 0, 0, 0.9);
-z-index: 1000;
+background: #F1F1F1
+z-index: 10;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -35,8 +35,8 @@ rotator.style = `
 width: 40px;
 height: 40px;
 position: relative;
-border: 3px solid #fff;
-border-top: 3px solid #000;
+border: 3px solid #3b0360;
+border-top: 3px solid #F1F1F1;
 border-radius: 50%;
 animation: spin 2s linear infinite;
 `;
