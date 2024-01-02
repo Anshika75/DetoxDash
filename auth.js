@@ -66,3 +66,4 @@ auth.onAuthStateChanged((user) => {
     loader.style.display = "none";
   }, 1500);
 });
+
