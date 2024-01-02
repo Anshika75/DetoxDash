@@ -69,7 +69,8 @@ body {
 .notif .message {
     font-size: 1rem;
     font-weight: 300;
-    text-align: left;
+    text-align: justify;
+    text-justify: inter-word;
 }
 .notif .other{
     display: flex;
@@ -289,6 +290,12 @@ body {
     }
     .container h1{
         font-size: 3rem;
+    }
+    .notif{
+        flex-direction: column;
+    }
+    .notif .action{
+        margin-top: 15px;
     }
     .addPostBtn {
         height: 50px;
