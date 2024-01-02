@@ -73,6 +73,7 @@ body {
 .post .desc {
     font-size: 1rem;
     font-weight: 300;
+    text-align: left;
 }
 .post .bottom{
     display: flex;
