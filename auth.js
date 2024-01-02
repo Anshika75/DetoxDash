@@ -26,7 +26,7 @@ left: 0;
 width: 100%;
 height: 100%;
 background: linear-gradient(45deg, #D3315A 0%, #7D5F91 100%);
-z-index: 10;
+z-index: 1000;
 display: flex;
 justify-content: center;
 align-items: center;
