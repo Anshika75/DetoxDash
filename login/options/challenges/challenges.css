@@ -497,6 +497,9 @@ img {
     .container h1{
         font-size: 3rem;
     }
+    .post .bottom{
+        margin-top: 10px;
+    }
     .post .bottom button{
         font-size: 1.25rem;
     }
