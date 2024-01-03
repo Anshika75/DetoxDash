@@ -10,7 +10,7 @@ Embark on a transformative journey with our mobile RPG, where players navigate c
 Move beyond celebrity endorsements. Detox Dash collaborates with diverse teen micro-influencers who share authentic experiences of resisting drugs or overcoming delinquency. Real stories resonate more than distant stars, creating a relatable and encouraging environment.
 
 ### 3. Hyperlocal Challenges
-Engage with your local community by participating in hyperlocal challenges on platforms like Snapchat or Instagram. Document acts of community service, spread positivity, and showcase the benefits of healthy choices. Partner with local youth groups and community centers for a powerful impact.
+Engage with your local community by participating in hyperlocal challenges on platforms like Snapchat or Instagram. Document acts of community service spread positivity, and showcase the benefits of healthy choices. Partner with local youth groups and community centers for a powerful impact.
 
 ### 4. Community Engagement Hub
 Connect with like-minded individuals in the app's dedicated space. Share achievements, support each other, and build a sense of belonging through forums, group challenges, and community events. Our community hub is designed to encourage positive interactions and mutual encouragement.
