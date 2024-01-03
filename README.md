@@ -1,4 +1,5 @@
 # Detox Dash
+
 Detox Dash is a platform committed to fostering positive lifestyle choices among teenagers through engaging features that empower and connect users.
 
 ## Features
