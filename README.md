@@ -24,11 +24,9 @@ Assign roles to users with a Duty Assign page. Introduce four roles - admin, mod
 ## Getting Started
 
 To start your Detox Dash journey:
-
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/detox-dash.git
 2. cd detox-dash
-
 
 Feel free to customize this README to better fit the specifics of your project.
