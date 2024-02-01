@@ -149,6 +149,27 @@
                 postBtn.style.cursor = "pointer";
                 postBtn.style.pointerEvents = "all";
                 savePost.reset();
+
+                // create  a notification for each user who has not joined the challenge yet
+                db.collection("users").get().then(function (querySnapshot) {
+                  querySnapshot.forEach(function (doc) {
+                    if (doc.id == auth.currentUser.uid) {
+                      return;
+                    }
+                    const notifications = doc.data().notifications || [];
+                    notifications.push({
+                      title: "New Challenge",
+                      body: `${auth.currentUser.displayName} has posted a new challenge`,
+                      toShowTime: new Date().getTime(),
+                      deadline: new Date().getTime() + 1000 * 60 * 60 * 24 * 7
+                    })
+                    db.collection("users").doc(doc.id).update({
+                      notifications
+                    }).then(function () {
+                      console.log("Notification sent");
+                    })
+                  })
+                })
               });
           });
         });
