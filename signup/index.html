@@ -32,6 +32,8 @@
 
           <button>Sign Up</button>
         </form>
+        <p class="or">OR</p>
+        <button id="googleLoginSignup">Signup with Google</button>
       </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
@@ -102,6 +104,39 @@
             console.log(error);
           });
       });
+
+      googleLoginSignup.addEventListener("click", (e) => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider).then((cred) => {
+                console.log(cred.user);
+                // check if user exists in database
+                db.collection("users").doc(cred.user.uid).get().then((doc) => {
+                    if (doc.exists) {
+                        console.log("Document data:", doc.data());
+                        window.location.href = "../login/options";
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("No such document!");
+                        // create user in database
+                        db.collection("users").doc(cred.user.uid).set({
+                            name: cred.user.displayName,
+                            email: cred.user.email,
+                            index: -1,
+                            password: "",
+                            type: "none"
+                        }).then(() => {
+                            console.log("Document successfully written!");
+                            // get some more info
+                            window.location.href = "../login/moreinfo.html";
+                        }).catch((error) => {
+                            console.error("Error writing document: ", error);
+                        })
+                    }
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                });
+            });
+        });
     </script>
   </body>
 </html>
