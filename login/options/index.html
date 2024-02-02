@@ -9,7 +9,7 @@
 <body>
     <div class="options-container">
         <div class="user">
-            <a href="./profile/"><img src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="user"></a>
+            <a href="./profile/"><img class="profilePic" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="user"></a>
             <div class="usrtxt">
                 <p id="user"></p>
                 <p id="role"></p>
@@ -56,6 +56,7 @@
                         if (doc.exists) {
                             document.getElementById("user").innerHTML =  doc.data().name;
                             document.getElementById("role").innerHTML =  doc.data().type;
+                            document.querySelector(".profilePic").setAttribute("src", user.photoURL);
                         } else {
                             window.location.href = "../../index.html";
                         }
