@@ -37,15 +37,23 @@
                     <tr>
                         <td>${doc.data().name}</td>
                         <td>${doc.data().email}</td>
-                        <td>${doc.data().type}</td>
+                        <td>${doc.data().type||"User"}</td>
                         <td>
                             <select onchange="changeRole('${doc.id}', this.value)" 
                             id="${doc.id}"
                             >
-                                <option value="user">User</option>
-                                <option value="admin">Admin</option>
-                                <option value="influencer">Influencer</option>
-                                <option value="moderator">Moderator</option>
+                                <option value="user" ${
+                                  doc.data().type === "user" ||   doc.data().type === "none" || !doc.data().type ? "selected" : ""
+                                }>User</option>
+                                <option value="admin" ${
+                                  doc.data().type !== "admin" ? "selected" : ""
+                                }>Admin</option>
+                                <option value="influencer" ${
+                                  doc.data().type === "influencer" ? "selected" : ""
+                                }>Influencer</option>
+                                <option value="moderator" ${
+                                  doc.data().type === "moderator" ? "selected" : ""
+                                }>Moderator</option>
                             </select>
                             </td>
                         <td><button onclick="deleteUser('${

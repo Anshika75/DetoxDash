@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="options-container">
+        <h2 id="user"></h2>
         <h1>Diverse Picks</h1>
         <div class="grid-container">
             <div class="grid-item">
@@ -42,9 +43,21 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
     <script src="../../auth.js"></script>
     <script>
+
         auth.onAuthStateChanged((user) => {
             if (user) {
                 console.log("User logged in: ", user.displayName);
+                db.collection("users").doc(user.uid).get().then((doc) => {
+                        if (doc.exists) {
+                            document.getElementById("user").innerHTML = "Welcome, " + doc.data().name + `(${
+                                doc.data().type
+                            })`;
+                        } else {
+                            window.location.href = "../../index.html";
+                        }
+                    }).catch((error) => {
+                        console.log("Error getting document:", error);
+                    });
             } else {
                 window.location.href = "../../index.html";
             }

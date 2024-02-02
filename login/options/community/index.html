@@ -129,8 +129,8 @@
                     </button>
                     ${
                       doc.data().postBy === auth.currentUser.uid ||
-                      currentUserByDb?.role === "admin" ||
-                      currentUserByDb?.role === "moderator"
+                      currentUserByDb?.type === "admin" ||
+                      currentUserByDb?.type === "moderator"
                         ? `<button class="deleteBtn" onclick='db.collection("forums").doc("${doc.id}").delete()'>
                         <i class="fa-solid fa-trash"></i>
                       </button>`

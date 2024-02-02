@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="./login.css">
+</head>
+
+<body>
+    <div class="login-splash-container">
+        <div class="form-container">
+            <h1>
+                <!-- final -->
+                <span style="color: #b12f50;">F</span>
+                <span style="color: #f2cf4a;">I</span>
+                <span style="color: #74d577;">N</span>
+                <span style="color: #b12f50;">A</span>
+                <span style="color: #f2cf4a;">L</span>
+            </h1>
+            <h1><span style="color: #D3315A;">L</span>
+                <span style="color: #00ADA9;">O</span>
+                <span style="color: #7D5F91;">G</span>
+                <span style="color: #EA872C;">I</span>
+                <span style="color: #D3315A;">N</span></h1>
+            <form id="loginForm">
+                <!-- Enter some more info about yourself it will help us for customisation -->
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" disabled>
+                <label for="drugIndex">
+                    Rate your drug addiction on a scale of 1-10
+                </label>
+                <input type="range" name="drugIndex" id="drugIndex" min="0" max="10">
+
+                <label for="age">
+                    Age:
+                </label>
+                <input type="number" name="age" id="age" min="5" max="100">
+                <label>
+                    Gender:
+                </label>
+                <input type="radio" name="Gender" value="Male" id="male"/>
+                <label for="male">
+                    Male
+                </label>
+                <input type="radio" name="Gender" value="Female" id="female" style="display: inline;"/>
+                <label for="female">
+                    Female
+                </label>
+
+                <button>Submit</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+
+    <script src="../auth.js"></script>
+    <script>
+        var Curuser = null;
+
+        // check if user exists in database
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in
+                console.log("User is signed in");
+                Curuser = user;
+                db.collection("users").doc(user.uid).get().then((doc) => {
+                    if (doc.exists) {
+                        email.value = doc.data().email;
+                    
+                    } else {
+                        window.location.href = "./";
+                    }
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                });
+            } else {
+                // User is signed out
+                console.log("User is signed out");
+            }
+        });
+
+        const loginForm = document.getElementById("loginForm");
+        loginForm.addEventListener("submit",(e)=>{
+            // update user info
+            e.preventDefault();
+            const drugIndex = loginForm["drugIndex"].value;
+            const Gender = loginForm["Gender"].value;
+            const age = loginForm["age"].value;
+            // update those values in database where uid = Curuser.uid
+            db.collection('users').doc(Curuser.uid).update({
+                "index": drugIndex,
+                "age":  parseInt(age),
+                "gender":  Gender
+            }).then(()=>{
+                console.log("Profile Updated Successfully!");
+                window.location.href = "./options";
+            })
+        })
+        
+    </script>
+</body>
+
+</html>
