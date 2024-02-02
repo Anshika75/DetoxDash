@@ -17,8 +17,8 @@
         </div>
         <h1>Diverse Picks</h1>
         <div class="grid-container">
-            <div class="grid-item">
-                <a href="./rpg/">Anti-drug RPG</a>
+            <div class="grid-item"  onclick="rpgclicked()">
+                <a>Anti-drug RPG</a>
                 <p>Level Up for Life: Detox Dash, Where Healthy Choices Win the Game!</p>
             </div>
             <div class="grid-item">
@@ -48,9 +48,10 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
     <script src="../../auth.js"></script>
     <script>
-
+        let Curuser = null;
         auth.onAuthStateChanged((user) => {
             if (user) {
+                Curuser = user;
                 console.log("User logged in: ", user.displayName);
                 db.collection("users").doc(user.uid).get().then((doc) => {
                         if (doc.exists) {
@@ -69,6 +70,16 @@
         });
         function logout() {
             auth.signOut(); 
+        }
+
+        function rpgclicked() {
+            // update and increment gameplay count in database and if it wasn't defined then define it
+            db.collection('users').doc(Curuser.uid).update({
+                "gameplay": firebase.firestore.FieldValue.increment(1)
+            }).then(() => {
+                console.log("Gameplay count incremented!");
+                window.location.href = "./rpg";
+            });
         }
     </script>
 </body>

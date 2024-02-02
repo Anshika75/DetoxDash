@@ -32,7 +32,7 @@
                     </div>
                     </p>
                     <p><b>Gamer: </b>
-                    <div class="bar">
+                    <div class="bar gamecount">
                         <div class="value"></div>
                     </div>
                     </p>
@@ -67,6 +67,7 @@
                     if (doc.exists) {
                         console.log(doc.data());
                         document.querySelector(".role").innerHTML = doc.data().type;
+                        document.querySelector('.gamecount .value').style.width = doc.data().gameplay*4+"%";
                     } else {
                         window.location.href = '../../';
                     }
@@ -86,6 +87,7 @@
                 db.collection("challenges").where("postBy", "==", user.uid).get().then((querySnapshot) => {
                     document.querySelector('.challengesCount .value').style.width = querySnapshot.size*5 + "%";
                 });
+
             } else {
                 window.location.href = '../../';
             }
