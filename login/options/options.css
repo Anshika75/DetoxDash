@@ -24,6 +24,60 @@ body {
     padding: 40px 120px;
     position: relative;
 }
+.options-container .user{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: linear-gradient(97deg, rgba(229, 212, 196, 0.50) 49.55%, rgba(179, 203, 217, 0.50) 100.33%);
+    box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
+    border-radius: 100%;
+    cursor: pointer;
+}
+.options-container .user img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    border: 2px solid #D3315A;
+}
+.options-container .user .usrtxt{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.options-container .user .usrtxt p{
+    font-size: 1rem;
+    font-weight: 600;
+    margin-left: 10px;
+}
+.options-container .user .usrtxt p#role{
+    color: #7D5F91;
+    font-size: 0.8rem;
+}
+.options-container .user .logout{
+    position: absolute;
+    top: 70px;
+    left: 0px;
+    width: 70%;
+    font-size: 0.8rem;
+    padding: 7px;
+    background-color: #3b0360b1;
+    color: rgba(252, 237, 223, 0.75);
+    border: none;
+    cursor: pointer;
+    float: right;
+    opacity: 0;
+}
+.options-container .user:hover .logout{
+    opacity: 100;
+}
 .options-container h1{
     font-size: 5rem;
     margin: 20px 0;

@@ -8,7 +8,14 @@
 </head>
 <body>
     <div class="options-container">
-        <h2 id="user"></h2>
+        <div class="user">
+            <img src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="user">
+            <div class="usrtxt">
+                <p id="user"></p>
+                <p id="role"></p>
+            </div>
+            <div onclick="logout()" class="logout">Logout</div>
+        </div>
         <h1>Diverse Picks</h1>
         <div class="grid-container">
             <div class="grid-item">
@@ -36,7 +43,6 @@
                 <p>Shape Your Community – Assign user roles in to empower and uplift the community.</p>
             </div>
         </div>
-        <button onclick="logout()" class="addPostBtn">LogOut</button>
     </div>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
@@ -49,9 +55,8 @@
                 console.log("User logged in: ", user.displayName);
                 db.collection("users").doc(user.uid).get().then((doc) => {
                         if (doc.exists) {
-                            document.getElementById("user").innerHTML = "Welcome, " + doc.data().name + `(${
-                                doc.data().type
-                            })`;
+                            document.getElementById("user").innerHTML =  doc.data().name;
+                            document.getElementById("role").innerHTML =  doc.data().type;
                         } else {
                             window.location.href = "../../index.html";
                         }
