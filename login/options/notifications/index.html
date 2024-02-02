@@ -78,9 +78,9 @@
       // add notification to db notifications array of all users
       db.collection("users").get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
-          // if (doc.id == auth.currentUser.uid || doc.data().type != "admin") {
-          //   return;
-          // }
+          if (doc.data().type != "admin") {
+            return;
+          }
           const notifications = doc.data().notifications || [];
           notifications.push({
             title,

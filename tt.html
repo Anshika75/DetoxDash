@@ -1,61 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      body > .skiptranslate {
-        /* //display: none; */
-      }
-
-      .goog-te-banner-frame.skiptranslate {
-        display: none !important;
-      }
-      body {
-        top: 0px !important;
-      }
-
-      @media print {
-        #google_translate_element {
-          display: none;
-        }
-      }
-    </style>
-    <script type="text/javascript">
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement(
-          {
-            pageLanguage: "hi",
-            includedLanguages: "en,es,hi",
-          },
-          "google_translate_element"
-        );
-
-        setTimeout(function () {
-          // Set the default language to Spanish
-          var selectElement = document.querySelector(
-            "#google_translate_element select"
-          );
-          selectElement.value = "hi";
-          selectElement.dispatchEvent(new Event("change"));
-        }, 1000);
-      }
-    </script>
-    <script
-      type="text/javascript"
-      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    ></script>
-    <script
-      type="text/javascript"
-      src="//translate.google.com/#en/hi/Hello"
-    ></script>
-  </head>
-  <body>
-    <div id="google_translate_element">
-
-    </div>
-
-    Who are you?
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <iframe src="https://www.google.com/maps/search/hospitols+near+me/@30.3937585,76.5490372,10z/data=!3m1!4b1?entry=ttu" width="100%" height="100%"></iframe>
+  
+</body>
 </html>
