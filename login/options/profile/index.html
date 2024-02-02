@@ -12,32 +12,32 @@
     <div class="profile-container">
         <div class="profile-card">
             <div class="left">
-                <img src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
+                <img class="profilePic" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
                 <div class="txt">
                     <p class="user">Alice Jaston</p>
                     <p class="role">Admin</p>
-                    <p class="info">abc@gmailcom</p>
+                    <p class="info">abc@gmail.com</p>
                 </div>
             </div>
             <div class="right">
                 <div class="info">
                     <p><b>Community Engagement: </b>
-                    <div class="bar">
+                    <div class="bar communityCount">
                         <div class="value"></div>
                     </div>
                     </p>
-                    <p><b>Influencer Connect: </b>
-                    <div class="bar">
+                    <p><b>Peer-to-peer storytelling: </b>
+                    <div class="bar postsCount">
                         <div class="value"></div>
                     </div>
                     </p>
                     <p><b>Gamer: </b>
-                    <div class="bar">
+                    <div class="bar gamecount">
                         <div class="value"></div>
                     </div>
                     </p>
-                    <p><b>Challenger: </b>
-                    <div class="bar">
+                    <p><b>challenges: </b>
+                    <div class="bar challengesCount">
                         <div class="value"></div>
                     </div>
                     </p>
@@ -49,11 +49,49 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
-    <script src="../../auth.js"></script>
+    <script src="../../../auth.js"></script>
     <script>
         function logout() {
             auth.signOut();
         }
+        var Curuser = null;
+
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                Curuser = user;
+                console.log(Curuser);
+                document.querySelector('.user').innerText = user.displayName;
+                document.querySelector('.info').innerText = user.email;
+                document.querySelector('.profilePic').setAttribute('src', user.photoURL);
+                db.collection("users").doc(user.uid).get().then((doc) => {
+                    if (doc.exists) {
+                        console.log(doc.data());
+                        document.querySelector(".role").innerHTML = doc.data().type;
+                        document.querySelector('.gamecount .value').style.width = doc.data().gameplay*4+"%";
+                    } else {
+                        window.location.href = '../../';
+                    }
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                });
+
+                // no of posts by user
+                db.collection("posts").where("postBy", "==", user.uid).get().then((querySnapshot) => {
+                    document.querySelector('.postsCount .value').style.width = querySnapshot.size*5 + "%";
+                });
+
+                db.collection("forums").where("postBy", "==", user.uid).get().then((querySnapshot) => {
+                    document.querySelector('.communityCount .value').style.width = querySnapshot.size*5 + "%";
+                });
+
+                db.collection("challenges").where("postBy", "==", user.uid).get().then((querySnapshot) => {
+                    document.querySelector('.challengesCount .value').style.width = querySnapshot.size*5 + "%";
+                });
+
+            } else {
+                window.location.href = '../../';
+            }
+        });
     </script>
 </body>
 

@@ -9,7 +9,7 @@
 <body>
     <div class="options-container">
         <div class="user">
-            <a href="./profile/"><img src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="user"></a>
+            <a href="./profile/"><img class="profilePic" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="user"></a>
             <div class="usrtxt">
                 <p id="user"></p>
                 <p id="role"></p>
@@ -17,8 +17,8 @@
         </div>
         <h1>Diverse Picks</h1>
         <div class="grid-container">
-            <div class="grid-item">
-                <a href="./rpg/">Anti-drug RPG</a>
+            <div class="grid-item"  onclick="rpgclicked()">
+                <a>Anti-drug RPG</a>
                 <p>Level Up for Life: Detox Dash, Where Healthy Choices Win the Game!</p>
             </div>
             <div class="grid-item">
@@ -48,14 +48,16 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
     <script src="../../auth.js"></script>
     <script>
-
+        let Curuser = null;
         auth.onAuthStateChanged((user) => {
             if (user) {
+                Curuser = user;
                 console.log("User logged in: ", user.displayName);
                 db.collection("users").doc(user.uid).get().then((doc) => {
                         if (doc.exists) {
                             document.getElementById("user").innerHTML =  doc.data().name;
                             document.getElementById("role").innerHTML =  doc.data().type;
+                            document.querySelector(".profilePic").setAttribute("src", user.photoURL);
                         } else {
                             window.location.href = "../../index.html";
                         }
@@ -68,6 +70,16 @@
         });
         function logout() {
             auth.signOut(); 
+        }
+
+        function rpgclicked() {
+            // update and increment gameplay count in database and if it wasn't defined then define it
+            db.collection('users').doc(Curuser.uid).update({
+                "gameplay": firebase.firestore.FieldValue.increment(1)
+            }).then(() => {
+                console.log("Gameplay count incremented!");
+                window.location.href = "./rpg";
+            });
         }
     </script>
 </body>
