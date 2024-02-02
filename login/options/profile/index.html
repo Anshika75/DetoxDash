@@ -62,7 +62,7 @@
                 console.log(Curuser);
                 document.querySelector('.user').innerText = user.displayName;
                 document.querySelector('.info').innerText = user.email;
-                document.querySelector('.profilePic').setAttribute('src', user.photoURL);
+                document.querySelector('.profilePic').setAttribute('src', user.photoURL||"https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg");
                 db.collection("users").doc(user.uid).get().then((doc) => {
                     if (doc.exists) {
                         console.log(doc.data());
