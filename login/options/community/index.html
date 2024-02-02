@@ -139,7 +139,7 @@
                         <div class="postBy">
                           <div class="postByPhoto">                                              
                             <h2>Post by ${doc.data().postByName}</h2>
-                            <img src="${doc.data().postByPhotoURL}" alt=""> 
+                            <img src="${doc.data().postByPhotoURL||"https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"}" alt=""> 
                           </div> 
                           <div class="postAt">
                             <p>${
@@ -164,7 +164,7 @@
                                   <div class="commentByPhoto">
                                     <h2>Comment by ${comment.commentByName}</h2>
                                     <img src="${
-                                      comment.commentByPhotoURL
+                                      comment.commentByPhotoURL || "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"
                                     }" alt="">
                                   </div>
                                   <div class="commentAt">

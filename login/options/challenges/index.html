@@ -131,7 +131,7 @@
                   postByName: auth.currentUser.displayName,
                   postBy: auth.currentUser.uid,
                   joined: [],
-                  postByPhotoURL: auth.currentUser.photoURL,
+                  postByPhotoURL: auth.currentUser.photoURL || "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg",
                   createdAt:
                     firebase.firestore.FieldValue.serverTimestamp() || null,
                   likes: [],
@@ -250,7 +250,7 @@
                       <div class="postBy">
                         <div class="postByPhoto">                                              
                           <h2>Post by ${doc.data().postByName}</h2>
-                          <img src="${doc.data().postByPhotoURL}" alt=""> 
+                          <img src="${doc.data().postByPhotoURL||"https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"}" alt=""> 
                         </div> 
                         <div class="postAt">
                           <p>${doc.data().createdAt.toDate().toDateString()}</p>
