@@ -61,23 +61,6 @@ body {
     color: #7D5F91;
     font-size: 0.8rem;
 }
-.options-container .user .logout{
-    position: absolute;
-    top: 70px;
-    left: 0px;
-    width: 70%;
-    font-size: 0.8rem;
-    padding: 7px;
-    background-color: #3b0360b1;
-    color: rgba(252, 237, 223, 0.75);
-    border: none;
-    cursor: pointer;
-    float: right;
-    opacity: 0;
-}
-.options-container .user:hover .logout{
-    opacity: 100;
-}
 .options-container h1{
     font-size: 5rem;
     margin: 20px 0;

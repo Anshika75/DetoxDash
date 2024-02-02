@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+body {
+    background-color: #f1f1f1;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image:url("https://www.dropbox.com/scl/fi/hgio2ytn2tys22lrzewnu/iMac-4.png?rlkey=ar2pz6k9o97g0i7ywv7q4ej0p&dl=1");
+    background-size: cover;
+    padding: 40px 120px;
+}
+.profile-container .profile-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #6d809337;
+    box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
+    background: linear-gradient(97deg, rgba(229, 212, 196, 0.50) 49.55%, rgba(179, 203, 217, 0.50) 100.33%);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.profile-container .profile-card .left{   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #6d809337;
+    padding-right: 40px;
+}
+.profile-container .profile-card .left img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border: 5px solid #7D5F91;
+    object-fit: cover;
+}
+.profile-container .profile-card .left p{
+    font-weight: 600;
+}
+.profile-container .profile-card .left p.user{
+    font-size: 1.25rem;
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-weight: 800;
+    opacity: 0.75;
+    font-family: 'Black Ops One', cursive;
+} 
+.profile-container .profile-card .left p.role{
+    font-size: 1rem;
+    font-weight: 900;
+    color:#7D5F91;
+    opacity: 0.75;
+    margin-top: 5px;
+} 
+.profile-container .profile-card .left p.info{
+    font-size: 1rem;
+    font-weight: 600;
+    color:#7D5F91;
+    opacity: 0.75;
+}
+.profile-container .profile-card .right{
+    padding-left: 40px;
+} 
+.profile-container .profile-card .right .info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px 0;
+}
+.profile-container .profile-card .right .info p b{
+    font-weight: 900;
+    opacity: 0.75;
+}
+.profile-container .profile-card .right .info .bar{
+    width: 400px;
+    height: 20px;
+    border-radius: 25px;
+    background-color: #7d5f915c;
+    margin: 10px 0;
+}
+.profile-container .profile-card .right .info .bar .value{
+    height: 100%;
+    border-radius: 25px;
+    width: 20%;
+    background-color: #7D5F91;
+}
+
+.addPostBtn {
+    font-size: 1.2rem;
+    padding: 10px;
+    background-color: #3b0360b1;
+    color: rgba(252, 237, 223, 0.75);
+    border: none;
+    cursor: pointer;
+    float: right;
+    height: 60px;
+    width: 100px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    transition: all 0.3s ease-in-out;
+}
+.addPostBtn:hover{
+    background-color: #3b0360;
+    color: rgba(252, 237, 223, 1);
+    transform: scale(0.9);
+}
+
+@media screen and (max-width: 768px) {
+    .profile-container {
+        padding: 40px 20px;
+    }
+    .profile-container .profile-card{
+        flex-direction: column;
+        padding: 20px;
+    }
+    .profile-container .profile-card .left{
+        border-right: none;
+        padding-right: 0;
+        flex-direction: row;
+        margin-bottom: 20px;
+    }
+    .profile-container .profile-card .left .txt{
+        font-size: 1.5rem;
+        margin-left: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    .profile-container .profile-card .left img{
+        height: 100px;
+        width: 100px;
+    }
+    .profile-container .profile-card .left p.user{
+        font-size: 1rem;
+        margin-top: 10px;
+    }
+    .profile-container .profile-card .left p.role{
+        font-size: 0.75rem;
+        margin-top: 5px;
+    }
+    .profile-container .profile-card .left p.info{
+        font-size: 0.75rem;
+    }
+    .profile-container .profile-card .right{
+        padding-left: 0;
+    }
+    .profile-container .profile-card .right .info{
+        padding: 10px 0;
+    }
+    .profile-container .profile-card .right .info .bar{
+        height: 10px;
+        width: 100%;
+    }
+    
+}

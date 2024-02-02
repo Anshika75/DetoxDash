@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./profile.css">
+</head>
+
+<body>
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="left">
+                <img src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
+                <div class="txt">
+                    <p class="user">Alice Jaston</p>
+                    <p class="role">Admin</p>
+                    <p class="info">abc@gmailcom</p>
+                </div>
+            </div>
+            <div class="right">
+                <div class="info">
+                    <p><b>Community Engagement: </b>
+                    <div class="bar">
+                        <div class="value"></div>
+                    </div>
+                    </p>
+                    <p><b>Influencer Connect: </b>
+                    <div class="bar">
+                        <div class="value"></div>
+                    </div>
+                    </p>
+                    <p><b>Gamer: </b>
+                    <div class="bar">
+                        <div class="value"></div>
+                    </div>
+                    </p>
+                    <p><b>Challenger: </b>
+                    <div class="bar">
+                        <div class="value"></div>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <button onclick="logout()" class="addPostBtn">Log Out</button>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="../../auth.js"></script>
+    <script>
+        function logout() {
+            auth.signOut();
+        }
+    </script>
+</body>
+
+</html>
