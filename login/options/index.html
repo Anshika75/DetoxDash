@@ -57,7 +57,7 @@
                         if (doc.exists) {
                             document.getElementById("user").innerHTML =  doc.data().name;
                             document.getElementById("role").innerHTML =  doc.data().type;
-                            document.querySelector(".profilePic").setAttribute("src", user.photoURL);
+                            document.querySelector(".profilePic").setAttribute("src", user.photoURL||"https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg");
                         } else {
                             window.location.href = "../../index.html";
                         }
