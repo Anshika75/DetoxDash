@@ -125,10 +125,9 @@ p{
     font-weight: 500;
 }
 @media screen and (max-width: 768px){
-    .login-splash-container .form-container {
-        transform: scale(1.8);
+    .login-splash-container {
         height: 400px;
-        background-color: red;
+        background-color: red !important;
     }
     
 }
