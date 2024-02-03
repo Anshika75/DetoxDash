@@ -152,7 +152,14 @@
                   "src",
                   user.photoURL || "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"
                 );
-              document.querySelector(".model-container").style.display = "flex";
+              var lastModelShow = localStorage.getItem("lastShown",0);
+              // check the time difference if its more than 5 minutes
+              if(Date.now()-lastModelShow>300000){
+                document.querySelector(".model-container").style.display = "flex";
+                localStorage.setItem("lastShown",Date.now());
+              }else{
+                console.log("Not showing model");
+              }
               document
                 .querySelector(".model button")
                 .addEventListener("click", () => {
