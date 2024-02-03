@@ -37,31 +37,31 @@
                 <span class="close">&times;</span>
                 <h2>Which of the following things you know?</h2>
                 <div class="grid-container" id="options">
-                    <div class="active"><img src="" alt="" data-value="0"></div>
-                    <div><img src="" alt="" data-value="0"></div>
-                    <div><img src="" alt="" data-value="0"></div>
-                    <div><img src="" alt="" data-value="0"></div>
-                    <div><img src="" alt="" data-value="0"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
-                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="../assets/drug1.jpg" alt="" data-value="-1"></div>
+                    <div><img src="../assets/other1.webp" alt="" data-value="0"></div>
+                    <div><img src="../assets/other2.jpeg" alt="" data-value="0"></div>
+                    <div><img src="../assets/drug4.jpeg" alt="" data-value="-1"></div>
+                    <div><img src="../assets/other3.webp" alt="" data-value="0"></div>
+                    <div><img src="../assets/other4.jpg" alt="" data-value="0"></div>
+                    <div><img src="../assets/drug5.jpeg" alt="" data-value="-1"></div>
+                    <div><img src="../assets/other5.jpg" alt="" data-value="0"></div>
+                    <div><img src="../assets/other6.webp" alt="" data-value="0"></div>
+                    <div><img src="../assets/other7.webp" alt="" data-value="0"></div>
+                    <div><img src="../assets/other8.webp" alt="" data-value="0"></div>
+                    <div><img src="../assets/other9.jpg" alt="" data-value="0"></div>
+                    <div><img src="../assets/other10.webp" alt="" data-value="0"></div>
+                    <div><img src="../assets/other11.webp" alt="" data-value="0"></div>
+                    <div><img src="../assets/other13.jpg" alt="" data-value="0"></div>
+                    <div><img src="../assets/other12.jpg" alt="" data-value="0"></div>
+                    <div><img src="../assets/other14.jpg" alt="" data-value="0"></div>
+                    <div><img src="../assets/other15.jpeg" alt="" data-value="0"></div>
+                    <div><img src="../assets/drug3.jpeg" alt="" data-value="-1"></div>
+                    <div><img src="../assets/other16.webp" alt="" data-value="0"></div>
+                    <div><img src="../assets/other17.webp" alt="" data-value="0"></div>
+                    <div><img src="../assets/other18.jpg" alt="" data-value="0"></div>
+                    <div><img src="../assets/other19.jpg" alt="" data-value="0"></div>
+                    <div><img src="../assets/other20.jpeg" alt="" data-value="0"></div>
+                    <div><img src="../assets/drug2.jpg" alt="" data-value="-1"></div>
                 </div>
             </div>
         </div>
@@ -79,12 +79,18 @@
             dv.addEventListener("click",(e)=>{
                 if(dv.classList.contains("active")){
                     dv.classList.remove("active");
-                    score -= parseInt(dv.querySelector("img").getAttribute("data-value"));
+                    score += parseInt(dv.querySelector("img").getAttribute("data-value"));
                 }else{
                     dv.classList.add("active");
-                    score += parseInt(dv.querySelector("img").getAttribute("data-value"));
+                    score -= parseInt(dv.querySelector("img").getAttribute("data-value"));
                 }
                 console.log(score);
+                if(score<0){
+                    score = 0;
+                }else if(score>5){
+                    score = 5;
+                }
+                document.querySelector("#drugIndex").value = score;
             });
         });
         document.querySelector(".predictAddiction").addEventListener("click",()=>{
