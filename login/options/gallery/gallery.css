@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-color: #f1f1f1;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url("https://www.dropbox.com/scl/fi/hgio2ytn2tys22lrzewnu/iMac-4.png?rlkey=ar2pz6k9o97g0i7ywv7q4ej0p&dl=1");
+    background-size: cover;
+    padding: 40px 120px;
+    position: relative;
+    background-attachment: fixed;
+}
+
+.container h1 {
+    font-size: 5rem;
+    margin: 20px 0;
+    font-weight: 600;
+    margin-top: 10px;
+    font-family: "Black Ops One", cursive;
+    background: -webkit-linear-gradient(0deg, #D3315A, #00ADA9, #7D5F91, #EA872C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.container .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #6d809337;
+    box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
+    background: linear-gradient(97deg, rgba(229, 212, 196, 0.50) 49.55%, rgba(179, 203, 217, 0.50) 100.33%);
+    width: 80vw;
+}
+.container .grid-container div{
+    width: 100%;
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.container .grid-container div img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+.container .grid-container div:hover{
+    transform: scale(1.01);
+}
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 40px 20px;
+    }
+    .container h1{
+        font-size: 3rem;
+    }
+    .container .grid-container {
+        grid-template-columns: 1fr;
+    }
+    
+}
