@@ -35,7 +35,7 @@
         <div class="modal" style="display: none;">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h2>Which of the following things you know?</h2>
+                <h2 id="cont">Which of the following things you know?</h2>
                 <div class="grid-container" id="options">
                     <div><img src="../assets/drug1.jpg" alt="" data-value="-1"></div>
                     <div><img src="../assets/other1.webp" alt="" data-value="0"></div>
@@ -63,6 +63,7 @@
                     <div><img src="../assets/other20.jpeg" alt="" data-value="0"></div>
                     <div><img src="../assets/drug2.jpg" alt="" data-value="-1"></div>
                 </div>
+                <button class="submit" id="submit">Submit</button>
             </div>
         </div>
     </div>
@@ -99,7 +100,10 @@
         document.querySelector(".modal .close").addEventListener("click",()=>{
             document.querySelector(".modal").style.display = "none";
         });
-
+        document.getElementById("submit").addEventListener("click", (e) => {
+            alert("Your addiction level is: " + score);
+            document.getElementById("cont").style.innerHTML = "Your addiction level is: " + score;
+        })
         var Curuser = null;
         let lat=0,lon=0;
         auth.onAuthStateChanged((user) => {
