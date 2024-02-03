@@ -81,6 +81,37 @@
           })
           .then(() => {
             modal.style.display = "none";
+            db.collection("users")
+              .doc(auth.currentUser.uid)
+              .update({
+                points: firebase.firestore.FieldValue.increment(5),
+              });
+
+            // send  notification to all users who are not admin or moderator
+            db.collection("users")
+              .get()
+              .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                  if (doc.id == auth.currentUser.uid) {
+                    return;
+                  }
+                  const notifications = doc.data().notifications || [];
+                  notifications.push({
+                    title: "New Community  Post!",
+                    body: `${auth.currentUser.displayName} posted a new community Forums`,
+                    toShowTime: new Date().getTime(),
+                    deadline: new Date().getTime() + 1000 * 60 * 60 * 24 * 7
+                  });
+                  db.collection("users")
+                    .doc(doc.id)
+                    .update({
+                      notifications,
+                    })
+                    .then(function () {
+                      console.log("Notification sent");
+                    });
+                });
+              });
           });
       });
 
@@ -132,14 +163,24 @@
                       currentUserByDb?.type === "admin" ||
                       currentUserByDb?.type === "moderator"
                         ? `<button class="deleteBtn" onclick='db.collection("forums").doc("${doc.id}").delete()'>
-                        <i class="fa-solid fa-trash"></i>
+                        <i class="fa-soliddb.collection("users")
+                          .doc(doc.id)
+                          .update({
+                            notifications
+                          })
+                          .then(function(){
+                            console.log("Notification sent");
+                          }); fa-trash"></i>
                       </button>`
                         : ""
                     }
                         <div class="postBy">
                           <div class="postByPhoto">                                              
                             <h2>Post by ${doc.data().postByName}</h2>
-                            <img src="${doc.data().postByPhotoURL||"https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"}" alt=""> 
+                            <img src="${
+                              doc.data().postByPhotoURL ||
+                              "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"
+                            }" alt=""> 
                           </div> 
                           <div class="postAt">
                             <p>${
@@ -164,7 +205,8 @@
                                   <div class="commentByPhoto">
                                     <h2>Comment by ${comment.commentByName}</h2>
                                     <img src="${
-                                      comment.commentByPhotoURL || "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"
+                                      comment.commentByPhotoURL ||
+                                      "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"
                                     }" alt="">
                                   </div>
                                   <div class="commentAt">
@@ -227,6 +269,13 @@
               commentBy: auth.currentUser.uid,
               commentByPhotoURL: auth.currentUser.photoURL,
             }),
+          })
+          .then(() => {
+            db.collection("users")
+              .doc(auth.currentUser.uid)
+              .update({
+                points: firebase.firestore.FieldValue.increment(2),
+              });
           });
       }
       auth.onAuthStateChanged((user) => {

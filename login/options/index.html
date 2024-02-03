@@ -105,7 +105,7 @@
             notifications!
           </p>
         </div>
-        <div class="grid-item">
+        <div class="grid-item" id="dutyassigndiv" style="display: none;">
           <a href="./dutyassign">Duty Assign</a>
           <p>
             Shape Your Community – Assign user roles in to empower and uplift
@@ -129,22 +129,23 @@
             .get()
             .then((doc) => {
               if (doc.exists) {
+                if(doc.data().type == "admin"||doc.data().type == "moderator"){
+                  dutyassigndiv.style.display = "flex";
+                }
                 document.getElementById("user").innerHTML = doc.data().name;
                 document.getElementById("role").innerHTML = doc.data().type;
+
                 document
                   .querySelector(".profilePic")
                   .setAttribute(
                     "src",
-                    user.photoURL ||
-                      "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"
+                    user.photoURL || "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"
                   );
-                document.querySelector(".model-container").style.display =
-                  "flex";
+                document.querySelector(".model-container").style.display = "flex";
                 document
                   .querySelector(".model button")
                   .addEventListener("click", () => {
-                    document.querySelector(".model-container").style.display =
-                      "none";
+                    document.querySelector(".model-container").style.display = "none";
                   });
                 // change header
                 document.querySelector(".model h2").innerHTML =

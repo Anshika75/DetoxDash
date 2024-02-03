@@ -12,6 +12,16 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <!-- firebase storage -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
+
+    <script src="../../../auth.js"></script>
+    <script>
+      var currentUserByDb;
+    </script>
   </head>
 
   <body id="body">
@@ -56,19 +66,11 @@
 
       <button class="addPostBtn">+</button>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
-    <!-- firebase storage -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
-
-    <script src="../../../auth.js"></script>
     <script>
       const modal = document.querySelector(".modal");
       const modalContent = document.querySelector(".modal-content");
       const close = document.querySelector(".close");
       const postButton = document.querySelector(".addPostBtn");
-      var currentUserByDb;
 
       postButton.addEventListener("click", () => {
         modal.style.display = "flex";
@@ -131,7 +133,8 @@
                   postByName: auth.currentUser.displayName,
                   postBy: auth.currentUser.uid,
                   joined: [],
-                  postByPhotoURL: auth.currentUser.photoURL || "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg",
+                  postByPhotoURL:
+                    auth.currentUser.photoURL || "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg",
                   createdAt:
                     firebase.firestore.FieldValue.serverTimestamp() || null,
                   likes: [],
@@ -146,12 +149,22 @@
                   postBtn.style.pointerEvents = "all";
                   savePost.reset();
 
+
+                  
                   // create  a notification for each user who has not joined the challenge yet
                   db.collection("users")
                     .get()
-                    .then(function (querySnapshot) {
+                    .then(function(querySnapshot){
                       querySnapshot.forEach(function (doc) {
                         if (doc.id == auth.currentUser.uid) {
+                          db.collection("users")
+                          .doc(doc.id)
+                          .update({
+                            points: firebase.firestore.FieldValue.increment(5)
+                          })
+                          .then(function(){
+                            console.log("Notification sent");
+                          });
                           return;
                         }
                         const notifications = doc.data().notifications || [];
@@ -162,12 +175,13 @@
                           deadline:
                             new Date().getTime() + 1000 * 60 * 60 * 24 * 7,
                         });
+                        
                         db.collection("users")
                           .doc(doc.id)
                           .update({
-                            notifications,
+                            notifications
                           })
-                          .then(function () {
+                          .then(function(){
                             console.log("Notification sent");
                           });
                       });
@@ -218,10 +232,10 @@
                     <div class="bottom">
                       <button class="joinBtn" onclick='${
                         doc.data().joined.includes(auth.currentUser.uid)
-                          ? `db.collection("challenges").doc("${doc.id}").update({
-                            joined: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")})`
+                          ? `/*db.collection("challenges").doc("${doc.id}").update({
+                            joined: firebase.firestore.FieldValue.arrayRemove("${auth.currentUser.uid}")})*/`
                           : `db.collection("challenges").doc("${doc.id}").update({
-                            joined: firebase.firestore.FieldValue.arrayUnion("${auth.currentUser.uid}") })`
+                            joined: firebase.firestore.FieldValue.arrayUnion("${auth.currentUser.uid}")});incc();`
                       }' {doc.data().joined.includes(auth.currentUser.uid) ?         
                             "disabled" : ""}">
                         ${
@@ -250,7 +264,10 @@
                       <div class="postBy">
                         <div class="postByPhoto">                                              
                           <h2>Post by ${doc.data().postByName}</h2>
-                          <img src="${doc.data().postByPhotoURL||"https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"}" alt=""> 
+                          <img src="${
+                            doc.data().postByPhotoURL ||
+                            "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"
+                          }" alt=""> 
                         </div> 
                         <div class="postAt">
                           <p>${doc.data().createdAt.toDate().toDateString()}</p>
@@ -275,12 +292,19 @@
           })
           .then(() => {
             console.log("Document successfully updated!");
+            db.collection("users").doc(currentUserByDb?.uid).update({points: firebase.firestore.FieldValue.increment(2)});
             document.getElementById("comment").value = "";
+            db.collection("users").doc(currentUserByDb?.uid).update({points: firebase.firestore.FieldValue.increment(2)});
           })
           .catch((error) => {
-            // The document probably doesn't exist.
             console.error("Error updating document: ", error);
+            
           });
+      }
+      function incc(){
+        db.collection("users").doc(
+          auth.currentUser.uid
+        ).update({points: firebase.firestore.FieldValue.increment(2)});
       }
       function openUploadModal(postId) {
         const modelProof = document.getElementById("modelProof");
