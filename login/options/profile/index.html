@@ -13,12 +13,15 @@
     <div class="profile-container">
         <div class="profile-card">
             <div class="left">
+                <span class="coins">
+                    <i class="fa-solid fa-coins" style="color: #CD6A1C; margin-right: 5px;"></i>
+                    <span id="balance" style="margin-right: 5px;"></span>   Points
+                  </span>
                 <img class="profilePic" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
                 <div class="txt">
                     <p class="user">
-                        <span class="name"></span> <span class="coins">(<i class="fa-solid fa-coins" style="color: gold; margin-right: 7px;"></i><span id="balance" style="margin-right:7px;"></span> Points)</span>
+                        <span id="name" class="name"></span>
                     </p>
-                    <p class="role">Admin</p>
                     <p class="info">abc@gmail.com</p>
                 </div>
             </div>
@@ -63,15 +66,14 @@
             if (user) {
                 Curuser = user;
                 console.log(Curuser);
-                document.querySelector('.user .name').innerText = user.displayName;
+                document.getElementById('name').innerText = user.displayName;
                 document.querySelector('.info').innerText = user.email;
                 document.querySelector('.profilePic').setAttribute('src', user.photoURL||"https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg");
                 db.collection("users").doc(user.uid).get().then((doc) => {
                     if (doc.exists) {
                         console.log(doc.data());
-                        document.querySelector(".role").innerHTML = doc.data().type;
                         document.querySelector('.gamecount .value').style.width = doc.data().gameplay*4+"%";
-                        document.getElementById("balance").innerHTML = doc.data().points;
+                        document.getElementById("balance").innerHTML = doc.data().points||0;
                     } else {
                         window.location.href = '../../';
                     }
