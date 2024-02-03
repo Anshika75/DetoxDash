@@ -31,37 +31,37 @@
                 <button>Submit</button>
             </form>
         </div>
-        <button class="addPostBtn">Predict Addiction Level</button>
-        <div class="modal">
+        <button class="predictAddiction addPostBtn">Predict Addiction Level</button>
+        <div class="modal" style="display: none;">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Which of the following things you know?</h2>
-                <div class="grid-container">
-                    <div class="active"><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
-                    <div><img src="" alt=""></div>
+                <div class="grid-container" id="options">
+                    <div class="active"><img src="" alt="" data-value="0"></div>
+                    <div><img src="" alt="" data-value="0"></div>
+                    <div><img src="" alt="" data-value="0"></div>
+                    <div><img src="" alt="" data-value="0"></div>
+                    <div><img src="" alt="" data-value="0"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
+                    <div><img src="" alt="" data-value="-1"></div>
                 </div>
             </div>
         </div>
@@ -72,6 +72,28 @@
 
     <script src="../auth.js"></script>
     <script>
+        var optionsLevel = document.querySelectorAll("#options div");
+        var score = 0;
+        Array.from(optionsLevel).forEach((dv)=>{
+            console.log(dv);
+            dv.addEventListener("click",(e)=>{
+                if(dv.classList.contains("active")){
+                    dv.classList.remove("active");
+                    score -= parseInt(dv.querySelector("img").getAttribute("data-value"));
+                }else{
+                    dv.classList.add("active");
+                    score += parseInt(dv.querySelector("img").getAttribute("data-value"));
+                }
+                console.log(score);
+            })
+        })
+        document.querySelector(".predictAddiction").addEventListener("click",()=>{
+            document.querySelector(".modal").style.display = "flex";
+        });
+        document.querySelector(".modal .close").addEventListener("click",()=>{
+            document.querySelector(".modal").style.display = "none";
+        });
+
         var Curuser = null;
         let lat=0,lon=0;
 
