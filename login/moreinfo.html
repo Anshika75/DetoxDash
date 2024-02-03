@@ -85,8 +85,8 @@
                     score += parseInt(dv.querySelector("img").getAttribute("data-value"));
                 }
                 console.log(score);
-            })
-        })
+            });
+        });
         document.querySelector(".predictAddiction").addEventListener("click",()=>{
             document.querySelector(".modal").style.display = "flex";
         });
@@ -96,11 +96,8 @@
 
         var Curuser = null;
         let lat=0,lon=0;
-
-        // check if user exists in database
         auth.onAuthStateChanged((user) => {
             if (user) {
-                // User is signed in
                 console.log("User is signed in");
                 Curuser = user;
                 db.collection("users").doc(user.uid).get().then((doc) => {
@@ -113,17 +110,14 @@
                     console.log("Error getting document:", error);
                 });
             } else {
-                // User is signed out
                 console.log("User is signed out");
             }
         });
 
         const loginForm = document.getElementById("loginForm");
         loginForm.addEventListener("submit",(e)=>{
-            // update user info
             e.preventDefault();
-            const drugIndex  = loginForm["drugIndex"].value
-            // update those values in database where uid = Curuser.uid
+            const drugIndex  = loginForm["drugIndex"].value;
             db.collection('users').doc(Curuser.uid).update({
                 "index": drugIndex,
                 location: {
