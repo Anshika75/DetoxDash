@@ -1,68 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nearby Hospitals Map</title>
+    <title>Simple Markers</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
     <style>
         #map {
-            height: 400px;
-            width: 100%;
+            height: 100%;
+        }
+        
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
         }
     </style>
-</head>
-<body>
-    <h1>Nearby Hospitals Map</h1>
-    <div id="map"></div>
-
     <script>
         function initMap() {
-            // Default coordinates (you can use the user's location if available)
-            var defaultLocation = { lat: 37.7749, lng: -122.4194 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: {
+                    lat: 30.668681974342036,
+                    lng: 76.84231879258739,
 
-            // Create a new map
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: defaultLocation,
-                zoom: 13
+                },
             });
 
-            // Create a marker for the user's location
-            var userMarker = new google.maps.Marker({
-                position: defaultLocation,
-                map: map,
-                title: 'Your Location'
-            });
-
-            var service = new google.maps.places.PlacesService(map);
-            service.nearbySearch({
-                location: defaultLocation,
-                radius: 5000,
-                type: 'hospital'
-            }, displayResults);
+            setMarkers(map);
         }
+        const beaches = [
+            ["Mehar Foundation", 30.68558758741156, 76.84098639630855, 4],
+            ["Loona Hospital", 30.677209478951745, 76.85459055952784, 5]
+        ];
 
-        function displayResults(results, status) {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                for (var i = 0; i < results.length; i++) {
-                    createMarker(results[i]);
-                }
+        function setMarkers(map) {
+            const image = {
+                url: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+                size: new google.maps.Size(20, 32),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(0, 32),
+            };
+            const shape = {
+                coords: [1, 1, 1, 20, 18, 20, 18, 1],
+                type: "poly",
+            };
+
+            for (let i = 0; i < beaches.length; i++) {
+                const beach = beaches[i];
+
+                new google.maps.Marker({
+                    position: {
+                        lat: beach[1],
+                        lng: beach[2]
+                    },
+                    map,
+                    icon: image,
+                    shape: shape,
+                    title: beach[0],
+                    zIndex: beach[3],
+                });
             }
         }
 
-        function createMarker(place) {
-            var marker = new google.maps.Marker({
-                map: map,
-                position: place.geometry.location,
-                title: place.name
-            });
-
-            google.maps.event.addListener(marker, 'click', function() {
-                alert('Hospital Name: ' + place.name + '\nAddress: ' + place.vicinity);
-            });
-        }
+        window.initMap = initMap;
     </script>
+</head>
 
-    <!-- Include the Google Maps API script -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Nte2C-AWAa1X3l7wU5gHOBI1L7fzRIM&libraries=places&callback=initMap" async defer></script>
+<body>
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Nte2C-AWAa1X3l7wU5gHOBI1L7fzRIM&callback=initMap&v=weekly" defer></script>
 </body>
+
+
 </html>
