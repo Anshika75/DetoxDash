@@ -152,6 +152,7 @@ body {
     }
     .options-container h1{
         font-size: 4rem;
+        margin-top: 100px;
     }
     .options-container .grid-container{
         grid-template-columns: repeat(1, 1fr);
