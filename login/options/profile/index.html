@@ -25,10 +25,11 @@
                     <p class="info">abc@gmail.com</p>
                 </div>
                 <div class="badgecontainer">
-                    <img src="https://www.dropbox.com/scl/fi/aok440rym74mh8c57x3it/traiilblazer.png?rlkey=hta25glwq5jw72m071aavidbh&dl=1" alt="">
-                    <img src="https://www.dropbox.com/scl/fi/aok440rym74mh8c57x3it/traiilblazer.png?rlkey=hta25glwq5jw72m071aavidbh&dl=1" alt="">
-                    <img src="https://www.dropbox.com/scl/fi/aok440rym74mh8c57x3it/traiilblazer.png?rlkey=hta25glwq5jw72m071aavidbh&dl=1" alt="">
-                    <img src="https://www.dropbox.com/scl/fi/aok440rym74mh8c57x3it/traiilblazer.png?rlkey=hta25glwq5jw72m071aavidbh&dl=1" alt="">
+                    <img id="trail" src="./../../../assets/traiilblazer.png" style="display: none;" alt="">
+                    <img id="part" src="./../../../assets/activeparticipant].png" style="display: none;" alt="">
+                    <img id="unity" src="./../../../assets/unitystar.png" style="display: none;" alt="">
+                    <img id="mile" src="./../../../assets/milestone master.png0" style="display: none;" alt="">
+                    <img id="voice" src="./../../../assets/voicevanguard.png" style="display: none;" alt="">
                 </div>
             </div>
             <div class="right">
@@ -80,6 +81,22 @@
                         console.log(doc.data());
                         document.querySelector('.gamecount .value').style.width = doc.data().gameplay*4+"%";
                         document.getElementById("balance").innerHTML = doc.data().points||0;
+                        var pts = doc.data().points||0;
+                        if(pts>=50){
+                            document.getElementById("trail").style.display = "block";
+                        }
+                        if(pts>=80){
+                            document.getElementById("part").style.display = "block";
+                        }
+                        if(pts>=100){
+                            document.getElementById("unity").style.display = "block";
+                        }
+                        if(pts>=150){
+                            document.getElementById("mile").style.display = "block";
+                        }
+                        if(pts>=200){
+                            document.getElementById("voice").style.display = "block";
+                        }
                     } else {
                         window.location.href = '../../';
                     }
