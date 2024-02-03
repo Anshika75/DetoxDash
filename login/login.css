@@ -18,14 +18,67 @@ body {
     height: 100vh;
     background-image: url("https://www.dropbox.com/scl/fi/hgio2ytn2tys22lrzewnu/iMac-4.png?rlkey=ar2pz6k9o97g0i7ywv7q4ej0p&dl=1");
     background-size: cover;
+    position: relative;
 }
-
+.login-splash-container .modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 320px;
+    border-radius: 12px;
+    border: 1px solid #6d809337;
+    box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
+    background: linear-gradient(97deg, rgba(229, 212, 196, 1) 49.55%, rgba(179, 203, 217, 1) 100.33%);
+    background-attachment: fixed;
+    z-index: 30;
+}
+.login-splash-container .modal h2{
+    font-size: 1.2rem;
+    font-weight: 100;
+    margin-bottom: 20px;
+    font-family: "Black Ops One", cursive;
+    color: #3c0362;
+}
+.login-splash-container .modal .close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #3c0362;
+    cursor: pointer;
+}
+.login-splash-container .modal .close:hover{
+    color: #D82F5A;
+}
+.login-splash-container .modal .grid-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+}
+.login-splash-container .modal .grid-container div{
+    height: 60px;
+    width: 100%;
+    background: #000;
+}
+.login-splash-container .modal .grid-container div.active{
+    border: 2.5px solid #D82F5A;
+}
 .login-splash-container .form-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    width: 300px;
     border-radius: 12px;
     border: 1px solid #6d809337;
     box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
@@ -49,6 +102,7 @@ body {
     font-size: 1rem;
     font-weight: 600;
     color: #3c0362;
+    margin-top: 2px;
 }
 .login-splash-container .form-container form input{
     width: 100%;
@@ -123,6 +177,27 @@ a{
 p{
     color: #23192a7a;
     font-weight: 500;
+}
+
+.addPostBtn {
+    font-size: 1.2rem;
+    padding: 10px;
+    background-color: #3b0360b1;
+    color: rgba(252, 237, 223, 0.75);
+    border: none;
+    cursor: pointer;
+    float: right;
+    height: 60px;
+    width: auto;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    transition: all 0.3s ease-in-out;
+}
+.addPostBtn:hover{
+    background-color: #3b0360;
+    color: rgba(252, 237, 223, 1);
+    transform: scale(0.9);
 }
 @media screen and (max-width: 768px){
     .login-splash-container {
