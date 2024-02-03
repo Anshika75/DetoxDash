@@ -137,6 +137,7 @@ form input[type="file"]::file-selector-button:hover {
   text-transform: lowercase;
   position: relative;
   opacity: 0.65;
+  margin-top: 12px;
 }
 .or::before {
   content: "";
