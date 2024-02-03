@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Options</title>
     <link rel="stylesheet" href="./options.css" />
-
+    <script src="https://kit.fontawesome.com/52662e94e6.js" crossorigin="anonymous"></script>
     <style>
       .model-container {
         /* display: none; */
@@ -58,6 +58,9 @@
         </div>
       </div>
       <div class="user">
+        <div class="coins">
+          <i class="fa-solid fa-coins" style="color: gold;margin-right: 5px;"></i><span id="balance" style="margin-right: 5px;"></span>   Points
+        </div>
         <a href="./profile/"
           ><img
             class="profilePic"
@@ -94,8 +97,7 @@
         <div class="grid-item">
           <a href="./community">Community Hub</a>
           <p>
-            Building Bridges, Creating Bonds – Detox Dash Community Hub, Your
-            Space to Thrive!
+            Building Bridges, Creating Bonds – Detox Dash Community Hub, Your Space to Thrive!
           </p>
         </div>
         <div class="grid-item">
@@ -134,7 +136,7 @@
                 }
                 document.getElementById("user").innerHTML = doc.data().name;
                 document.getElementById("role").innerHTML = doc.data().type;
-
+                document.getElementById("balance").innerHTML = doc.data().points||0;
                 document
                   .querySelector(".profilePic")
                   .setAttribute(
@@ -150,11 +152,11 @@
                 // change header
                 document.querySelector(".model h2").innerHTML =
                   "Your drug index is " + (doc.data().index || "-1");
-
-                switch (doc.data().index) {
+                  var innd = parseInt(doc.data().index||0);
+                switch (innd) {
                   case 0:
                     document.querySelector(".model p").innerHTML =
-                      "You are doing great!";
+                      "You are doing great! you are not addicted so you can simply read our comics <a href='https://www.webtoons.com/en/canvas/breaking-chains-a-journey-to-recovery/list?title_no=933104'>Link</a>";
                     break;
                   case 1:
                     document.querySelector(".model p").innerHTML =

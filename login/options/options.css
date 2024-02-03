@@ -28,14 +28,24 @@ body {
     position: absolute;
     top: 20px;
     right: 20px;
+    gap: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    background: linear-gradient(97deg, rgba(229, 212, 196, 0.50) 49.55%, rgba(179, 203, 217, 0.50) 100.33%);
-    box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
+    /* background: linear-gradient(97deg, rgba(229, 212, 196, 0.50) 49.55%, rgba(179, 203, 217, 0.50) 100.33%); */
+    /* box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25); */
     border-radius: 100%;
     cursor: pointer;
+}
+.options-container .user .coins{
+    padding: .8rem .9rem;
+    border-radius: 30px;
+    background: linear-gradient(97deg, rgba(229, 212, 196, 0.90) 49.55%, rgba(179, 203, 217, 0.90) 100.33%);
+    box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .options-container .user img{
     height: 100%;

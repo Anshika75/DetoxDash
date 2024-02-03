@@ -15,7 +15,7 @@
   <div class="container">
     <h1>Notifications</h1>
     <div id="allNotifications"></div>
-    <button class="addPostBtn">+</button>
+    <button class="addPostBtn" style="display: none;">+</button>
     <div class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
@@ -109,6 +109,9 @@
           .doc(auth.currentUser.uid)
           .onSnapshot(function (doc) {
             currentUserByDb = doc.data();
+            if(doc.data().type=="admin"||doc.data().type=="moderator"){
+              document.querySelector(".addPostBtn").style.display = "grid"
+            }
             console.log(currentUserByDb);
             const notifications = doc.data().notifications || [];
             allNotifications.innerHTML = "";

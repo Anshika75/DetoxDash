@@ -54,13 +54,26 @@ body {
     font-weight: 600;
 }
 .profile-container .profile-card .left p.user{
-    font-size: 1.25rem;
+    
     margin-top: 20px;
     text-transform: uppercase;
-    font-weight: 800;
+    
     opacity: 0.75;
     font-family: 'Black Ops One', cursive;
 } 
+.profile-container .profile-card .left p.user span:nth-child(1){
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+.profile-container .profile-card .left p.user .coins{
+    padding: .8rem .9rem;
+    border-radius: 30px;
+    background: linear-gradient(97deg, rgba(229, 212, 196, 0.90) 49.55%, rgba(179, 203, 217, 0.90) 100.33%);
+    box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .profile-container .profile-card .left p.role{
     font-size: 1rem;
     font-weight: 900;

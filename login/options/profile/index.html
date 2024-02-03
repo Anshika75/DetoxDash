@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./profile.css">
+    <script src="https://kit.fontawesome.com/52662e94e6.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -14,7 +15,9 @@
             <div class="left">
                 <img class="profilePic" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="">
                 <div class="txt">
-                    <p class="user">Alice Jaston</p>
+                    <p class="user">
+                        <span class="name"></span> <span class="coins">(<i class="fa-solid fa-coins" style="color: gold; margin-right: 7px;"></i><span id="balance" style="margin-right:7px;"></span> Points)</span>
+                    </p>
                     <p class="role">Admin</p>
                     <p class="info">abc@gmail.com</p>
                 </div>
@@ -60,7 +63,7 @@
             if (user) {
                 Curuser = user;
                 console.log(Curuser);
-                document.querySelector('.user').innerText = user.displayName;
+                document.querySelector('.user .name').innerText = user.displayName;
                 document.querySelector('.info').innerText = user.email;
                 document.querySelector('.profilePic').setAttribute('src', user.photoURL||"https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg");
                 db.collection("users").doc(user.uid).get().then((doc) => {
@@ -68,6 +71,7 @@
                         console.log(doc.data());
                         document.querySelector(".role").innerHTML = doc.data().type;
                         document.querySelector('.gamecount .value').style.width = doc.data().gameplay*4+"%";
+                        document.getElementById("balance").innerHTML = doc.data().points;
                     } else {
                         window.location.href = '../../';
                     }

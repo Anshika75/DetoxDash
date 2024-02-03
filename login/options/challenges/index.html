@@ -64,7 +64,7 @@
         </div>
       </div>
 
-      <button class="addPostBtn">+</button>
+      <button class="addPostBtn" style="display: none;">+</button>
     </div>
     <script>
       const modal = document.querySelector(".modal");
@@ -200,6 +200,9 @@
             .then((doc) => {
               currentUserByDb = doc.data();
               console.log(currentUserByDb);
+              if(doc.data().type=="admin"||doc.data().type=="moderator"){
+                document.querySelector(".addPostBtn").style.display ="grid";
+              }
             });
         } else {
           console.log("User logged out");
@@ -247,7 +250,7 @@
                       </button>
                         ${
                           doc.data().joined.includes(auth.currentUser.uid)
-                            ? `<button class="openUploadModal" onclick='openUploadModal("${doc.id}")'>
+                            ? `<button class="openUploadModal" onclick='openUploadModal("${doc.id}")' >
                           Upload <i class="fa-solid fa-upload"></i>
                         </button>`
                             : ""
@@ -298,7 +301,7 @@
           })
           .catch((error) => {
             console.error("Error updating document: ", error);
-            
+
           });
       }
       function incc(){
