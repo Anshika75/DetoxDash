@@ -1,162 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Options</title>
-    <link rel="stylesheet" href="./options.css">
+    <link rel="stylesheet" href="./options.css" />
 
     <style>
-        .model-container{
-            /* display: none; */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-        .model{
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 50%;
-            overflow-y: scroll;
-        }
-        .model button{
-            padding: 10px;
-            border: none;
-            background-color: #D3315A;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .model button:hover{
-            background-color: #00ADA9;
-        }
-
+      .model-container {
+        /* display: none; */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      .model {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 50%;
+        overflow-y: scroll;
+      }
+      .model button {
+        padding: 10px;
+        border: none;
+        background-color: #d3315a;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      .model button:hover {
+        background-color: #00ada9;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="options-container">
-        <div class="model-container">
-            <div class="model">
-                <h2>Detox Dash</h2>
-                <p class="content">Detox Dash is a community engagement platform that aims to empower and uplift communities through peer-to-peer storytelling, hyperlocal challenges, and community hubs. It is a platform that is designed to bring people together and create a sense of belongingness and unity.</p>
-                <button>Close</button>
-            </div>
+      <div class="model-container">
+        <div class="model">
+          <h2>Detox Dash</h2>
+          <p class="content">
+            Detox Dash is a community engagement platform that aims to empower
+            and uplift communities through peer-to-peer storytelling, hyperlocal
+            challenges, and community hubs. It is a platform that is designed to
+            bring people together and create a sense of belongingness and unity.
+          </p>
+          <button>Close</button>
         </div>
-        <div class="user">
-            <a href="./profile/"><img class="profilePic" src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="user"></a>
-            <div class="usrtxt">
-                <p id="user"></p>
-                <p id="role"></p>
-            </div>
+      </div>
+      <div class="user">
+        <a href="./profile/"
+          ><img
+            class="profilePic"
+            src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg"
+            alt="user"
+        /></a>
+        <div class="usrtxt">
+          <p id="user"></p>
+          <p id="role"></p>
         </div>
-        <h1>Diverse Picks</h1>
-        <div class="grid-container">
-            <div class="grid-item"  onclick="rpgclicked()">
-                <a>Anti-drug RPG</a>
-                <p>Level Up for Life: Detox Dash, Where Healthy Choices Win the Game!</p>
-            </div>
-            <div class="grid-item">
-                <a href="./peertopeer/">Peer-to-peer storytelling</a>
-                <p>Diverse Narratives, Shared Journeys – Detox Dash, Uniting Through Real Stories!</p>
-            </div>
-            <div class="grid-item">
-                <a href="./challenges/">Hyperlocal challenges</a>
-                <p>Snap, Share, Inspire – Detox Dash Challenges, Lighting Up Communities!</p>
-            </div>
-            <div class="grid-item">
-                <a href="./community">Community Hub</a>
-                <p>Building Bridges, Creating Bonds – Detox Dash Community Hub, Your Space to Thrive!</p>
-            </div>
-            <div class="grid-item">
-                <a href="./notifications">Notifications</a>
-                <p>Stay Informed, Stay Empowered – Explore the latest updates and notifications!</p>
-            </div>
-            <div class="grid-item">
-                <a href="./dutyassign">Duty Assign</a>
-                <p>Shape Your Community – Assign user roles in to empower and uplift the community.</p>
-            </div>
+      </div>
+      <h1>Diverse Picks</h1>
+      <div class="grid-container">
+        <div class="grid-item" onclick="rpgclicked()">
+          <a>Anti-drug RPG</a>
+          <p>
+            Level Up for Life: Detox Dash, Where Healthy Choices Win the Game!
+          </p>
         </div>
-
-        
+        <div class="grid-item">
+          <a href="./peertopeer/">Peer-to-peer storytelling</a>
+          <p>
+            Diverse Narratives, Shared Journeys – Detox Dash, Uniting Through
+            Real Stories!
+          </p>
+        </div>
+        <div class="grid-item">
+          <a href="./challenges/">Hyperlocal challenges</a>
+          <p>
+            Snap, Share, Inspire – Detox Dash Challenges, Lighting Up
+            Communities!
+          </p>
+        </div>
+        <div class="grid-item">
+          <a href="./community">Community Hub</a>
+          <p>
+            Building Bridges, Creating Bonds – Detox Dash Community Hub, Your
+            Space to Thrive!
+          </p>
+        </div>
+        <div class="grid-item">
+          <a href="./notifications">Notifications</a>
+          <p>
+            Stay Informed, Stay Empowered – Explore the latest updates and
+            notifications!
+          </p>
+        </div>
+        <div class="grid-item">
+          <a href="./dutyassign">Duty Assign</a>
+          <p>
+            Shape Your Community – Assign user roles in to empower and uplift
+            the community.
+          </p>
+        </div>
+      </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
     <script src="../../auth.js"></script>
     <script>
-        let Curuser = null;
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                Curuser = user;
-                console.log("User logged in: ", user.displayName);
-                db.collection("users").doc(user.uid).get().then((doc) => {
-                        if (doc.exists) {
-                            document.getElementById("user").innerHTML =  doc.data().name;
-                            document.getElementById("role").innerHTML =  doc.data().type;
-                            document.querySelector(".profilePic").setAttribute("src", user.photoURL||"https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg");
-                            document.querySelector(".model-container").style.display = "flex";
-                            document.querySelector(".model button").addEventListener("click", () => {
-                                document.querySelector(".model-container").style.display = "none";
-                            });
-                            // change header
-                            document.querySelector(".model h2").innerHTML = "Your drug index is "+doc.data().index;
+      let Curuser = null;
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          Curuser = user;
+          console.log("User logged in: ", user.displayName);
+          db.collection("users")
+            .doc(user.uid)
+            .get()
+            .then((doc) => {
+              if (doc.exists) {
+                document.getElementById("user").innerHTML = doc.data().name;
+                document.getElementById("role").innerHTML = doc.data().type;
+                document
+                  .querySelector(".profilePic")
+                  .setAttribute(
+                    "src",
+                    user.photoURL ||
+                      "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"
+                  );
+                document.querySelector(".model-container").style.display =
+                  "flex";
+                document
+                  .querySelector(".model button")
+                  .addEventListener("click", () => {
+                    document.querySelector(".model-container").style.display =
+                      "none";
+                  });
+                // change header
+                document.querySelector(".model h2").innerHTML =
+                  "Your drug index is " + (doc.data().index || "-1");
 
-                            switch(doc.data().index){
-                            case 0:
-                            document.querySelector(".model p").innerHTML = "You are doing great!";
-                            break;
-                            case 1:
-                            document.querySelector(".model p").innerHTML = "You are doing good!";
-                            break;
-                            case 2:
-                            document.querySelector(".model p").innerHTML = "You are doing okay!";
-                            break;
-                            case 3:
-                            document.querySelector(".model p").innerHTML = "You are doing bad!";
-                            break;
-                            case 4:
-                            document.querySelector(".model p").innerHTML = "You are doing very bad!";
-                            break;
-                            case 5:
-                            document.querySelector(".model p").innerHTML = "You are doing very very bad!";
-                            break;
-                            default:
-                            document.querySelector(".model p").innerHTML = "You don't have any index! Contact the admin.";
-                            }
-                        } else {
-                            window.location.href = "../../index.html";
-                        }
-                    }).catch((error) => {
-                        console.log("Error getting document:", error);
-                    });
-            } else {
+                switch (doc.data().index) {
+                  case 0:
+                    document.querySelector(".model p").innerHTML =
+                      "You are doing great!";
+                    break;
+                  case 1:
+                    document.querySelector(".model p").innerHTML =
+                      "You are doing good!";
+                    break;
+                  case 2:
+                    document.querySelector(".model p").innerHTML =
+                      "You are doing okay!";
+                    break;
+                  case 3:
+                    document.querySelector(".model p").innerHTML =
+                      "You are doing bad!";
+                    break;
+                  case 4:
+                    document.querySelector(".model p").innerHTML =
+                      "You are doing very bad!";
+                    break;
+                  case 5:
+                    document.querySelector(".model p").innerHTML =
+                      "You are doing very very bad!";
+                    break;
+                  default:
+                    document.querySelector(".model p").innerHTML =
+                      "You don't have any index! Contact the admin.";
+                }
+              } else {
                 window.location.href = "../../index.html";
-            }
-        });
-        function logout() {
-            auth.signOut(); 
-        }
-
-        function rpgclicked() {
-            // update and increment gameplay count in database and if it wasn't defined then define it
-            db.collection('users').doc(Curuser.uid).update({
-                "gameplay": firebase.firestore.FieldValue.increment(1)
-            }).then(() => {
-                console.log("Gameplay count incremented!");
-                window.location.href = "./rpg";
+              }
+            })
+            .catch((error) => {
+              console.log("Error getting document:", error);
             });
+        } else {
+          window.location.href = "../../index.html";
         }
+      });
+      function logout() {
+        auth.signOut();
+      }
+
+      function rpgclicked() {
+        // update and increment gameplay count in database and if it wasn't defined then define it
+        db.collection("users")
+          .doc(Curuser.uid)
+          .update({
+            gameplay: firebase.firestore.FieldValue.increment(1),
+          })
+          .then(() => {
+            console.log("Gameplay count incremented!");
+            window.location.href = "./rpg";
+          });
+      }
     </script>
-</body>
+  </body>
 </html>

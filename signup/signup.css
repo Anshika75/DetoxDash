@@ -1,128 +1,169 @@
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: #f1f1f1;
-    font-family: 'Open Sans', sans-serif;
+  background-color: #f1f1f1;
+  font-family: "Open Sans", sans-serif;
 }
 
 .login-splash-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-image: url("https://www.dropbox.com/scl/fi/hgio2ytn2tys22lrzewnu/iMac-4.png?rlkey=ar2pz6k9o97g0i7ywv7q4ej0p&dl=1");
-    background-size: cover;
-    background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("https://www.dropbox.com/scl/fi/hgio2ytn2tys22lrzewnu/iMac-4.png?rlkey=ar2pz6k9o97g0i7ywv7q4ej0p&dl=1");
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .login-splash-container .form-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #6d809337;
-    box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
-    background: linear-gradient(97deg, rgba(229, 212, 196, 0.50) 49.55%, rgba(179, 203, 217, 0.50) 100.33%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #6d809337;
+  box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
+  background: linear-gradient(
+    97deg,
+    rgba(229, 212, 196, 0.5) 49.55%,
+    rgba(179, 203, 217, 0.5) 100.33%
+  );
 }
-.login-splash-container .form-container h1{
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    font-family: "Black Ops One", cursive;
+.login-splash-container .form-container h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-family: "Black Ops One", cursive;
 }
-.login-splash-container .form-container form{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 100%;
+.login-splash-container .form-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
 }
-.login-splash-container .form-container form label{
-    font-size: 1rem;
-    font-weight: 600;
-    color: #3c0362;
+.login-splash-container .form-container form label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3c0362;
 }
-.login-splash-container .form-container form input{
-    width: 100%;
-    padding: 5px 7px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: 1px solid #6d809337;
-    box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
-    background: linear-gradient(97deg, rgba(255, 249, 244, 0.5) 49.55%, rgba(179, 203, 217, 0.50) 100.33%);
-    outline: none;
-    font-size: 1rem;
-    font-weight: 500;
+.login-splash-container .form-container form input {
+  width: 100%;
+  padding: 5px 7px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #6d809337;
+  box-shadow: 1px 1px 4px 0px rgba(255, 255, 255, 0.25);
+  background: linear-gradient(
+    97deg,
+    rgba(255, 249, 244, 0.5) 49.55%,
+    rgba(179, 203, 217, 0.5) 100.33%
+  );
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
 }
-.login-splash-container .form-container form button{
-    z-index: 20;
-    padding: 10px 40px;
-    border: none;
-    border-radius: 5px;
-    background-color: #F8BBD0;
-    color: #D82F5A;
-    cursor: pointer;
-    font-weight: 700;
-    width: 100%;
-    transition: all 0.3s ease-in-out;
-    margin-top: 10px;
+.login-splash-container .form-container form button {
+  z-index: 20;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f8bbd0;
+  color: #d82f5a;
+  cursor: pointer;
+  font-weight: 700;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-top: 10px;
 }
-.login-splash-container .form-container form button a{
-    color: #D82F5A;
-    transition: all 0.3s ease-in-out;
-    text-decoration: none;
+.login-splash-container .form-container form button a {
+  color: #d82f5a;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
 }
-.login-splash-container .form-container form button:hover a{
-    color: #f1f1f1;
+.login-splash-container .form-container form button:hover a {
+  color: #f1f1f1;
 }
-.login-splash-container .form-container form button:hover{
-    background-color: #D82F5A;
-    color: #f1f1f1;
+.login-splash-container .form-container form button:hover {
+  background-color: #d82f5a;
+  color: #f1f1f1;
 }
 form input[type="file"]::file-selector-button {
-    padding: 10px;
-    font-size: 1.25rem;
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    font-weight: 300;
-    background-color: #542076b1;
-    color: rgba(252, 237, 223, 0.75);
-    width: 150px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
-  
+  padding: 10px;
+  font-size: 1.25rem;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-weight: 300;
+  background-color: #542076b1;
+  color: rgba(252, 237, 223, 0.75);
+  width: 150px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
 form input[type="file"]::-ms-browse:hover {
-    background-color: #3b0360;
-    color: rgba(252, 237, 223, 1);
-    transform: scale(0.9);
-  }
-  
+  background-color: #3b0360;
+  color: rgba(252, 237, 223, 1);
+  transform: scale(0.9);
+}
+
 form input[type="file"]::-webkit-file-upload-button:hover {
-    background-color: #3b0360;
-    color: rgba(252, 237, 223, 1);
-    transform: scale(0.9);
-  }
-  
+  background-color: #3b0360;
+  color: rgba(252, 237, 223, 1);
+  transform: scale(0.9);
+}
+
 form input[type="file"]::file-selector-button:hover {
-    background-color: #3b0360;
-    color: rgba(252, 237, 223, 1);
-    transform: scale(0.9);
+  background-color: #3b0360;
+  color: rgba(252, 237, 223, 1);
+  transform: scale(0.9);
+}
+
+.or {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-family: "Black Ops One", cursive;
+  color: #23192a7a;
+  text-transform: lowercase;
+  position: relative;
+  opacity: 0.65;
+}
+.or::before {
+  content: "";
+  position: absolute;
+  width: 35%;
+  height: 2px;
+  background-color: #23192a49;
+  top: 50%;
+  left: 7%;
+}
+.or::after {
+  content: "";
+  position: absolute;
+  width: 35%;
+  height: 2px;
+  background-color: #23192a49;
+  top: 50%;
+  right: 7%;
+}
+p {
+  color: #23192a7a;
+  font-weight: 500;
+}
+@media screen and (max-width: 768px) {
+  .login-splash-container .form-container {
+    transform: scale(1.8);
+    height: 400px;
+    background-color: red;
   }
-@media screen and (max-width: 768px){
-    .login-splash-container .form-container {
-        transform: scale(1.8);
-        height: 400px;
-        background-color: red;
-    }
-    
 }

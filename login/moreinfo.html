@@ -29,24 +29,13 @@
                 <label for="drugIndex">
                     Rate your drug addiction on a scale of 1-10
                 </label>
-                <input type="range" name="drugIndex" id="drugIndex" min="0" max="10">
+                <input type="range" name="drugIndex" id="drugIndex" min="0" max="5">
 
-                <label for="age">
-                    Age:
-                </label>
-                <input type="number" name="age" id="age" min="5" max="100">
                 <label>
-                    Gender:
+                    Your current location
                 </label>
-                <input type="radio" name="Gender" value="Male" id="male"/>
-                <label for="male">
-                    Male
-                </label>
-                <input type="radio" name="Gender" value="Female" id="female" style="display: inline;"/>
-                <label for="female">
-                    Female
-                </label>
-
+                <button id="getLocationBtn" type="button">Get My Location</button>
+                <p id="location"></p>
                 <button>Submit</button>
             </form>
         </div>
@@ -58,6 +47,7 @@
     <script src="../auth.js"></script>
     <script>
         var Curuser = null;
+        let lat=0,lon=0;
 
         // check if user exists in database
         auth.onAuthStateChanged((user) => {
@@ -67,8 +57,7 @@
                 Curuser = user;
                 db.collection("users").doc(user.uid).get().then((doc) => {
                     if (doc.exists) {
-                        email.value = doc.data().email;
-                    
+                        email.value = doc.data().email;       
                     } else {
                         window.location.href = "./";
                     }
@@ -85,19 +74,37 @@
         loginForm.addEventListener("submit",(e)=>{
             // update user info
             e.preventDefault();
-            const drugIndex = loginForm["drugIndex"].value;
-            const Gender = loginForm["Gender"].value;
-            const age = loginForm["age"].value;
+            const drugIndex  = loginForm["drugIndex"].value
             // update those values in database where uid = Curuser.uid
             db.collection('users').doc(Curuser.uid).update({
                 "index": drugIndex,
-                "age":  parseInt(age),
-                "gender":  Gender
+                location: {
+                    latitude : lat,
+                    longitude: lon
+                }
             }).then(()=>{
                 console.log("Profile Updated Successfully!");
                 window.location.href = "./options";
             })
         })
+        getLocationBtn.addEventListener("click",getLocation);
+        function getLocation(e){
+            e.preventDefault();
+            if (navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showPosition, (err)=>{
+                    alert("Could not retrieve your location.");
+                });
+                function  showPosition(position){
+                    var x=document.getElementById("location");
+                    x.innerHTML="Latitude: "+ position.coords.latitude+" Longitude"+" "+position.coords.longitude;
+                    lat = parseFloat(position.coords.latitude);
+                    lon = parseFloat(position.coords.longitude);
+                    x.innerHTML="Latitude: "+lat+"\tLongitude: " +lon;
+                }
+            }else{
+                alert("Location is not supported by your device");
+            }
+        }
         
     </script>
 </body>

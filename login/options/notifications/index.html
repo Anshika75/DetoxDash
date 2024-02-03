@@ -76,9 +76,9 @@
       const title = document.querySelector("#title").value;
       const body = document.querySelector("#body").value;
       // add notification to db notifications array of all users
-      db.collection("users").get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          if (doc.data().type != "admin") {
+      db.collection("users").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc){
+          if(doc.data().type != "admin") {
             return;
           }
           const notifications = doc.data().notifications || [];
@@ -90,7 +90,7 @@
           })
           db.collection("users").doc(doc.id).update({
             notifications
-          }).then(function () {
+          }).then(function(){
             console.log("Notification sent");
             createBtn.disabled = false;
             modal.style.display = "none";

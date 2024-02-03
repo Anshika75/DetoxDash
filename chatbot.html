@@ -37,8 +37,7 @@
         messagesDiv.innerHTML += `
         <div class="user">
           <div class="message">${text}</div>
-        </div>
-        `;
+        </div>`;
         document.getElementById("prompt").value = "";
         const data = { input: text };
         fetch(url, {
