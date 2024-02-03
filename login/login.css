@@ -16,7 +16,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url("https://www.dropbox.com/scl/fi/hgio2ytn2tys22lrzewnu/iMac-4.png?rlkey=ar2pz6k9o97g0i7ywv7q4ej0p&dl=1");
+    background-image: url("../assets/bg.png");
     background-size: cover;
     position: relative;
 }
