@@ -116,7 +116,7 @@
             const notifications = doc.data().notifications || [];
             allNotifications.innerHTML = "";
             notifications.forEach(function (notification) {
-              if (notification.toShowTime < new Date().getTime()) {
+              if (false && notification.toShowTime < new Date().getTime()) {
                 return;
               }
               allNotifications.innerHTML += `

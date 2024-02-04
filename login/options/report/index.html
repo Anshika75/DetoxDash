@@ -80,9 +80,7 @@
         }
       });
       var s;
-      uploadProof.addEventListener("submit",()=>{
-
-      })
+      uploadProof.addEventListener("submit", () => {});
       const savePost = document.getElementById("savePost");
       savePost.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -129,7 +127,8 @@
                   postBy: auth.currentUser.uid,
                   joined: [],
                   postByPhotoURL:
-                    auth.currentUser.photoURL || "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg",
+                    auth.currentUser.photoURL ||
+                    "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg",
                   createdAt:
                     firebase.firestore.FieldValue.serverTimestamp() || null,
                   likes: [],
@@ -152,22 +151,25 @@
                         if (doc.id == auth.currentUser.uid) {
                           return;
                         }
-                        const notifications = doc.data().notifications || [];
-                        notifications.push({
-                          title: "New Challenge",
-                          body: `${auth.currentUser.displayName} has posted a new challenge`,
-                          toShowTime: new Date().getTime(),
-                          deadline:
-                            new Date().getTime() + 1000 * 60 * 60 * 24 * 7,
-                        });
-                        db.collection("users")
-                          .doc(doc.id)
-                          .update({
-                            notifications,
-                          })
-                          .then(function () {
-                            console.log("Notification sent");
+
+                        if (doc.data().type == "admin") {
+                          const notifications = doc.data().notifications || [];
+                          notifications.push({
+                            title: "New Report",
+                            body: `${auth.currentUser.displayName} has report`,
+                            toShowTime: new Date().getTime(),
+                            deadline:
+                              new Date().getTime() + 1000 * 60 * 60 * 24 * 7,
                           });
+                          db.collection("users")
+                            .doc(doc.id)
+                            .update({
+                              notifications,
+                            })
+                            .then(function () {
+                              console.log("Notification sent");
+                            });
+                        }
                       });
                     });
                 });
@@ -197,8 +199,11 @@
         db.collection("reports").onSnapshot((snapshot) => {
           posts.innerHTML = "";
           snapshot.forEach((doc) => {
-            if(doc.data().postBy==currentUserByDb?.uid||currentUserByDb.type=="admin")
-            posts.innerHTML += `
+            if (
+              doc.data().postBy == auth.currentUser.uid||
+              currentUserByDb.type == "admin"
+            )
+              posts.innerHTML += `
                   <div class="post">
                     <div class="postimg">
                       <img src="${doc.data().image}" alt="">
@@ -210,9 +215,11 @@
                       <p>${doc.data().description}</p>
                     </div>
                     <div class="bottom">
-                      <button class="solveBtn" onclick="openUploadModal('${doc.id}',${currentUserByDb?.type=="admin"})">${
-                       doc.data().solveStatus || "Pending"
-                      }</button>
+                      <button class="solveBtn" onclick="openUploadModal('${
+                        doc.id
+                      }',${currentUserByDb?.type == "admin"})">${
+                doc.data().solveStatus || "Pending"
+              }</button>
                       ${
                         doc.data().postBy === auth.currentUser.uid ||
                         currentUserByDb?.type === "admin" ||
@@ -261,23 +268,24 @@
             console.error("Error updating document: ", error);
           });
       }
-      function openUploadModal(postId,t) {
-        if(!t){
+      function openUploadModal(postId, t) {
+        if (!t) {
           return;
         }
 
         const modelProof = document.getElementById("modelProof");
-        uploadProof.addEventListener("submit",(e)=>{
-            e.preventDefault();
-            // update solved status in db
-            db.collection("reports").
-            doc(postId).update({
-                solveStatus: "Solved"
-            }).then(()=>{
-                modelProof.style.display = "none";
+        uploadProof.addEventListener("submit", (e) => {
+          e.preventDefault();
+          // update solved status in db
+          db.collection("reports")
+            .doc(postId)
+            .update({
+              solveStatus: "Solved",
             })
-            
-        })
+            .then(() => {
+              modelProof.style.display = "none";
+            });
+        });
         modelProof.style.display = "flex";
         const close = modelProof.querySelector(".close");
         close.addEventListener("click", () => {
