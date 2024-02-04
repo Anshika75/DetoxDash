@@ -128,8 +128,15 @@
           Guiding Paths to Renewed Lives: Your Journey to Recovery Begins Here.
         </p>
       </div>
+      <div class="grid-item">
+        <a href="./report/">Report</a>
+        <p>
+          Facing drug abuse? Feel free to report.
+        </p>
+      </div>
+
     </div>
-    <button class="addPostBtn">Content Plan</button>
+    <button class="addPostBtn" style="display: none;" onclick="window.location.href='https://drive.google.com/uc?export=download&id=1dEWoc601hhU6YKXm6gZX-YDhZviUGiGr';">Content Plan</button>
   </div>
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
@@ -148,9 +155,10 @@
             if (doc.exists) {
               if (doc.data().type == "admin" || doc.data().type == "moderator") {
                 dutyassigndiv.style.display = "flex";
+                document.querySelector(".addPostBtn").style.display = "grid";
               }
               document.getElementById("user").innerHTML = doc.data().name;
-              document.getElementById("role").innerHTML = doc.data().type;
+              document.getElementById("role").innerHTML = doc.data().type||"user";
               document.getElementById("balance").innerHTML = doc.data().points || 0;
               document
                 .querySelector(".profilePic")
