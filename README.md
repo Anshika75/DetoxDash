@@ -2,7 +2,6 @@
 Detox Dash is a platform committed to fostering positive lifestyle choices among teenagers through engaging features that empower and connect users.
 
 ## Features
-
 ### 1. Anti-Drug RPG
 Embark on a transformative journey with our mobile RPG, where players navigate challenges like peer pressure and addiction. Earn points for healthy decisions and overcoming obstacles, unlocking rewards, social recognition, and exclusive content. Think of it as "Pokemon Go" for making positive choices in real life.
 
