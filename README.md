@@ -28,4 +28,5 @@ To start your Detox Dash journey:
    git clone https://github.com/your-username/detox-dash.git
 2. cd detox-dash
 
+
 Feel free to customize this README to better fit the specifics of your project.
