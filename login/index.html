@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Login</title>
-    <link rel="stylesheet" href="./login.css">
-</head>
+    <link rel="stylesheet" href="./login.css" />
+  </head>
 
-<body>
+  <body>
     <div class="login-splash-container">
-        <div class="form-container">
-            <h1><span style="color: #D3315A;">L</span>
-                <span style="color: #00ADA9;">O</span>
-                <span style="color: #7D5F91;">G</span>
-                <span style="color: #EA872C;">I</span>
-                <span style="color: #D3315A;">N</span></h1>
-            <form id="loginForm">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+      <div class="form-container">
+        <h1>
+          <span style="color: #d3315a">L</span>
+          <span style="color: #00ada9">O</span>
+          <span style="color: #7d5f91">G</span>
+          <span style="color: #ea872c">I</span>
+          <span style="color: #d3315a">N</span>
+        </h1>
+        <form id="loginForm">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
 
-                <button><a>Login</a></button>
-            </form>
-            <p class="or">OR</p>
-            <button id="googleLogin">
-                Login with Google
-            </button>
-            <p><br>Not yet registered? <a href="../signup/">Sign Up</a></p>
-        </div>
+          <button><a>Login</a></button>
+        </form>
+        <p class="or">OR</p>
+        <button id="googleLogin">Login with Google</button>
+        <p><br />Not yet registered? <a href="../signup/">Sign Up</a></p>
+      </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
@@ -36,58 +35,69 @@
 
     <script src="../auth.js"></script>
     <script>
-        const loginForm = document.getElementById("loginForm");
-        loginForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const email = loginForm["email"].value;
-            const password = loginForm["password"].value;
-            auth.signInWithEmailAndPassword(email, password).then((cred) => {
-                console.log(cred.user);
-                // window.location.href = "./options";
-                db.collection("users").doc(cred.user.uid).get().then((u)=>{
-                    if(u.exists && u.data().index==-1||!u.data().index){
-                        window.location.href = "./moreinfo.html";
-                    }else{
-                        window.location.href = "./options"
-                    }
-                })
+      const loginForm = document.getElementById("loginForm");
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = loginForm["email"].value;
+        const password = loginForm["password"].value;
+        auth.signInWithEmailAndPassword(email, password).then((cred) => {
+          console.log(cred.user);
+          // window.location.href = "./options";
+          db.collection("users")
+            .doc(cred.user.uid)
+            .get()
+            .then((u) => {
+              if ((u.exists && u.data().index == -1) || !u.data().index) {
+                window.location.href = "./moreinfo.html";
+              } else {
+                window.location.href = "./options";
+              }
             });
         });
+      });
 
-        const googleLogin = document.getElementById("googleLogin");
-        googleLogin.addEventListener("click", (e) => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider).then((cred) => {
-                console.log(cred.user);
-                // check if user exists in database
-                db.collection("users").doc(cred.user.uid).get().then((doc) => {
-                    if (doc.exists) {
-                        console.log("Document data:", doc.data());
-                        window.location.href = "./options";
-                    } else {
-                        // doc.data() will be undefined in this case
-                        console.log("No such document!");
-                        // create user in database
-                        db.collection("users").doc(cred.user.uid).set({
-                            name: cred.user.displayName,
-                            email: cred.user.email,
-                            index: -1,
-                            password: "",
-                            type: "user"
-                        }).then(() => {
-                            console.log("Document successfully written!");
-                            // get some more info
-                            window.location.href = "./moreinfo.html";
-                        }).catch((error) => {
-                            console.error("Error writing document: ", error);
-                        })
-                    }
-                }).catch((error) => {
-                    console.log("Error getting document:", error);
-                });
+      const googleLogin = document.getElementById("googleLogin");
+      googleLogin.addEventListener("click", (e) => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider).then((cred) => {
+          console.log(cred.user);
+          // check if user exists in database
+          db.collection("users")
+            .doc(cred.user.uid)
+            .get()
+            .then((doc) => {
+              if (doc.exists) {
+                console.log("Document data:", doc.data());
+                window.location.href = "./options";
+              } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+                // create user in database
+                db.collection("users")
+                  .doc(cred.user.uid)
+                  .set({
+                    name: cred.user.displayName,
+                    email: cred.user.email,
+                    index: -1,
+                    password: "",
+                    type: "user",
+                    isVerified: false
+                  })
+                  .then(() => {
+                    console.log("Document successfully written!");
+                    // get some more info
+                    window.location.href = "./moreinfo.html";
+                  })
+                  .catch((error) => {
+                    console.error("Error writing document: ", error);
+                  });
+              }
+            })
+            .catch((error) => {
+              console.log("Error getting document:", error);
             });
         });
+      });
     </script>
-</body>
-
+  </body>
 </html>
