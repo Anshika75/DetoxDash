@@ -1,245 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Options</title>
-  <link rel="stylesheet" href="./options.css" />
-  <script src="https://kit.fontawesome.com/52662e94e6.js" crossorigin="anonymous"></script>
-  <style>
-    .model-container {
-      /* display: none; */
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .model {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      width: 50%;
-      overflow-y: scroll;
-    }
-
-    .model button {
-      padding: 10px;
-      border: none;
-      background-color: #d3315a;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-    .model button:hover {
-      background-color: #00ada9;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="options-container">
-    <div class="model-container">
-      <div class="model">
-        <h2>Detox Dash</h2>
-        <p class="content">
-          Detox Dash is a community engagement platform that aims to empower
-          and uplift communities through peer-to-peer storytelling, hyperlocal
-          challenges, and community hubs. It is a platform that is designed to
-          bring people together and create a sense of belongingness and unity.
-        </p>
-        <button>Close</button>
-      </div>
-    </div>
-    <div class="user">
-      <div class="coins">
-        <i class="fa-solid fa-coins" style="color: #CD6A1C; margin-right: 5px;"></i><span id="balance"
-          style="margin-right: 5px;"></span> Points
-      </div>
-      <a href="./profile/"><img class="profilePic"
-          src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg" alt="user" /></a>
-      <div class="usrtxt">
-        <p id="user"></p>
-        <p id="role"></p>
-      </div>
-    </div>
-    <h1>Diverse Picks</h1>
-    <div class="grid-container">
-      <div class="grid-item">
-        <a href="./gallery/">Meme Gallery</a>
-        <p>
-          Embrace the Joy of Humor: Unleashing Laughter, One Hilarious Meme at a Time!
-        </p>
-      </div>
-      <div class="grid-item" onclick="rpgclicked()">
-        <a>Anti-drug RPG</a>
-        <p>
-          Level Up for Life: Detox Dash, Where Healthy Choices Win the Game!
-        </p>
-      </div>
-      <div class="grid-item">
-        <a href="./peertopeer/">Peer-to-peer storytelling</a>
-        <p>
-          Diverse Narratives, Shared Journeys – Detox Dash, Uniting Through
-          Real Stories!
-        </p>
-      </div>
-      <div class="grid-item">
-        <a href="./challenges/">Hyperlocal challenges</a>
-        <p>
-          Snap, Share, Inspire – Detox Dash Challenges, Lighting Up
-          Communities!
-        </p>
-      </div>
-      <div class="grid-item">
-        <a href="./community">Community Hub</a>
-        <p>
-          Building Bridges, Creating Bonds – Detox Dash Community Hub, Your Space to Thrive!
-        </p>
-      </div>
-      <div class="grid-item">
-        <a href="./notifications">Notifications</a>
-        <p>
-          Stay Informed, Stay Empowered – Explore the latest updates and
-          notifications!
-        </p>
-      </div>
-      <div class="grid-item" id="dutyassigndiv" style="display: none;">
-        <a href="./dutyassign">Duty Assign</a>
-        <p>
-          Shape Your Community – Assign user roles in to empower and uplift
-          the community.
-        </p>
-      </div>
-      <div class="grid-item">
-        <a href="./map/">Rehabillation Centers</a>
-        <p>
-          Guiding Paths to Renewed Lives: Your Journey to Recovery Begins Here.
-        </p>
-      </div>
-      <div class="grid-item">
-        <a href="./report/">Report</a>
-        <p>
-          Facing drug abuse? Feel free to report.
-        </p>
-      </div>
-
-    </div>
-    <button class="addPostBtn" style="display: none;" onclick="window.location.href='https://drive.google.com/uc?export=download&id=1dEWoc601hhU6YKXm6gZX-YDhZviUGiGr';">Content Plan</button>
-  </div>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
-  <script src="../../auth.js"></script>
-  <script>
-    let Curuser = null;
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        Curuser = user;
-        console.log("User logged in: ", user.displayName);
-        db.collection("users")
-          .doc(user.uid)
-          .get()
-          .then((doc) => {
-            if (doc.exists) {
-              if (doc.data().type == "admin" || doc.data().type == "moderator") {
-                dutyassigndiv.style.display = "flex";
-                document.querySelector(".addPostBtn").style.display = "grid";
-              }
-              document.getElementById("user").innerHTML = doc.data().name;
-              document.getElementById("role").innerHTML = doc.data().type||"user";
-              document.getElementById("balance").innerHTML = doc.data().points || 0;
-              document
-                .querySelector(".profilePic")
-                .setAttribute(
-                  "src",
-                  user.photoURL || "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"
-                );
-              var lastModelShow = localStorage.getItem("lastShown",0);
-              // check the time difference if its more than 5 minutes
-              if(Date.now()-lastModelShow>300000){
-                document.querySelector(".model-container").style.display = "flex";
-                localStorage.setItem("lastShown",Date.now());
-              }else{
-                console.log("Not showing model");
-              }
-              document
-                .querySelector(".model button")
-                .addEventListener("click", () => {
-                  document.querySelector(".model-container").style.display = "none";
-                });
-              // change header
-              document.querySelector(".model h2").innerHTML =
-                "Your drug index is " + (doc.data().index || "-1");
-              var innd = parseInt(doc.data().index || 0);
-              switch (innd) {
-                case 0:
-                  document.querySelector(".model p").innerHTML =
-                    " Since your drug addiction level turns out to be 0, it seems like, you're contemplating trying drugs, explore our memes page to gain insights into the potential consequences of drug use. We present this information in a fun and creative way to help you make informed decisions.";
-                  break;
-                case 1:
-                  document.querySelector(".model p").innerHTML =
-                    "  Since your drug addiction level turns out to be 1, it seems like, you find yourself using drugs on special occasions, consider visiting our Anti-Drug RPG page. This section presents challenges associated with quitting drug addiction through creative storytelling, providing you with a deeper understanding of the potential struggles.";
-                  break;
-                case 2:
-                  document.querySelector(".model p").innerHTML =
-                    "Since your drug addiction level turns out to be 2, it seems like, your drug consumption occurs monthly, check out our peer-to-peer storytelling page. Learn from the experiences of others, including influencers who have successfully overcome drug addiction. Connecting with these stories may help you relate more closely to the journey of recovery.";
-                  break;
-                case 3:
-                  document.querySelector(".model p").innerHTML =
-                    "Since your drug addiction level turns out to be 3, it seems like, you are consuming drugs twice a month, explore our hyperlocal challenges page. Engage in sustained audience interaction and participation to foster a sense of community involvement. This platform provides a supportive space for sharing experiences and insights.";
-                  break;
-                case 4:
-                  document.querySelector(".model p").innerHTML =
-                    "Since your drug addiction level turns out to be 4, it seems like, your drug consumption has become a twice-daily occurrence, connect with our community hub page. Foster audience engagement and interaction within our interactive YouTube community. This platform is designed to offer support and understanding as you navigate through challenges related to drug use.";
-                  break;
-                case 5:
-                  document.querySelector(".model p").innerHTML =
-                    " Since your drug addiction level turns out to be 5, it seems like, you find yourself consuming drugs multiple times a day, it's strongly recommended to seek guidance from nearby drug prevention centers. These centers are equipped to provide professional assistance and support tailored to your specific situation. It's crucial to reach out for help promptly.";
-                  break;
-                default:
-                  document.querySelector(".model p").innerHTML =
-                    "You don't have any index! Contact the admin.";
-              }
-            } else {
-              window.location.href = "../../index.html";
-            }
-          })
-          .catch((error) => {
-            console.log("Error getting document:", error);
-          });
-      } else {
-        window.location.href = "../../index.html";
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Options</title>
+    <link rel="stylesheet" href="./options.css" />
+    <script
+      src="https://kit.fontawesome.com/52662e94e6.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      .model-container {
+        /* display: none; */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
       }
-    });
-    function logout() {
-      auth.signOut();
-    }
 
-    function rpgclicked() {
-      // update and increment gameplay count in database and if it wasn't defined then define it
-      db.collection("users")
-        .doc(Curuser.uid)
-        .update({
-          gameplay: firebase.firestore.FieldValue.increment(1),
-        })
-        .then(() => {
-          console.log("Gameplay count incremented!");
-          window.location.href = "./rpg";
-        });
-    }
-  </script>
-</body>
+      .model {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 50%;
+        overflow-y: scroll;
+      }
 
+      .model button {
+        padding: 10px;
+        border: none;
+        background-color: #d3315a;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .model button:hover {
+        background-color: #00ada9;
+      }
+      .helpdesk-logo {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        cursor: pointer;
+        z-index: 1000; /* Ensure the logo stays on top */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="options-container">
+      <div class="model-container">
+        <div class="model">
+          <h2>Detox Dash</h2>
+          <p class="content">
+            Detox Dash is a community engagement platform that aims to empower
+            and uplift communities through peer-to-peer storytelling, hyperlocal
+            challenges, and community hubs. It is a platform that is designed to
+            bring people together and create a sense of belongingness and unity.
+          </p>
+          <button>Close</button>
+        </div>
+      </div>
+      <div class="user">
+        <div class="coins">
+          <i
+            class="fa-solid fa-coins"
+            style="color: #cd6a1c; margin-right: 5px"
+          ></i
+          ><span id="balance" style="margin-right: 5px"></span> Points
+        </div>
+        <a href="./profile/"
+          ><img
+            class="profilePic"
+            src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg"
+            alt="user"
+        /></a>
+        <div class="usrtxt">
+          <p id="user"></p>
+          <p id="role"></p>
+        </div>
+      </div>
+      <h1>Diverse Picks</h1>
+      <div class="grid-container">
+        <div class="grid-item">
+          <a href="./gallery/">Meme Gallery</a>
+          <p>
+            Embrace the Joy of Humor: Unleashing Laughter, One Hilarious Meme at
+            a Time!
+          </p>
+        </div>
+        <div class="grid-item" onclick="rpgclicked()">
+          <a>Anti-drug RPG</a>
+          <p>
+            Level Up for Life: Detox Dash, Where Healthy Choices Win the Game!
+          </p>
+        </div>
+        <div class="grid-item">
+          <a href="./peertopeer/">Peer-to-peer storytelling</a>
+          <p>
+            Diverse Narratives, Shared Journeys – Detox Dash, Uniting Through
+            Real Stories!
+          </p>
+        </div>
+        <div class="grid-item">
+          <a href="./challenges/">Hyperlocal challenges</a>
+          <p>
+            Snap, Share, Inspire – Detox Dash Challenges, Lighting Up
+            Communities!
+          </p>
+        </div>
+        <div class="grid-item">
+          <a href="./community">Community Hub</a>
+          <p>
+            Building Bridges, Creating Bonds – Detox Dash Community Hub, Your
+            Space to Thrive!
+          </p>
+        </div>
+        <div class="grid-item">
+          <a href="./notifications">Notifications</a>
+          <p>
+            Stay Informed, Stay Empowered – Explore the latest updates and
+            notifications!
+          </p>
+        </div>
+        <div class="grid-item" id="dutyassigndiv" style="display: none">
+          <a href="./dutyassign">Duty Assign</a>
+          <p>
+            Shape Your Community – Assign user roles in to empower and uplift
+            the community.
+          </p>
+        </div>
+        <div class="grid-item">
+          <a href="./map/">Rehabillation Centers</a>
+          <p>
+            Guiding Paths to Renewed Lives: Your Journey to Recovery Begins
+            Here.
+          </p>
+        </div>
+        <div class="grid-item">
+          <a href="./report/">Report</a>
+          <p>Facing drug abuse? Feel free to report.</p>
+        </div>
+      </div>
+      <button
+        class="addPostBtn"
+        style="display: none"
+        onclick="window.location.href='https://drive.google.com/uc?export=download&id=1dEWoc601hhU6YKXm6gZX-YDhZviUGiGr';"
+      >
+        Content Plan
+      </button>
+      <a href="../../chatbot.html" target="_blank" class="helpdesk-logo">
+        <img
+          src="https://prod.cloud.rockstargames.com/crews/sc/1399/48260338/publish/emblems/a980b501b443aa6194442331fd3b3cb356191c1c_512.png"
+          alt="Helpdesk"
+          width="50"
+          height="50"
+        />
+      </a>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="../../auth.js"></script>
+    <script>
+      let Curuser = null;
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          Curuser = user;
+          console.log("User logged in: ", user.displayName);
+          db.collection("users")
+            .doc(user.uid)
+            .get()
+            .then((doc) => {
+              if (doc.exists) {
+                if (
+                  doc.data().type == "admin" ||
+                  doc.data().type == "moderator"
+                ) {
+                  dutyassigndiv.style.display = "flex";
+                  document.querySelector(".addPostBtn").style.display = "grid";
+                }
+                document.getElementById("user").innerHTML = doc.data().name;
+                document.getElementById("role").innerHTML =
+                  doc.data().type || "user";
+                document.getElementById("balance").innerHTML =
+                  doc.data().points || 0;
+                document
+                  .querySelector(".profilePic")
+                  .setAttribute(
+                    "src",
+                    user.photoURL ||
+                      "https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg"
+                  );
+                var lastModelShow = localStorage.getItem("lastShown", 0);
+                // check the time difference if its more than 5 minutes
+                if (Date.now() - lastModelShow > 300000) {
+                  document.querySelector(".model-container").style.display =
+                    "flex";
+                  localStorage.setItem("lastShown", Date.now());
+                } else {
+                  console.log("Not showing model");
+                }
+                document
+                  .querySelector(".model button")
+                  .addEventListener("click", () => {
+                    document.querySelector(".model-container").style.display =
+                      "none";
+                  });
+                // change header
+                document.querySelector(".model h2").innerHTML =
+                  "Your drug index is " + (doc.data().index || "-1");
+                var innd = parseInt(doc.data().index || 0);
+                switch (innd) {
+                  case 0:
+                    document.querySelector(".model p").innerHTML =
+                      " Since your drug addiction level turns out to be 0, it seems like, you're contemplating trying drugs, explore our memes page to gain insights into the potential consequences of drug use. We present this information in a fun and creative way to help you make informed decisions.";
+                    break;
+                  case 1:
+                    document.querySelector(".model p").innerHTML =
+                      "  Since your drug addiction level turns out to be 1, it seems like, you find yourself using drugs on special occasions, consider visiting our Anti-Drug RPG page. This section presents challenges associated with quitting drug addiction through creative storytelling, providing you with a deeper understanding of the potential struggles.";
+                    break;
+                  case 2:
+                    document.querySelector(".model p").innerHTML =
+                      "Since your drug addiction level turns out to be 2, it seems like, your drug consumption occurs monthly, check out our peer-to-peer storytelling page. Learn from the experiences of others, including influencers who have successfully overcome drug addiction. Connecting with these stories may help you relate more closely to the journey of recovery.";
+                    break;
+                  case 3:
+                    document.querySelector(".model p").innerHTML =
+                      "Since your drug addiction level turns out to be 3, it seems like, you are consuming drugs twice a month, explore our hyperlocal challenges page. Engage in sustained audience interaction and participation to foster a sense of community involvement. This platform provides a supportive space for sharing experiences and insights.";
+                    break;
+                  case 4:
+                    document.querySelector(".model p").innerHTML =
+                      "Since your drug addiction level turns out to be 4, it seems like, your drug consumption has become a twice-daily occurrence, connect with our community hub page. Foster audience engagement and interaction within our interactive YouTube community. This platform is designed to offer support and understanding as you navigate through challenges related to drug use.";
+                    break;
+                  case 5:
+                    document.querySelector(".model p").innerHTML =
+                      " Since your drug addiction level turns out to be 5, it seems like, you find yourself consuming drugs multiple times a day, it's strongly recommended to seek guidance from nearby drug prevention centers. These centers are equipped to provide professional assistance and support tailored to your specific situation. It's crucial to reach out for help promptly.";
+                    break;
+                  default:
+                    document.querySelector(".model p").innerHTML =
+                      "You don't have any index! Contact the admin.";
+                }
+              } else {
+                window.location.href = "../../index.html";
+              }
+            })
+            .catch((error) => {
+              console.log("Error getting document:", error);
+            });
+        } else {
+          window.location.href = "../../index.html";
+        }
+      });
+      function logout() {
+        auth.signOut();
+      }
+
+      function rpgclicked() {
+        // update and increment gameplay count in database and if it wasn't defined then define it
+        db.collection("users")
+          .doc(Curuser.uid)
+          .update({
+            gameplay: firebase.firestore.FieldValue.increment(1),
+          })
+          .then(() => {
+            console.log("Gameplay count incremented!");
+            window.location.href = "./rpg";
+          });
+      }
+    </script>
+  </body>
 </html>

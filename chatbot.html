@@ -9,17 +9,21 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      background-color: #f5f5f5; /* Light background */
     }
 
     .container {
       max-width: 600px;
-      margin: 0 auto;
+      margin: 20px auto;
       padding: 20px;
+      border-radius: 10px; /* Rounded corners for container */
+      background-color: #fff; /* White background for content area */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
     }
 
     .messages {
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      border: none;
+      border-radius: 10px; /* Rounded corners for messages area */
       overflow-y: auto;
       max-height: 400px;
       padding: 10px;
@@ -27,40 +31,70 @@
     }
 
     .message {
-      background-color: #f1f1f1;
-      padding: 10px;
+      padding: 15px;
       border-radius: 8px;
       margin-bottom: 10px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle message shadow */
+    }
+    .sarthi{
+      animation: enter-message 0.5s ease-in-out 1; 
+      /* Animation for new messages */
+      float: left;
+    }
+    .user{
+      animation: enter-message 0.5s forwards 1;
+       /* Animation for new messages */
+      float: right;
     }
 
     .user .message {
-      background-color: #a0d2eb;
-      color: #fff;
+      background-color: #e0f2ff; /* Light blue for user messages */
+      color: #333; /* Darker text for user messages */
       align-self: flex-end;
     }
 
     .sarthi .message {
-      background-color: #d4eafd;
+      /*background-color: #daf0fe;  Light green for Sarthi messages */
+      color: #333; /* Darker text for Sarthi messages */
+    }
+
+    .message.user:hover,
+    .message.sarthi:hover {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Enhanced hover effect */
+      cursor: default; /* Remove pointer cursor on hover */
+    }
+
+    @keyframes enter-message {
+      from {
+        opacity: 0;
+        transform: translateX(20px); /* New messages slide in from bottom */
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     input[type="text"] {
       width: calc(100% - 20px);
-      padding: 10px;
+      padding: 15px; /* Increased padding for better visual weight */
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 8px;
+      box-sizing: border-box; /* Include border in width calculation */
+      font-size: 16px; /* Larger font size for improved readability */
     }
 
     input[type="text"]:focus {
       outline: none;
-      border-color: #007bff;
+      border-color: #007bff; /* Blue focus border for user input */
     }
   </style>
 </head>
 
 <body>
   <div class="container">
+    <h1>AntiDrug Sarthi</h1>
     <div class="messages" id="messages">
-      <h1>AntiDrug Sarthi</h1>
       <div class="sarthi message">
         The AntiDrug Sarthi chatbot serves as a compassionate virtual guide, offering empathetic support, motivational encouragement, and practical advice to help users overcome drug addiction and navigate the path to recovery.
       </div>
@@ -96,6 +130,9 @@
         .then((res) => res.text())
         .then((res) => {
           let message = res.toLowerCase().replace(/^\[antidrugsarthi\]\s?/, "");
+          // remove starting and ending quotes and spaces
+          message = res.trim().replace(/^"(.*)"$/, '$1');
+
           messagesDiv.innerHTML += `
             <div class="sarthi">
               <div class="message">${message}</div>
