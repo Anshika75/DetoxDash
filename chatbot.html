@@ -1,64 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AntiDrug Sarthi Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 
-  <body>
-    <div class="messages">
-      <h1>Messages</h1>
-      <div class="sarthi">
-        The AntiDrug Sarthi chatbot serves as a compassionate virtual guide,
-        offering empathetic support, motivational encouragement, and practical
-        advice to help users overcome drug addiction and navigate the path to
-        recovery
-      </div>
-      <div class="user">
-        <div class="message">Hello</div>
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .messages {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow-y: auto;
+      max-height: 400px;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .user .message {
+      background-color: #a0d2eb;
+      color: #fff;
+      align-self: flex-end;
+    }
+
+    .sarthi .message {
+      background-color: #d4eafd;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="messages" id="messages">
+      <h1>AntiDrug Sarthi</h1>
+      <div class="sarthi message">
+        The AntiDrug Sarthi chatbot serves as a compassionate virtual guide, offering empathetic support, motivational encouragement, and practical advice to help users overcome drug addiction and navigate the path to recovery.
       </div>
     </div>
-    <div>
-      <input type="text" id="prompt" placeholder="Chat With AntiDrug Sarthi" />
-    </div>
-    <script>
-      const url = "https://llamastudio.dev/api/cls2y5fhf0001k108skqd7irh";
-      const messagesDiv = document.querySelector(".messages");
-      document.getElementById("prompt").addEventListener("keyup", (event) => {
-        // if enter key is pressed
-        if (event.keyCode === 13) {
-          sendMessage();
-        }
-      });
+    <input type="text" id="prompt" placeholder="Type your message here" />
+  </div>
 
-      function sendMessage() {
-        var text = document.getElementById("prompt").value;
-        messagesDiv.innerHTML += `
+  <script>
+    const url = "https://llamastudio.dev/api/cluwrtzhu0001l8097y2ric5z";
+    const messagesDiv = document.getElementById("messages");
+
+    document.getElementById("prompt").addEventListener("keyup", (event) => {
+      if (event.keyCode === 13) {
+        sendMessage();
+      }
+    });
+
+    function sendMessage() {
+      var text = document.getElementById("prompt").value;
+      messagesDiv.innerHTML += `
         <div class="user">
           <div class="message">${text}</div>
         </div>`;
-        document.getElementById("prompt").value = "";
-        const data = { input: text };
-        fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-          .then((res) => {
-            return res.text();
-          })
-          .then((res) => {
-            // remove the prefix [AntiDrug Sarthi]: from the response in lowercase if available
-            let message = res.toLowerCase().replace(/^\[antidrugsarthi\]\s?/, "");
-            console.log(message);
-            messagesDiv.innerHTML += `
-                <div class="sarthi">${message}<br/><br/></div>
-            `;
-          });
-      }
-    </script>
-  </body>
+      document.getElementById("prompt").value = "";
+      const data = { input: text };
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.text())
+        .then((res) => {
+          let message = res.toLowerCase().replace(/^\[antidrugsarthi\]\s?/, "");
+          messagesDiv.innerHTML += `
+            <div class="sarthi">
+              <div class="message">${message}</div>
+            </div>`;
+        });
+    }
+  </script>
+</body>
 </html>
